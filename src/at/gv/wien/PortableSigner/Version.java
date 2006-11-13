@@ -13,9 +13,9 @@ package at.gv.wien.PortableSigner;
  * @author pfp
  */
 public class Version {
-	private static String date = "$Date: 2006-10-31 03:02:54 +0100 (Tue, 31 Oct 2006) $";
-	private static String author = "$Author: pfp $";
-	private static String revision = "$Revision: 46 $";
+	private static String date = "$Date$";
+	private static String author = "$Author$";
+	private static String revision = "$Revision$";
 	public String print;
 	
 	public Version() {
