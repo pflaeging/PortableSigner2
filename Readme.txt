@@ -1,0 +1,34 @@
+Das vorliegende Programm lässt sich in einer Java 1.5.0 Umgebung mit
+
+java -jar PortableSigner.jar starten.
+
+Es verwendet folgende zusätzliche Klassenbibliotheken:
+
+    - itext (siehe auch http://itext.sourceforge.net)
+    - BouncyCastle (siehe auch http://www.bouncycastle.org)
+    - Swing-layout (siehe auch http://layout.jdesktop.org)
+
+Für die Verwendung von Bouncycastle muss das Schema für Strong Export Security
+in der Java Runtime installiert sein (siehe auch Zitat 
+von http://www.bouncycastle.org/documentation.html): 
+
+"
+   3. If you are using JDK 1.4, or later, you must use the signed jar for 
+    the provider and you must download the unrestricted policy files for 
+    the Sun JCE if you want the provider to work properly. The policy files 
+    can be found at the same place as the JDK download. Further information 
+    on this can be found in the Sun documentation on the JCE. If you have not 
+    installed the policy files you will see something like:
+
+java.lang.SecurityException: Unsupported keysize or algorithm parameters
+		at javax.crypto.Cipher.init(DashoA6275)
+
+"
+
+Die neue JCE Policy ist zu finden unter 
+http://java.sun.com/javase/downloads/index.jsp
+gegen Ende der Seite als:
+"Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy "
+
+-peter pfläging <pfp@adv.magwien.gv.at>
+
