@@ -25,12 +25,12 @@ public class SignCommandLine {
     public SignCommandLine(String args[]) {
        CommandLine cmd;
        Options options = new Options();
-       options.addOption("t", true, "Eingabedatei (PDF)");
-       options.addOption("o", true, "Ausgabedatei (PDF)");
-       options.addOption("s", true, "Signaturdatei (P12)");
-       options.addOption("p", true, "Signaturpasswort");
-       options.addOption("n", false, "Ohne GUI");
-       options.addOption("h", false, "Hilfe (diese Seite)");
+       options.addOption("t", true, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-InputFile"));
+       options.addOption("o", true, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-OutputFile"));
+       options.addOption("s", true, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SignatureFile"));
+       options.addOption("p", true, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Password"));
+       options.addOption("n", false, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WithoutGUI"));
+       options.addOption("h", false, java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Help"));
        CommandLineParser parser = new PosixParser();
        HelpFormatter usage = new HelpFormatter();
        try {
@@ -42,16 +42,16 @@ public class SignCommandLine {
             nogui = cmd.hasOption("n");
             help = cmd.hasOption("h");
             if (cmd.getArgs().length != 0) {
-                throw new ParseException("Unknown Arguments");
+                throw new ParseException(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-UnknownArguments"));
             }
        } catch(ParseException e) {
-           System.err.println("Falsche Kommandozeilenparameter");
+           System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WrongArguments"));
            usage.printHelp("PortableSigner", options);
            System.exit(3);
        }
        if (nogui) {
            if (input == null || output == null || signature == null ) {
-               System.err.println("Fehlende Argumente -t, -o oder -s");
+               System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingArguments"));
                usage.printHelp("PortableSigner", options);
                System.exit(2);
            }

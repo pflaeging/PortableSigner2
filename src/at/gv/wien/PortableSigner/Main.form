@@ -53,7 +53,9 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="jButtonCancelYes">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ja"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Yes" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelYesActionPerformed"/>
@@ -61,7 +63,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCancelNo">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nein"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="No" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelNoActionPerformed"/>
@@ -69,7 +73,9 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelCancelQuestion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Wirklich abbrechen?"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="ReallyCancel" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>
@@ -138,7 +144,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAboutOk">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="OK" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAboutOkActionPerformed"/>
@@ -201,7 +209,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonFinishedOK">
           <Properties>
-            <Property name="text" type="java.lang.String" value="OK"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="OK" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFinishedOKActionPerformed"/>
@@ -234,7 +244,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jButtonAbout" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="118" max="32767" attributes="0"/>
+                      <EmptySpace pref="137" max="32767" attributes="0"/>
                       <Component id="jButtonCancelMain" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonSignMain" min="-2" max="-2" attributes="0"/>
@@ -313,17 +323,23 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabelInput">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Eingabedatei:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="InputLabel" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelOutput">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ausgabedatei:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="OutputLabel" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelSignature">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Signaturdatei:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SignatureLabel" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldInputfile">
@@ -333,7 +349,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonInputfile">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suchen ..."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SearchButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInputfileActionPerformed"/>
@@ -346,7 +364,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonOutputfile">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suchen ..."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SearchButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOutputfileActionPerformed"/>
@@ -359,7 +379,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSignaturefile">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Suchen ..."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SearchButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSignaturefileActionPerformed"/>
@@ -367,7 +389,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSignMain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Signieren"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SignButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSignMainActionPerformed"/>
@@ -375,7 +399,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancelMain">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Abbrechen ..."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="CancelButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelMainActionPerformed"/>
@@ -385,12 +411,16 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelPassword">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Passwort:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="PasswordLabel" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAbout">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xdc;ber ..."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="AboutButton" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAboutActionPerformed"/>

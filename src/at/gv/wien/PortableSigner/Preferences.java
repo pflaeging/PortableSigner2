@@ -16,6 +16,8 @@ package at.gv.wien.PortableSigner;
  */
 public class Preferences {
     
+    // public static java.util.Locale Language;
+    
     public String lastInputFile = "",
             lastOutputFile = "",
             lastP12File = "";
@@ -23,6 +25,7 @@ public class Preferences {
                 
     /** Creates a new instance of Preferences */
     public Preferences() {
+        // Language = new java.util.Locale(prefs.get("Language", "de"));
         lastInputFile = prefs.get("LastInputFile", "");
         lastOutputFile = prefs.get("LastOutputFile", "");
         lastP12File = prefs.get("LastP12File", "");

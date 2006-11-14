@@ -45,9 +45,9 @@ public class DoSignPDF {
 	public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
 			String pkcs12FileName, String password) {
 		try {
-            System.out.println("Eingabedatei: " + pdfInputFileName);
-            System.out.println("Ausgabedatei: " + pdfOutputFileName);
-            System.out.println("Signaturdatei: " + pkcs12FileName);
+//            System.out.println("Eingabedatei: " + pdfInputFileName);
+//            System.out.println("Ausgabedatei: " + pdfOutputFileName);
+//            System.out.println("Signaturdatei: " + pkcs12FileName);
 			java.security.Security
 					.insertProviderAt(
 							new org.bouncycastle.jce.provider.BouncyCastleProvider(),
@@ -58,15 +58,15 @@ public class DoSignPDF {
 			try {
 				reader = new PdfReader(pdfInputFileName);
 			} catch (IOException e) {
-				setResult("Die Datei\n" + pdfInputFileName
-						+ "\nkonnte nicht geöffnet werden\n", true);
+				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfInputFileName
+						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), true);
 			}
 			FileOutputStream fout = null;
 			try {
 				fout = new FileOutputStream(pdfOutputFileName);
 			} catch (FileNotFoundException e) {
-				setResult("Die Datei\n" + pdfOutputFileName
-						+ "\nkonnte nicht geschrieben werden\n", true);
+				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfOutputFileName
+						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"), true);
 			}
 			PdfStamper stp = null;
 			try {
@@ -80,13 +80,13 @@ public class DoSignPDF {
 				// null);
 				sap.setCertified(true);
 				stp.close();
-				setResult("Das Dokument\n" + pdfOutputFileName
-						+ "\nwurde erzeugt und signiert!", false);
+				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("Document") + pdfOutputFileName
+						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"), false);
 			} catch (Exception e) {
-				setResult("Beim Signieren der Datei trat ein Fehler auf", true);
+				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"), true);
 			}
 		} catch (KeyStoreException kse) {
-			setResult("Es konnte kein Keystore erzeugt werden.",
+			setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorCreatingKeystore"),
 					true);
 		}
 	}
@@ -100,19 +100,19 @@ public class DoSignPDF {
 					.toCharArray());
 		} catch (NoSuchAlgorithmException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Algorithmus)!",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
 					true);
 		} catch (CertificateException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Zertifikatsfehler)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificate"),
 					true);
 		} catch (FileNotFoundException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNotAccessible"),
 					true);
 		} catch (IOException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (EA Fehler)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateIO"),
 					true);
 		}
 
@@ -123,15 +123,15 @@ public class DoSignPDF {
 					.toCharArray());
 		} catch (NoSuchElementException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Keine Schlüssel)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNoKey"),
 					true);
 		} catch (NoSuchAlgorithmException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Algorithmus)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
 					true);
 		} catch (UnrecoverableKeyException e) {
 			setResult(
-					"Beim Lesen des Zertifikates trat ein Fehler auf (Algorithmus)",
+					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
 					true);
 		}
 		certificateChain = ks.getCertificateChain(alias);

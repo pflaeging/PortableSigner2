@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         prefs = new Preferences();
         
-        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);
+//        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);
         
         initComponents();
         if (mycommand.signature == null) {
@@ -52,7 +52,6 @@ public class Main extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jDialogCancel = new javax.swing.JDialog();
         jPanelCancel = new javax.swing.JPanel();
         jButtonCancelYes = new javax.swing.JButton();
@@ -82,26 +81,27 @@ public class Main extends javax.swing.JFrame {
         jLabelPassword = new javax.swing.JLabel();
         jButtonAbout = new javax.swing.JButton();
 
+        jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+
         jDialogCancel.setAlwaysOnTop(true);
         jDialogCancel.setLocationByPlatform(true);
         jDialogCancel.setModal(true);
-        jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
-
-        jButtonCancelYes.setText("Ja");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n"); // NOI18N
+        jButtonCancelYes.setText(bundle.getString("Yes")); // NOI18N
         jButtonCancelYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelYesActionPerformed(evt);
             }
         });
 
-        jButtonCancelNo.setText("Nein");
+        jButtonCancelNo.setText(bundle.getString("No")); // NOI18N
         jButtonCancelNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelNoActionPerformed(evt);
             }
         });
 
-        jLabelCancelQuestion.setText("Wirklich abbrechen?");
+        jLabelCancelQuestion.setText(bundle.getString("ReallyCancel")); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanelCancelLayout = new org.jdesktop.layout.GroupLayout(jPanelCancel);
         jPanelCancel.setLayout(jPanelCancelLayout);
@@ -129,16 +129,14 @@ public class Main extends javax.swing.JFrame {
                     .add(jButtonCancelNo)
                     .add(jButtonCancelYes)))
         );
-
         jDialogCancel.getContentPane().add(jPanelCancel);
 
         jDialogAbout.setLocationByPlatform(true);
         jDialogAbout.setResizable(false);
-
         jLabelAboutText.setFont(new java.awt.Font("Lucida Grande", 1, 18));
         jLabelAboutText.setText("PortableSigner");
 
-        jButtonAboutOk.setText("OK");
+        jButtonAboutOk.setText(bundle.getString("OK")); // NOI18N
         jButtonAboutOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAboutOkActionPerformed(evt);
@@ -184,10 +182,9 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabelAboutCopyright))
                 .addContainerGap())
         );
-
         jLabelFinished.setText("jLabel1");
 
-        jButtonFinishedOK.setText("OK");
+        jButtonFinishedOK.setText(bundle.getString("OK")); // NOI18N
         jButtonFinishedOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFinishedOKActionPerformed(evt);
@@ -217,16 +214,15 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        jLabelInput.setText(bundle.getString("InputLabel")); // NOI18N
 
-        jLabelInput.setText("Eingabedatei:");
+        jLabelOutput.setText(bundle.getString("OutputLabel")); // NOI18N
 
-        jLabelOutput.setText("Ausgabedatei:");
-
-        jLabelSignature.setText("Signaturdatei:");
+        jLabelSignature.setText(bundle.getString("SignatureLabel")); // NOI18N
 
         jTextFieldInputfile.setEditable(false);
 
-        jButtonInputfile.setText("Suchen ...");
+        jButtonInputfile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonInputfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInputfileActionPerformed(evt);
@@ -235,7 +231,7 @@ public class Main extends javax.swing.JFrame {
 
         jTextFieldOutputfile.setEditable(false);
 
-        jButtonOutputfile.setText("Suchen ...");
+        jButtonOutputfile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonOutputfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOutputfileActionPerformed(evt);
@@ -244,30 +240,30 @@ public class Main extends javax.swing.JFrame {
 
         jTextFieldSignaturefile.setEditable(false);
 
-        jButtonSignaturefile.setText("Suchen ...");
+        jButtonSignaturefile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonSignaturefile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSignaturefileActionPerformed(evt);
             }
         });
 
-        jButtonSignMain.setText("Signieren");
+        jButtonSignMain.setText(bundle.getString("SignButton")); // NOI18N
         jButtonSignMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSignMainActionPerformed(evt);
             }
         });
 
-        jButtonCancelMain.setText("Abbrechen ...");
+        jButtonCancelMain.setText(bundle.getString("CancelButton")); // NOI18N
         jButtonCancelMain.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCancelMainActionPerformed(evt);
             }
         });
 
-        jLabelPassword.setText("Passwort:");
+        jLabelPassword.setText(bundle.getString("PasswordLabel")); // NOI18N
 
-        jButtonAbout.setText("\u00dcber ...");
+        jButtonAbout.setText(bundle.getString("AboutButton")); // NOI18N
         jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAboutActionPerformed(evt);
@@ -340,7 +336,6 @@ public class Main extends javax.swing.JFrame {
                     .add(jButtonAbout))
                 .addContainerGap())
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -407,7 +402,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         jTextFieldSignaturefile.setText(file);
-        System.out.println(file);
+//        System.out.println(file);
     }//GEN-LAST:event_jButtonSignaturefileActionPerformed
 
     private void jButtonOutputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputfileActionPerformed
@@ -417,7 +412,7 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         jTextFieldOutputfile.setText(file);
-        System.out.println(file);
+//        System.out.println(file);
     }//GEN-LAST:event_jButtonOutputfileActionPerformed
 
     private void jButtonInputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInputfileActionPerformed
@@ -427,13 +422,16 @@ public class Main extends javax.swing.JFrame {
             return;
         }
         jTextFieldInputfile.setText(file);
-        System.out.println(file);
+//        System.out.println(file);
     }//GEN-LAST:event_jButtonInputfileActionPerformed
     
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        java.util.Locale Language;
+ 
         mycommand = new SignCommandLine(args);
         
         if (mycommand.nogui) {
@@ -541,7 +539,7 @@ public class Main extends javax.swing.JFrame {
         }
         
         public String getDescription() {
-            return "Portable Document Dateien (PDF)";
+            return java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("PDFDescription");
         }
     }
     
@@ -552,7 +550,7 @@ public class Main extends javax.swing.JFrame {
         }
         
         public String getDescription() {
-            return "PKCS#12 Dateien (P12)";
+            return java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("PKCS12Description");
         }
     }
 }
