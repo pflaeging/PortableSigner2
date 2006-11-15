@@ -17,6 +17,7 @@ public class Main extends javax.swing.JFrame {
     public String copyright = "Peter Pfläging <pfp@adv.magwien.gv.at>)";
     private Preferences  prefs;
     private Version version = new Version();
+    public static String result;
     
     /** Creates new form Main */
     public Main() {
@@ -66,6 +67,7 @@ public class Main extends javax.swing.JFrame {
         jDialogFinished = new javax.swing.JDialog();
         jLabelFinished = new javax.swing.JLabel();
         jButtonFinishedOK = new javax.swing.JButton();
+        jButtonFinishBack = new javax.swing.JButton();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -182,12 +184,21 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabelAboutCopyright))
                 .addContainerGap())
         );
+        jDialogFinished.setModal(true);
         jLabelFinished.setText("jLabel1");
 
-        jButtonFinishedOK.setText(bundle.getString("OK")); // NOI18N
+        jButtonFinishedOK.setText(bundle.getString("Finish")); // NOI18N
+        jButtonFinishedOK.setActionCommand(bundle.getString("Finish")); // NOI18N
         jButtonFinishedOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFinishedOKActionPerformed(evt);
+            }
+        });
+
+        jButtonFinishBack.setText(bundle.getString("Back")); // NOI18N
+        jButtonFinishBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFinishBackActionPerformed(evt);
             }
         });
 
@@ -195,20 +206,25 @@ public class Main extends javax.swing.JFrame {
         jDialogFinished.getContentPane().setLayout(jDialogFinishedLayout);
         jDialogFinishedLayout.setHorizontalGroup(
             jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogFinishedLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogFinishedLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonFinishedOK))
+                .add(jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                    .add(jDialogFinishedLayout.createSequentialGroup()
+                        .add(jButtonFinishBack)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jButtonFinishedOK)))
                 .addContainerGap())
         );
         jDialogFinishedLayout.setVerticalGroup(
             jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogFinishedLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogFinishedLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
-                .add(jButtonFinishedOK)
+                .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 94, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButtonFinishedOK)
+                    .add(jButtonFinishBack))
                 .addContainerGap())
         );
 
@@ -279,7 +295,7 @@ public class Main extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                         .add(jButtonAbout)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 118, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 137, Short.MAX_VALUE)
                         .add(jButtonCancelMain)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButtonSignMain))
@@ -339,37 +355,42 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonFinishBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinishBackActionPerformed
+        jDialogFinished.setVisible(false);
+        jLabelFinished.setText("");
+    }//GEN-LAST:event_jButtonFinishBackActionPerformed
+    
     private void jButtonFinishedOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinishedOKActionPerformed
         dispose();
         System.exit(0);
     }//GEN-LAST:event_jButtonFinishedOKActionPerformed
-
+    
     private void jButtonAboutOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutOkActionPerformed
         jDialogAbout.setVisible(false);
     }//GEN-LAST:event_jButtonAboutOkActionPerformed
-
+    
     private void jButtonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutActionPerformed
         jTextAreaAboutVersion.setText(
-                copyright + "\n\n" + 
+                copyright + "\n\n" +
                 version.print);
         jDialogAbout.setSize(500,250);
         jDialogAbout.setVisible(true);
     }//GEN-LAST:event_jButtonAboutActionPerformed
-
+    
     private void jButtonCancelNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelNoActionPerformed
-        jDialogCancel.setVisible(false);        
+        jDialogCancel.setVisible(false);
     }//GEN-LAST:event_jButtonCancelNoActionPerformed
-
+    
     private void jButtonCancelYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelYesActionPerformed
         dispose();
         System.exit(0);
     }//GEN-LAST:event_jButtonCancelYesActionPerformed
-
+    
     private void jButtonCancelMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelMainActionPerformed
         jDialogCancel.setSize(200, 100);
         jDialogCancel.setVisible(true);
     }//GEN-LAST:event_jButtonCancelMainActionPerformed
-
+    
     private void jButtonSignMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignMainActionPerformed
         // DoSign Sign;
         String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
@@ -388,13 +409,13 @@ public class Main extends javax.swing.JFrame {
                 outputPDFFile,
                 signatureP12File,
                 password);
-       
-        jLabelFinished.setText(DoSignPDF.result);
+        
+        jLabelFinished.setText(Main.result);
         jDialogFinished.setSize(600,200);
         jDialogFinished.setVisible(true);
         
     }//GEN-LAST:event_jButtonSignMainActionPerformed
-
+    
     private void jButtonSignaturefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignaturefileActionPerformed
         String file = chooseP12File();
         // do nothing if open dialog was cancelled
@@ -404,7 +425,7 @@ public class Main extends javax.swing.JFrame {
         jTextFieldSignaturefile.setText(file);
 //        System.out.println(file);
     }//GEN-LAST:event_jButtonSignaturefileActionPerformed
-
+    
     private void jButtonOutputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputfileActionPerformed
         String file = choosePDFFileSave();
         // do nothing if open dialog was cancelled
@@ -414,7 +435,7 @@ public class Main extends javax.swing.JFrame {
         jTextFieldOutputfile.setText(file);
 //        System.out.println(file);
     }//GEN-LAST:event_jButtonOutputfileActionPerformed
-
+    
     private void jButtonInputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInputfileActionPerformed
         String file = choosePDFFile();
         // do nothing if open dialog was cancelled
@@ -430,24 +451,23 @@ public class Main extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         
-        java.util.Locale Language;
- 
+ //       java.util.Locale Language;
+        
         mycommand = new SignCommandLine(args);
         
         if (mycommand.nogui) {
             new DoSignPDF(mycommand.input,
-                mycommand.output,
-                mycommand.signature,
-                mycommand.password);
+                    mycommand.output,
+                    mycommand.signature,
+                    mycommand.password);
             System.exit(0);
-        }
-        else {
-           
+        } else {
+            
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new Main().setVisible(true);
                 }
-            }); 
+            });
         }
         
     }
@@ -458,6 +478,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelMain;
     private javax.swing.JButton jButtonCancelNo;
     private javax.swing.JButton jButtonCancelYes;
+    private javax.swing.JButton jButtonFinishBack;
     private javax.swing.JButton jButtonFinishedOK;
     private javax.swing.JButton jButtonInputfile;
     private javax.swing.JButton jButtonOutputfile;
@@ -551,6 +572,13 @@ public class Main extends javax.swing.JFrame {
         
         public String getDescription() {
             return java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("PKCS12Description");
+        }
+    }
+    
+    public static void setResult(String resultText, Boolean errorState) {
+        System.err.println(resultText);
+        if (result == null) {
+            result = resultText;
         }
     }
 }

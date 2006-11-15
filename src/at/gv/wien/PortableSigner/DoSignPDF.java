@@ -38,8 +38,8 @@ public class DoSignPDF {
 	private static PrivateKey privateKey;
 
 	private static Certificate[] certificateChain;
-
-	public static String result;
+        
+        private static GetPKCS12 pkcs12;
 
 	/** Creates a new instance of DoSignPDF */
 	public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
@@ -52,27 +52,28 @@ public class DoSignPDF {
 					.insertProviderAt(
 							new org.bouncycastle.jce.provider.BouncyCastleProvider(),
 							2);
-			readPrivateKeyFromPKCS12(pkcs12FileName, password);
+                        
+                        pkcs12 = new GetPKCS12(pkcs12FileName, password);
 
 			PdfReader reader = null;
 			try {
 				reader = new PdfReader(pdfInputFileName);
 			} catch (IOException e) {
-				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfInputFileName
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfInputFileName
 						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), true);
 			}
 			FileOutputStream fout = null;
 			try {
 				fout = new FileOutputStream(pdfOutputFileName);
 			} catch (FileNotFoundException e) {
-				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfOutputFileName
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfOutputFileName
 						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"), true);
 			}
 			PdfStamper stp = null;
 			try {
 				stp = PdfStamper.createSignature(reader, fout, '\0');
 				PdfSignatureAppearance sap = stp.getSignatureAppearance();
-				sap.setCrypto(privateKey, certificateChain, null,
+				sap.setCrypto(pkcs12.privateKey, pkcs12.certificateChain, null,
 						PdfSignatureAppearance.WINCER_SIGNED);
 				// sap.setReason("I'm the author");
 				// sap.setLocation("Vienna");
@@ -80,67 +81,15 @@ public class DoSignPDF {
 				// null);
 				sap.setCertified(true);
 				stp.close();
-				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("Document") + pdfOutputFileName
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("Document") + pdfOutputFileName
 						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"), false);
 			} catch (Exception e) {
-				setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"), true);
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"), true);
 			}
 		} catch (KeyStoreException kse) {
-			setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorCreatingKeystore"),
+			Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorCreatingKeystore"),
 					true);
 		}
 	}
 
-	protected static void readPrivateKeyFromPKCS12(String pkcs12FileName,
-			String pkcs12Password) throws KeyStoreException {
-		KeyStore ks = null;
-		try {
-			ks = KeyStore.getInstance("pkcs12");
-			ks.load(new FileInputStream(pkcs12FileName), pkcs12Password
-					.toCharArray());
-		} catch (NoSuchAlgorithmException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-					true);
-		} catch (CertificateException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificate"),
-					true);
-		} catch (FileNotFoundException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNotAccessible"),
-					true);
-		} catch (IOException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateIO"),
-					true);
-		}
-
-		String alias = "";
-		try {
-			alias = (String) ks.aliases().nextElement();
-			privateKey = (PrivateKey) ks.getKey(alias, pkcs12Password
-					.toCharArray());
-		} catch (NoSuchElementException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNoKey"),
-					true);
-		} catch (NoSuchAlgorithmException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-					true);
-		} catch (UnrecoverableKeyException e) {
-			setResult(
-					java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-					true);
-		}
-		certificateChain = ks.getCertificateChain(alias);
-	}
-
-	private static void setResult(String resultText, Boolean errorState) {
-		System.err.println(resultText);
-		if (result == null) {
-			result = resultText;
-		}
-	}
 }
