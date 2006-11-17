@@ -59,15 +59,13 @@ public class DoSignPDF {
 			try {
 				reader = new PdfReader(pdfInputFileName);
 			} catch (IOException e) {
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfInputFileName
-						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), true);
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), true);
 			}
 			FileOutputStream fout = null;
 			try {
 				fout = new FileOutputStream(pdfOutputFileName);
 			} catch (FileNotFoundException e) {
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("File") + pdfOutputFileName
-						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"), true);
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"), true);
 			}
 			PdfStamper stp = null;
 			try {
@@ -81,8 +79,7 @@ public class DoSignPDF {
 				// null);
 				sap.setCertified(true);
 				stp.close();
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("Document") + pdfOutputFileName
-						+ java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"), false);
+				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"), false);
 			} catch (Exception e) {
 				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"), true);
 			}

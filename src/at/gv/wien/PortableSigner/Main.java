@@ -6,6 +6,8 @@
 
 package at.gv.wien.PortableSigner;
 
+import javax.swing.JLabel;
+
 
 /**
  *
@@ -17,7 +19,8 @@ public class Main extends javax.swing.JFrame {
     public String copyright = "Peter Pfläging <pfp@adv.magwien.gv.at>)";
     private Preferences  prefs;
     private Version version = new Version();
-    public static String result;
+    private static java.awt.Color resultcolor;
+    private static String result;
     
     /** Creates new form Main */
     public Main() {
@@ -64,15 +67,6 @@ public class Main extends javax.swing.JFrame {
         jScrollPaneAboutVersion = new javax.swing.JScrollPane();
         jTextAreaAboutVersion = new javax.swing.JTextArea();
         jLabelAboutCopyright = new javax.swing.JLabel();
-        jDialogFinished = new javax.swing.JDialog();
-        jLabelFinished = new javax.swing.JLabel();
-        jButtonFinishedOK = new javax.swing.JButton();
-        jButtonFinishBack = new javax.swing.JButton();
-        jDialogPassword = new javax.swing.JDialog();
-        jLabelPassword = new javax.swing.JLabel();
-        jPasswordFieldPassword = new javax.swing.JPasswordField();
-        jButtonPasswordOK = new javax.swing.JButton();
-        jButtonPasswordCancel = new javax.swing.JButton();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -82,9 +76,28 @@ public class Main extends javax.swing.JFrame {
         jButtonOutputfile = new javax.swing.JButton();
         jTextFieldSignaturefile = new javax.swing.JTextField();
         jButtonSignaturefile = new javax.swing.JButton();
-        jButtonSignMain = new javax.swing.JButton();
         jButtonCancelMain = new javax.swing.JButton();
         jButtonAbout = new javax.swing.JButton();
+        jLabelTitle = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabelPassword = new javax.swing.JLabel();
+        jPasswordFieldPassword = new javax.swing.JPasswordField();
+        jButtonPasswordOK = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelSign = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabelWorking = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jLabel7 = new javax.swing.JLabel();
+        jLabelResult = new javax.swing.JLabel();
+        jLabelFinished = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelFinishNext = new javax.swing.JLabel();
 
         jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
@@ -187,98 +200,6 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabelAboutCopyright))
                 .addContainerGap())
         );
-        jDialogFinished.setModal(true);
-        jLabelFinished.setText("jLabel1");
-
-        jButtonFinishedOK.setText(bundle.getString("Finish")); // NOI18N
-        jButtonFinishedOK.setActionCommand(bundle.getString("Finish")); // NOI18N
-        jButtonFinishedOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFinishedOKActionPerformed(evt);
-            }
-        });
-
-        jButtonFinishBack.setText(bundle.getString("Back")); // NOI18N
-        jButtonFinishBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFinishBackActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jDialogFinishedLayout = new org.jdesktop.layout.GroupLayout(jDialogFinished.getContentPane());
-        jDialogFinished.getContentPane().setLayout(jDialogFinishedLayout);
-        jDialogFinishedLayout.setHorizontalGroup(
-            jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogFinishedLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogFinishedLayout.createSequentialGroup()
-                        .add(jButtonFinishBack)
-                        .add(15, 15, 15)
-                        .add(jButtonFinishedOK)))
-                .addContainerGap())
-        );
-        jDialogFinishedLayout.setVerticalGroup(
-            jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogFinishedLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jDialogFinishedLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonFinishBack)
-                    .add(jButtonFinishedOK))
-                .addContainerGap())
-        );
-        jDialogPassword.setAlwaysOnTop(true);
-        jDialogPassword.setLocationByPlatform(true);
-        jDialogPassword.setModal(true);
-        jLabelPassword.setText(bundle.getString("PasswordLabel")); // NOI18N
-
-        jButtonPasswordOK.setText("OK");
-        jButtonPasswordOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPasswordOKActionPerformed(evt);
-            }
-        });
-
-        jButtonPasswordCancel.setText("Cancel");
-        jButtonPasswordCancel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPasswordCancelActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jDialogPasswordLayout = new org.jdesktop.layout.GroupLayout(jDialogPassword.getContentPane());
-        jDialogPassword.getContentPane().setLayout(jDialogPasswordLayout);
-        jDialogPasswordLayout.setHorizontalGroup(
-            jDialogPasswordLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogPasswordLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabelPassword)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 255, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogPasswordLayout.createSequentialGroup()
-                .addContainerGap(195, Short.MAX_VALUE)
-                .add(jButtonPasswordCancel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButtonPasswordOK)
-                .addContainerGap())
-        );
-        jDialogPasswordLayout.setVerticalGroup(
-            jDialogPasswordLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogPasswordLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jDialogPasswordLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabelPassword)
-                    .add(jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jDialogPasswordLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonPasswordOK)
-                    .add(jButtonPasswordCancel))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -288,16 +209,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabelSignature.setText(bundle.getString("SignatureLabel")); // NOI18N
 
-        jTextFieldInputfile.setEditable(false);
-
         jButtonInputfile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonInputfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonInputfileActionPerformed(evt);
             }
         });
-
-        jTextFieldOutputfile.setEditable(false);
 
         jButtonOutputfile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonOutputfile.addActionListener(new java.awt.event.ActionListener() {
@@ -306,19 +223,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldSignaturefile.setEditable(false);
-
         jButtonSignaturefile.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonSignaturefile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSignaturefileActionPerformed(evt);
-            }
-        });
-
-        jButtonSignMain.setText(bundle.getString("SignButton")); // NOI18N
-        jButtonSignMain.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSignMainActionPerformed(evt);
             }
         });
 
@@ -329,12 +237,65 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/at/gv/wien/PortableSigner/PortableSignerLogo-small.png")));
         jButtonAbout.setText(bundle.getString("AboutButton")); // NOI18N
         jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAboutActionPerformed(evt);
             }
         });
+
+        jLabelTitle.setFont(new java.awt.Font("Lucida Grande", 3, 14));
+        jLabelTitle.setText("Sign PDF ");
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel1.setText("1.");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel2.setText("2.");
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel3.setText("3.");
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel4.setText("4.");
+
+        jLabelPassword.setText(bundle.getString("PasswordLabel")); // NOI18N
+
+        jButtonPasswordOK.setText("OK");
+        jButtonPasswordOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPasswordOKActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel5.setText("5.");
+
+        jLabelSign.setText("Sign:");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel6.setText("6.");
+
+        jLabelWorking.setText("Working:");
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel7.setText("7.");
+
+        jLabelResult.setText("Result:");
+
+        jLabelFinished.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelFinished.setText("?");
+        jLabelFinished.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabelFinished.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 3, 13));
+        jLabel8.setText("8.");
+
+        jLabel9.setText("Restart:");
+
+        jLabelFinishNext.setFont(new java.awt.Font("Lucida Grande", 1, 13));
+        jLabelFinishNext.setText("Goto 1. or");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -343,31 +304,67 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                        .add(jButtonAbout)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 137, Short.MAX_VALUE)
-                        .add(jButtonCancelMain)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .add(layout.createSequentialGroup()
+                        .add(jLabelTitle)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 172, Short.MAX_VALUE)
+                        .add(jButtonAbout))
+                    .add(layout.createSequentialGroup()
+                        .add(jLabel5)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButtonSignMain))
+                        .add(jLabelSign))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabelInput)
-                            .add(jLabelOutput)
-                            .add(jLabelSignature))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel1)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelInput))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel2)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelOutput))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel3)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelSignature))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel4)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelPassword))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel6)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelWorking))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel7)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabelResult))
+                            .add(layout.createSequentialGroup()
+                                .add(jLabel8)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jLabel9)))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(layout.createSequentialGroup()
-                                .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonOutputfile))
                             .add(layout.createSequentialGroup()
-                                .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonInputfile))
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
-                                .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jButtonPasswordOK)
+                                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinishNext))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jButtonSignaturefile)))))
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(jButtonSignaturefile)
+                                    .add(jButtonCancelMain))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -375,39 +372,71 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabelTitle)
+                    .add(jButtonAbout))
+                .add(18, 18, 18)
+                .add(jSeparator1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelInput)
                     .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButtonInputfile))
+                    .add(jButtonInputfile)
+                    .add(jLabel1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOutput)
                     .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButtonOutputfile))
+                    .add(jButtonOutputfile)
+                    .add(jLabel2))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelSignature)
                     .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButtonSignaturefile))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 38, Short.MAX_VALUE)
+                    .add(jButtonSignaturefile)
+                    .add(jLabel3))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel4)
+                        .add(jLabelPassword))
+                    .add(jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonSignMain)
-                    .add(jButtonCancelMain)
-                    .add(jButtonAbout))
-                .addContainerGap())
+                    .add(jLabel5)
+                    .add(jLabelSign)
+                    .add(jButtonPasswordOK))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel6)
+                        .add(jLabelWorking))
+                    .add(jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                        .add(jLabel7)
+                        .add(jLabelResult))
+                    .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabelFinishNext)
+                    .add(jLabel8)
+                    .add(jLabel9)
+                    .add(jButtonCancelMain))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonPasswordCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordCancelActionPerformed
-        jDialogPassword.setVisible(false);
-    }//GEN-LAST:event_jButtonPasswordCancelActionPerformed
-
     private void jButtonPasswordOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordOKActionPerformed
         // DoSign Sign;
-        jDialogPassword.setVisible(false);
         
         //TODO: Cursor
         // getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
+        jProgressBar1.setIndeterminate(true);
+        //TODO Wakeup ... notifyAll();
+        jLabelFinished.setText("?");
+        jLabelFinished.setForeground(new java.awt.Color(0,0,0));
         String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
         String password = "";
         password = String.valueOf(jPasswordFieldPassword.getPassword());
@@ -417,31 +446,26 @@ public class Main extends javax.swing.JFrame {
         if (inputPDFFile == null || outputPDFFile == null || signatureP12File == null) {
             return;
         }
+
         prefs.set("LastInputFile", inputPDFFile);
         prefs.set("LastOutputFile", outputPDFFile);
         prefs.set("LastP12File", signatureP12File);
+        result = null;
+
         new DoSignPDF(inputPDFFile,
                 outputPDFFile,
                 signatureP12File,
                 password);
-
+        
+        jProgressBar1.setIndeterminate(false);
+        jProgressBar1.setValue(100);
         // getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabelFinished.setText(Main.result);
-        jDialogFinished.setSize(600,200);
-        jDialogFinished.setVisible(true);        
+        jLabelFinished.setForeground(resultcolor);
+        jLabelFinished.setText(result);
+        
 
     }//GEN-LAST:event_jButtonPasswordOKActionPerformed
-
-    private void jButtonFinishBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinishBackActionPerformed
-        jDialogFinished.setVisible(false);
-        jLabelFinished.setText("");
-    }//GEN-LAST:event_jButtonFinishBackActionPerformed
-    
-    private void jButtonFinishedOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinishedOKActionPerformed
-        dispose();
-        System.exit(0);
-    }//GEN-LAST:event_jButtonFinishedOKActionPerformed
-    
+        
     private void jButtonAboutOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutOkActionPerformed
         jDialogAbout.setVisible(false);
     }//GEN-LAST:event_jButtonAboutOkActionPerformed
@@ -467,12 +491,7 @@ public class Main extends javax.swing.JFrame {
         jDialogCancel.setSize(200, 100);
         jDialogCancel.setVisible(true);
     }//GEN-LAST:event_jButtonCancelMainActionPerformed
-    
-    private void jButtonSignMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignMainActionPerformed
-        jDialogPassword.setSize(400, 120);
-        jDialogPassword.setVisible(true);
-    }//GEN-LAST:event_jButtonSignMainActionPerformed
-    
+        
     private void jButtonSignaturefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignaturefileActionPerformed
         String file = chooseP12File();
         // do nothing if open dialog was cancelled
@@ -535,29 +554,39 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelMain;
     private javax.swing.JButton jButtonCancelNo;
     private javax.swing.JButton jButtonCancelYes;
-    private javax.swing.JButton jButtonFinishBack;
-    private javax.swing.JButton jButtonFinishedOK;
     private javax.swing.JButton jButtonInputfile;
     private javax.swing.JButton jButtonOutputfile;
-    private javax.swing.JButton jButtonPasswordCancel;
     private javax.swing.JButton jButtonPasswordOK;
-    private javax.swing.JButton jButtonSignMain;
     private javax.swing.JButton jButtonSignaturefile;
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
-    private javax.swing.JDialog jDialogFinished;
-    private javax.swing.JDialog jDialogPassword;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAboutCopyright;
     private javax.swing.JLabel jLabelAboutText;
     private javax.swing.JLabel jLabelCancelQuestion;
+    private javax.swing.JLabel jLabelFinishNext;
     private javax.swing.JLabel jLabelFinished;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelOutput;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelResult;
+    private javax.swing.JLabel jLabelSign;
     private javax.swing.JLabel jLabelSignature;
+    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JLabel jLabelWorking;
     private javax.swing.JPanel jPanelCancel;
     private javax.swing.JPasswordField jPasswordFieldPassword;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaAboutVersion;
     private javax.swing.JTextField jTextFieldInputfile;
     private javax.swing.JTextField jTextFieldOutputfile;
@@ -636,7 +665,12 @@ public class Main extends javax.swing.JFrame {
     }
     
     public static void setResult(String resultText, Boolean errorState) {
-        System.err.println(resultText);
+        if (errorState) {
+            resultcolor = new java.awt.Color(240,0,0);
+            System.err.println(resultText);
+        } else {
+            resultcolor = new java.awt.Color(0,240,0);
+        }
         if (result == null) {
             result = resultText;
         }
