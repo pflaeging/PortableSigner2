@@ -497,7 +497,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPasswordOK">
       <Properties>
-        <Property name="text" type="java.lang.String" value="OK"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="OK" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPasswordOKActionPerformed"/>
@@ -515,7 +517,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelSign">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sign:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Sign" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -530,7 +534,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelWorking">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Working:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Working" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JProgressBar" name="jProgressBar1">
@@ -547,7 +553,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelResult">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Result:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Result" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelFinished">
@@ -570,7 +578,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Restart:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Restart" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelFinishNext">
@@ -580,7 +590,9 @@
             <Font name="Lucida Grande" size="13" style="1"/>
           </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" value="Goto 1. or"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Goto_1" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

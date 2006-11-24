@@ -21,6 +21,9 @@ public class Main extends javax.swing.JFrame {
     private Version version = new Version();
     private static java.awt.Color resultcolor;
     private static String result;
+    String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
+    String password = "";
+    
     
     /** Creates new form Main */
     public Main() {
@@ -262,7 +265,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabelPassword.setText(bundle.getString("PasswordLabel")); // NOI18N
 
-        jButtonPasswordOK.setText("OK");
+        jButtonPasswordOK.setText(bundle.getString("OK")); // NOI18N
         jButtonPasswordOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPasswordOKActionPerformed(evt);
@@ -272,17 +275,17 @@ public class Main extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel5.setText("5.");
 
-        jLabelSign.setText("Sign:");
+        jLabelSign.setText(bundle.getString("Sign")); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel6.setText("6.");
 
-        jLabelWorking.setText("Working:");
+        jLabelWorking.setText(bundle.getString("Working")); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel7.setText("7.");
 
-        jLabelResult.setText("Result:");
+        jLabelResult.setText(bundle.getString("Result")); // NOI18N
 
         jLabelFinished.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelFinished.setText("?");
@@ -292,10 +295,10 @@ public class Main extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel8.setText("8.");
 
-        jLabel9.setText("Restart:");
+        jLabel9.setText(bundle.getString("Restart")); // NOI18N
 
         jLabelFinishNext.setFont(new java.awt.Font("Lucida Grande", 1, 13));
-        jLabelFinishNext.setText("Goto 1. or");
+        jLabelFinishNext.setText(bundle.getString("Goto_1")); // NOI18N
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -427,18 +430,18 @@ public class Main extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButtonPasswordOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordOKActionPerformed
         // DoSign Sign;
         
         //TODO: Cursor
-        // getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
+        //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
         jProgressBar1.setIndeterminate(true);
-        //TODO Wakeup ... notifyAll();
+        //jProgressBar1.paint(jProgressBar1.getGraphics());
         jLabelFinished.setText("?");
         jLabelFinished.setForeground(new java.awt.Color(0,0,0));
-        String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
-        String password = "";
+        //String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
+        //String password = "";
         password = String.valueOf(jPasswordFieldPassword.getPassword());
         inputPDFFile = jTextFieldInputfile.getText();
         outputPDFFile = jTextFieldOutputfile.getText();
@@ -446,26 +449,33 @@ public class Main extends javax.swing.JFrame {
         if (inputPDFFile == null || outputPDFFile == null || signatureP12File == null) {
             return;
         }
-
+        
         prefs.set("LastInputFile", inputPDFFile);
         prefs.set("LastOutputFile", outputPDFFile);
         prefs.set("LastP12File", signatureP12File);
         result = null;
-
-        new DoSignPDF(inputPDFFile,
-                outputPDFFile,
-                signatureP12File,
-                password);
         
-        jProgressBar1.setIndeterminate(false);
-        jProgressBar1.setValue(100);
-        // getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jLabelFinished.setForeground(resultcolor);
-        jLabelFinished.setText(result);
+        // create Thread for signing
+        Runnable runnable = new Runnable() {
+            public void run() {
+                new DoSignPDF(inputPDFFile,
+                        outputPDFFile,
+                        signatureP12File,
+                        password);
+                jProgressBar1.setIndeterminate(false);
+                jProgressBar1.setValue(100);
+                //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
+                jLabelFinished.setForeground(resultcolor);
+                jLabelFinished.setText(result);
+            }
+        };
         
-
+        
+        Thread thread = new Thread(runnable);
+        thread.start();
+        
     }//GEN-LAST:event_jButtonPasswordOKActionPerformed
-        
+    
     private void jButtonAboutOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutOkActionPerformed
         jDialogAbout.setVisible(false);
     }//GEN-LAST:event_jButtonAboutOkActionPerformed
@@ -491,7 +501,7 @@ public class Main extends javax.swing.JFrame {
         jDialogCancel.setSize(200, 100);
         jDialogCancel.setVisible(true);
     }//GEN-LAST:event_jButtonCancelMainActionPerformed
-        
+    
     private void jButtonSignaturefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignaturefileActionPerformed
         String file = chooseP12File();
         // do nothing if open dialog was cancelled
@@ -527,7 +537,7 @@ public class Main extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         
- //       java.util.Locale Language;
+        //       java.util.Locale Language;
         
         mycommand = new SignCommandLine(args);
         
