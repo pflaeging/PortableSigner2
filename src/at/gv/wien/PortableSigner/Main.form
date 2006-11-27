@@ -139,7 +139,9 @@
                 <Font name="Lucida Grande" size="18" style="1"/>
               </FontInfo>
             </Property>
-            <Property name="text" type="java.lang.String" value="PortableSigner"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;PortableSigner &quot; + Version.release" type="code"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAboutOk">
@@ -200,7 +202,7 @@
                   <Component id="jSeparator1" alignment="0" pref="451" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="172" max="32767" attributes="0"/>
+                      <EmptySpace pref="177" max="32767" attributes="0"/>
                       <Component id="jButtonAbout" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -441,7 +443,9 @@
             <Font name="Lucida Grande" size="14" style="3"/>
           </FontInfo>
         </Property>
-        <Property name="text" type="java.lang.String" value="Sign PDF "/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="SignPDF" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">

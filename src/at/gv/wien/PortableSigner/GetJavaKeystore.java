@@ -43,23 +43,28 @@ public class GetJavaKeystore {
         } catch (NoSuchAlgorithmException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Algorithmus)!",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (CertificateException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Zertifikatsfehler)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (FileNotFoundException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (IOException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (EA Fehler)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (KeyStoreException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         }
         
         String alias = "";
@@ -78,11 +83,13 @@ public class GetJavaKeystore {
         } catch (NoSuchElementException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Keine Schlüssel)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (KeyStoreException e) {
             Main.setResult(
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)",
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         }
     }
     

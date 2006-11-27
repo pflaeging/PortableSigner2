@@ -2,9 +2,6 @@
  * DoSignPDF.java
  *
  * Created on 21. September 2006, 15:25
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
  */
 
 
@@ -59,13 +56,19 @@ public class DoSignPDF {
 			try {
 				reader = new PdfReader(pdfInputFileName);
 			} catch (IOException e) {
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), true);
+				Main.setResult(
+                                        java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), 
+                                        true,
+                                        e.getLocalizedMessage());
 			}
 			FileOutputStream fout = null;
 			try {
 				fout = new FileOutputStream(pdfOutputFileName);
 			} catch (FileNotFoundException e) {
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"), true);
+				Main.setResult(
+                                        java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeWritten"),
+                                        true,
+                                        e.getLocalizedMessage());
 			}
 			PdfStamper stp = null;
 			try {
@@ -79,13 +82,19 @@ public class DoSignPDF {
 				// null);
 				sap.setCertified(true);
 				stp.close();
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"), false);
+				Main.setResult(
+                                        java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"),
+                                        false,
+                                        "");
 			} catch (Exception e) {
-				Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"), true);
+				Main.setResult(
+                                        java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorWhileSigningFile"),
+                                        true,
+                                        e.getLocalizedMessage());
 			}
 		} catch (KeyStoreException kse) {
 			Main.setResult(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorCreatingKeystore"),
-					true);
+					true, kse.getLocalizedMessage());
 		}
 	}
 

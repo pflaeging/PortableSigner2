@@ -155,7 +155,7 @@ public class Main extends javax.swing.JFrame {
         jDialogAbout.setLocationByPlatform(true);
         jDialogAbout.setResizable(false);
         jLabelAboutText.setFont(new java.awt.Font("Lucida Grande", 1, 18));
-        jLabelAboutText.setText("PortableSigner");
+        jLabelAboutText.setText("PortableSigner " + Version.release);
 
         jButtonAboutOk.setText(bundle.getString("OK")); // NOI18N
         jButtonAboutOk.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +249,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         jLabelTitle.setFont(new java.awt.Font("Lucida Grande", 3, 14));
-        jLabelTitle.setText("Sign PDF ");
+        jLabelTitle.setText(bundle.getString("SignPDF")); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel1.setText("1.");
@@ -310,7 +310,7 @@ public class Main extends javax.swing.JFrame {
                     .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(jLabelTitle)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 172, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 177, Short.MAX_VALUE)
                         .add(jButtonAbout))
                     .add(layout.createSequentialGroup()
                         .add(jLabel5)
@@ -674,10 +674,10 @@ public class Main extends javax.swing.JFrame {
         }
     }
     
-    public static void setResult(String resultText, Boolean errorState) {
+    public static void setResult(String resultText, Boolean errorState, String errorString) {
         if (errorState) {
             resultcolor = new java.awt.Color(240,0,0);
-            System.err.println(resultText);
+            System.err.println(resultText  + "\n\t" + errorString);
         } else {
             resultcolor = new java.awt.Color(0,240,0);
         }

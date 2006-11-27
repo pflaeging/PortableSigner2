@@ -43,19 +43,23 @@ public class GetPKCS12 {
         } catch (NoSuchAlgorithmException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (CertificateException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificate"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (FileNotFoundException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNotAccessible"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (IOException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateIO"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         }
         
         String alias = "";
@@ -66,15 +70,17 @@ public class GetPKCS12 {
         } catch (NoSuchElementException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNoKey"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         } catch (NoSuchAlgorithmException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-                    true);
+                    true, e.getLocalizedMessage());
         } catch (UnrecoverableKeyException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
-                    true);
+                    true,
+                    e.getLocalizedMessage());
         }
         certificateChain = ks.getCertificateChain(alias);
     }
