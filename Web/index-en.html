@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+
+
+
+
+
+  
+  
+  
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+
+
+
+
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  <title>PortableSigner Mainpage</title>
+  <meta content="Peter Pflaeging" name="author">
+</head>
+
+
+<body>
+
+
+
+
+
+<div style="text-align: right;"><a href="index-de.html"><img style="height: 18px;" alt="Austria" src="austria.png"><img style="width: 30px; height: 18px;" alt="Deutschland" src="germany.png"></a> &nbsp; <a href="index-en.html"><img style="width: 30px; height: 15px;" alt="England" src="united_kingdom.png"><img style="width: 30px; height: 16px;" alt="USA" src="united_states.png"></a></div>
+
+
+
+
+
+<h1 style="text-align: center;"><img style="width: 139px; height: 115px;" alt="Logo" src="PortableSignerLogo.png">PortableSigner</h1>
+
+
+
+
+
+<h2>Tool to sign Portable Document Files (PDF)</h2>
+
+
+
+
+<br>
+
+
+
+
+PortableSigner is a signing (with X.509 certificates) program for PDF
+files. It's plattform independent and runs (tested) under Windows
+(2000, XP, ...), Linux and Mac OS X.<br>
+
+
+
+
+
+<h2>Features</h2>
+
+
+
+
+<br>
+
+
+
+
+It's possible to sign PDF documents digital with X.509 certificates.
+This signed documents are read only. Therefore it's possible to
+implement "electronic paper"<br>
+
+
+<br>
+
+
+<h2>Download</h2>
+
+
+<a href="http://sourceforge.net/project/showfiles.php?group_id=181271">http://sourceforge.net/project/showfiles.php?group_id=181271</a>
+
+
+<br>
+
+
+
+
+
+<h2>What is needed?</h2>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li>This program</li>
+
+
+
+
+
+  <li>Java 1.5 compatible runtime</li>
+
+
+
+
+
+  <li>one PKCS#12 file with your personal digital X.509 certificate (from <a href="http://www.cacert.org">CaCert</a> for example)</li>
+
+
+
+
+
+  <li>PDF files to sign</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+<h2>Operating modes</h2>
+
+
+
+
+
+PortableSigner can work in 2 modes:<br>
+
+
+
+
+
+<ul>
+
+
+
+
+
+  <li><span style="font-weight: bold;">GUI Desktop
+Modus</span> :&nbsp;Graphical frontend to sign single documents.</li>
+
+
+
+
+
+  <li><span style="font-weight: bold;">Commandline
+Modus</span> : Operation from the commandline for batch or operatorless work</li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+<h3>GUI Desktop Modus</h3>
+
+
+
+
+If you have a Java 1.5 compatible runtime, unpack the ZIP file and
+doubleclick or invoke the following commandline from the extracted
+directory:
+<pre>java -jar PortableSigner.jar<br></pre>
+
+
+
+
+<br>
+
+
+
+
+
+Now you see something like this:<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<img style="width: 502px; height: 227px;" alt="Main window" src="Mainwindow.png"><br>
+
+
+
+
+
+<br>
+
+
+
+
+The operation on base of this screen is straightforward:<br>
+
+
+
+
+
+<ol>
+
+
+
+
+
+  <li>Select your inputfile (the last used file is preselected).</li>
+
+
+
+
+
+  <li>Select an outputfile.</li>
+
+
+
+
+
+  <li>Select your PKCS#12 file (I will support other type of files and keystores later. Look in the <a href="todo.txt">ToDo</a>)</li>
+
+
+
+
+
+  <li>The password of your PKCS#12 file.</li>
+
+
+
+
+
+  <li>Press the "Sign" Button&nbsp;</li>
+
+
+
+
+
+  <li>Ready!</li>
+
+
+
+
+
+</ol>
+
+
+
+
+
+Finaly you get the following dialog:<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<img style="width: 600px; height: 200px;" alt="Final dialog" src="Finish.png"><br>
+
+
+
+
+
+<br>
+
+
+Here's the "About ..." dialog. please include the version info in every request to me!<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<img style="width: 500px; height: 250px;" alt="Bild vom About Dialog" src="Ueber.png"><br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<h3>Commandline Modus</h3>
+
+
+
+
+You can use the following commandline parameter:<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<pre><span style="font-family: monospace;"><span style="font-weight: bold;">pfp$</span> java -jar PortableSigner.jar -h<br>usage: PortableSigner<br> -h    Help (this page)<br> -n    Without GUI<br> -o    Outputfile (PDF)<br> -p    Signaturepassword<br> -s    Signaturefile (P12)<br> -t    Inputfile (PDF)<br><br></span><span style="font-weight: bold;">pfp$</span><br></pre>
+
+
+
+
+For the example above the following commandline is requiered:<br>
+
+
+
+
+
+<pre><span style="font-family: monospace;"><span style="font-weight: bold;">pfp$</span> java -jar PortableSigner.jar -n \<br>	-t /Users/pfp/Desktop/unsigned.pdf \<br>	-o /Users/pfp/Desktop/signed.pdf \<br>	-s /Users/pfp/Desktop/pfp.p12 \ <br>	-p MySecretPassword</span><br>Document<br>/Users/pfp/Desktop/signed.pdf<br>is generated and signed!<br><span style="font-weight: bold;">pfp$</span><br></pre>
+
+
+
+
+The switch "-n" turns the GUI off. In all other cases the GUI is invoked to support macro mode calling!<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+<hr style="width: 100%; height: 2px;">Peter
+Pfl&auml;ging &lt;<a href="mailto:pfp@adv.magwien.gv.at">pfp@adv.magwien.gv.at</a>&gt;<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+This&nbsp; program is made by the EDP department of the Municipality of Vienna (<a href="http://www.wien.gv.at/english/edp/">http://www.wien.gv.at/english/edp/</a>).<br>
+
+
+
+
+
+<br>
+
+
+
+
+
+</body>
+</html>

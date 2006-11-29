@@ -1,0 +1,6 @@
+ToDo
+
+- support of other keystores
+- PKCS#11 support
+- other languages
+- OpenOffice macro to sign inside OOo
