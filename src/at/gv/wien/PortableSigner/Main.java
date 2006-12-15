@@ -17,6 +17,7 @@ public class Main extends javax.swing.JFrame {
     
     private static SignCommandLine mycommand;
     public String copyright = "Peter Pfläging <pfp@adv.magwien.gv.at>)";
+    public String url = "http://sourceforge.net/projects/portablesigner";
     private Preferences  prefs;
     private Version version = new Version();
     private static java.awt.Color resultcolor;
@@ -70,6 +71,11 @@ public class Main extends javax.swing.JFrame {
         jScrollPaneAboutVersion = new javax.swing.JScrollPane();
         jTextAreaAboutVersion = new javax.swing.JTextArea();
         jLabelAboutCopyright = new javax.swing.JLabel();
+        jButtonLicense = new javax.swing.JButton();
+        jDialogLicense = new javax.swing.JDialog();
+        jButtonLicenseOK = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaLicenseText = new javax.swing.JTextArea();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -170,21 +176,29 @@ public class Main extends javax.swing.JFrame {
 
         jLabelAboutCopyright.setText("(c) Stadt Wien");
 
+        jButtonLicense.setText(bundle.getString("LicenseButton")); // NOI18N
+        jButtonLicense.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLicenseActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jDialogAboutLayout = new org.jdesktop.layout.GroupLayout(jDialogAbout.getContentPane());
         jDialogAbout.getContentPane().setLayout(jDialogAboutLayout);
         jDialogAboutLayout.setHorizontalGroup(
             jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jDialogAboutLayout.createSequentialGroup()
                 .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, jDialogAboutLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .add(jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE))
-                        .add(org.jdesktop.layout.GroupLayout.LEADING, jDialogAboutLayout.createSequentialGroup()
-                            .addContainerGap()
-                            .add(jLabelAboutCopyright)
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 241, Short.MAX_VALUE)
-                            .add(jButtonAboutOk)))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogAboutLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jDialogAboutLayout.createSequentialGroup()
+                                .add(jLabelAboutCopyright)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 137, Short.MAX_VALUE)
+                                .add(jButtonLicense)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jButtonAboutOk))))
                     .add(jDialogAboutLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(jLabelAboutText)))
@@ -200,7 +214,40 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jButtonAboutOk)
-                    .add(jLabelAboutCopyright))
+                    .add(jLabelAboutCopyright)
+                    .add(jButtonLicense))
+                .addContainerGap())
+        );
+        jButtonLicenseOK.setText("OK");
+        jButtonLicenseOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLicenseOKActionPerformed(evt);
+            }
+        });
+
+        jTextAreaLicenseText.setColumns(20);
+        jTextAreaLicenseText.setRows(5);
+        jTextAreaLicenseText.setText(bundle.getString("LicenseText")); // NOI18N
+        jScrollPane1.setViewportView(jTextAreaLicenseText);
+
+        org.jdesktop.layout.GroupLayout jDialogLicenseLayout = new org.jdesktop.layout.GroupLayout(jDialogLicense.getContentPane());
+        jDialogLicense.getContentPane().setLayout(jDialogLicenseLayout);
+        jDialogLicenseLayout.setHorizontalGroup(
+            jDialogLicenseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDialogLicenseLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jDialogLicenseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonLicenseOK)
+                    .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialogLicenseLayout.setVerticalGroup(
+            jDialogLicenseLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogLicenseLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonLicenseOK)
                 .addContainerGap())
         );
 
@@ -430,6 +477,15 @@ public class Main extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonLicenseOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLicenseOKActionPerformed
+        jDialogLicense.setVisible(false);
+    }//GEN-LAST:event_jButtonLicenseOKActionPerformed
+
+    private void jButtonLicenseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLicenseActionPerformed
+        jDialogLicense.setVisible(true);
+        jDialogLicense.setSize(450,450);
+    }//GEN-LAST:event_jButtonLicenseActionPerformed
     
     private void jButtonPasswordOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordOKActionPerformed
         // DoSign Sign;
@@ -482,7 +538,7 @@ public class Main extends javax.swing.JFrame {
     
     private void jButtonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutActionPerformed
         jTextAreaAboutVersion.setText(
-                copyright + "\n\n" +
+                copyright + "\n" + url + "\n\n" +
                 version.print);
         jDialogAbout.setSize(500,250);
         jDialogAbout.setVisible(true);
@@ -565,11 +621,14 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelNo;
     private javax.swing.JButton jButtonCancelYes;
     private javax.swing.JButton jButtonInputfile;
+    private javax.swing.JButton jButtonLicense;
+    private javax.swing.JButton jButtonLicenseOK;
     private javax.swing.JButton jButtonOutputfile;
     private javax.swing.JButton jButtonPasswordOK;
     private javax.swing.JButton jButtonSignaturefile;
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
+    private javax.swing.JDialog jDialogLicense;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -595,9 +654,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelCancel;
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaAboutVersion;
+    private javax.swing.JTextArea jTextAreaLicenseText;
     private javax.swing.JTextField jTextFieldInputfile;
     private javax.swing.JTextField jTextFieldOutputfile;
     private javax.swing.JTextField jTextFieldSignaturefile;
