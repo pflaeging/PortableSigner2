@@ -21,9 +21,11 @@ public class Main extends javax.swing.JFrame {
     private Preferences  prefs;
     private Version version = new Version();
     private static java.awt.Color resultcolor;
-    private static String result;
+    private static String result, exceptionstring;
     String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
     String password = "";
+    private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
+    private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
     
     
     /** Creates new form Main */
@@ -312,6 +314,12 @@ public class Main extends javax.swing.JFrame {
 
         jLabelPassword.setText(bundle.getString("PasswordLabel")); // NOI18N
 
+        jPasswordFieldPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordFieldPasswordActionPerformed(evt);
+            }
+        });
+
         jButtonPasswordOK.setText(bundle.getString("OK")); // NOI18N
         jButtonPasswordOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,6 +486,10 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPasswordFieldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldPasswordActionPerformed
+        jButtonPasswordOKActionPerformed(evt);
+    }//GEN-LAST:event_jPasswordFieldPasswordActionPerformed
+
     private void jButtonLicenseOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLicenseOKActionPerformed
         jDialogLicense.setVisible(false);
     }//GEN-LAST:event_jButtonLicenseOKActionPerformed
@@ -510,6 +522,7 @@ public class Main extends javax.swing.JFrame {
         prefs.set("LastOutputFile", outputPDFFile);
         prefs.set("LastP12File", signatureP12File);
         result = null;
+        exceptionstring = null;
         
         // create Thread for signing
         Runnable runnable = new Runnable() {
@@ -522,6 +535,7 @@ public class Main extends javax.swing.JFrame {
                 jProgressBar1.setValue(100);
                 //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
                 jLabelFinished.setForeground(resultcolor);
+                jLabelFinished.setToolTipText(exceptionstring);
                 jLabelFinished.setText(result);
             }
         };
@@ -737,10 +751,14 @@ public class Main extends javax.swing.JFrame {
     
     public static void setResult(String resultText, Boolean errorState, String errorString) {
         if (errorState) {
-            resultcolor = new java.awt.Color(240,0,0);
-            System.err.println(resultText  + "\n\t" + errorString);
+            resultcolor = colorerror;
+            if (exceptionstring == null) {
+                exceptionstring = errorString;
+            }
+            System.err.println(resultText  + "\n\t" + exceptionstring);
         } else {
-            resultcolor = new java.awt.Color(0,240,0);
+            resultcolor = colorok;
+            exceptionstring = null;
         }
         if (result == null) {
             result = resultText;

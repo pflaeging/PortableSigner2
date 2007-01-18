@@ -25,6 +25,10 @@ public class Preferences {
                 
     /** Creates a new instance of Preferences */
     public Preferences() {
+        get();
+    }
+    
+    private void get() {
         // Language = new java.util.Locale(prefs.get("Language", "de"));
         lastInputFile = prefs.get("LastInputFile", "");
         lastOutputFile = prefs.get("LastOutputFile", "");
@@ -33,6 +37,7 @@ public class Preferences {
     
     public void set(String property, String value) {
         prefs.put(property, value);
+        get();
     }
 
 }
