@@ -19,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.security.cert.CertificateException;
 import java.util.NoSuchElementException;
 
@@ -31,6 +32,12 @@ public class GetPKCS12 {
     public static PrivateKey privateKey;
     
     public static Certificate[] certificateChain;
+    public static String subject;
+    public static java.math.BigInteger serial;
+    public static java.util.Date notBefore, notAfter;
+    public static String issuer;
+    
+    X509Certificate x509cert;
     
     /** Creates a new instance of GetPKCS12 */    
     public GetPKCS12(String pkcs12FileName,
@@ -83,6 +90,12 @@ public class GetPKCS12 {
                     e.getLocalizedMessage());
         }
         certificateChain = ks.getCertificateChain(alias);
+        x509cert = (X509Certificate) ks.getCertificate(alias);
+        subject = x509cert.getSubjectX500Principal().toString();
+        serial = x509cert.getSerialNumber();
+        notBefore = x509cert.getNotBefore();
+        notAfter = x509cert.getNotAfter();
+        issuer = x509cert.getIssuerX500Principal().toString();
     }
     
     
