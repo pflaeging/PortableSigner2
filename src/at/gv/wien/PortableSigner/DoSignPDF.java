@@ -120,7 +120,7 @@ public class DoSignPDF {
                                     float topy = size.top();
                                     float rightx = size.right();
                                     float [] cellsize = new float[2];
-                                    cellsize[0] = 80f;
+                                    cellsize[0] = 85f;
                                     cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
                                 
                                     PdfPTable table = new PdfPTable(2);
@@ -128,7 +128,7 @@ public class DoSignPDF {
                                     PdfPCell  cell = 
                                         new PdfPCell(new Paragraph(
                                             new Chunk(greet, 
-                                                new Font(Font.TIMES_ROMAN, 12))));
+                                                new Font(Font.HELVETICA, 12))));
                                     cell.setPaddingBottom(5);
                                     cell.setColspan(2);
                                     cell.setBorderWidth(0f);
@@ -137,28 +137,28 @@ public class DoSignPDF {
                                     // inner table start
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(signator, new Font(Font.TIMES_ROMAN, 12))));
+                                            new Chunk(signator, new Font(Font.HELVETICA, 10))));
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.subject, new Font(Font.COURIER, 10))));
                                     // L 1
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(datestr, new Font(Font.TIMES_ROMAN, 12))));
+                                            new Chunk(datestr, new Font(Font.HELVETICA, 10))));
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
                                     // L 2
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(ca, new Font(Font.TIMES_ROMAN, 12))));
+                                            new Chunk(ca, new Font(Font.HELVETICA, 10))));
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.issuer, new Font(Font.COURIER, 10))));
                                     // L 3
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(serial, new Font(Font.TIMES_ROMAN, 12))));
+                                            new Chunk(serial, new Font(Font.HELVETICA, 10))));
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 10))));
@@ -166,7 +166,7 @@ public class DoSignPDF {
                                     if (specialcount == 1) {
                                         otable.addCell(
                                             new Paragraph(
-                                                new Chunk(special, new Font(Font.TIMES_ROMAN, 12))));
+                                                new Chunk(special, new Font(Font.HELVETICA, 10))));
                                         otable.addCell(
                                             new Paragraph(
                                                 new Chunk(pkcs12.atEgovOID, new Font(Font.COURIER, 10))));

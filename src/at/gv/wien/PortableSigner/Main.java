@@ -46,7 +46,7 @@ public class Main extends javax.swing.JFrame {
             jTextFieldInputfile.setText(mycommand.input);
         }
         if (mycommand.output == null) {
-            jTextFieldOutputfile.setText(prefs.lastOutputFile);
+            jTextFieldOutputfile.setText(generateOutputFile(jTextFieldInputfile.getText()));
         } else {
             jTextFieldOutputfile.setText(mycommand.output);
         }
@@ -469,7 +469,6 @@ public class Main extends javax.swing.JFrame {
         jLabelResult.setText(bundle.getString("Result")); // NOI18N
 
         jLabelFinished.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabelFinished.setText("?");
         jLabelFinished.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabelFinished.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
 
@@ -508,10 +507,10 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(jLabelTitle)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 195, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 242, Short.MAX_VALUE)
                         .add(jButtonAbout))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -550,27 +549,27 @@ public class Main extends javax.swing.JFrame {
                                 .add(jLabelResult)))
                         .add(10, 10, 10)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+                            .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(jLabelFinishNext)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 176, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 223, Short.MAX_VALUE)
                                 .add(jButtonCancelMain))
                             .add(jButtonPasswordOK)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(layout.createSequentialGroup()
-                                        .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                                        .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                                     .add(layout.createSequentialGroup()
                                         .add(jCheckBoxSignatureBlock)
                                         .add(128, 128, 128))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -653,6 +652,7 @@ public class Main extends javax.swing.JFrame {
         String file = chooseImageFile();
         // do nothing if open dialog was cancelled
         if (file == null) {
+            jFrameOption.setAlwaysOnTop(true);
             return;
         }
         jTextFieldOptionLogo.setText(file);
@@ -676,7 +676,7 @@ public class Main extends javax.swing.JFrame {
 
     private void jButtonOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionActionPerformed
         
-        jFrameOption.setSize(450,300);
+        jFrameOption.setSize(450,180);
         String lang = prefs.signLanguage;
         // System.out.println(lang);
         if (lang.equals("german")) {
@@ -709,11 +709,9 @@ public class Main extends javax.swing.JFrame {
     private void jButtonPasswordOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordOKActionPerformed
         // DoSign Sign;
         
-        //TODO: Cursor
-        //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.WAIT_CURSOR));
+        
         jProgressBar1.setIndeterminate(true);
-        //jProgressBar1.paint(jProgressBar1.getGraphics());
-        jLabelFinished.setText("?");
+        jLabelFinished.setText("");
         jLabelFinished.setForeground(new java.awt.Color(0,0,0));
         //String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
         //String password = "";
@@ -726,7 +724,7 @@ public class Main extends javax.swing.JFrame {
         }
         
         prefs.set("LastInputFile", inputPDFFile);
-        prefs.set("LastOutputFile", outputPDFFile);
+        // prefs.set("LastOutputFile", outputPDFFile);
         prefs.set("LastP12File", signatureP12File);
         result = null;
         exceptionstring = null;
@@ -808,8 +806,9 @@ public class Main extends javax.swing.JFrame {
         if (file == null) {
             return;
         }
+        // System.out.println("output: " + generateOutputFile(file));
+        jTextFieldOutputfile.setText(generateOutputFile(file));
         jTextFieldInputfile.setText(file);
-//        System.out.println(file);
     }//GEN-LAST:event_jButtonInputfileActionPerformed
     
     /**
@@ -903,14 +902,26 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldOutputfile;
     private javax.swing.JTextField jTextFieldSignaturefile;
     // End of variables declaration//GEN-END:variables
+
     
+    private String generateOutputFile(String inputFile) {
+        // generating filename by appending -sig to filename:
+        // /i/am/here.pdf becomes /i/am/here-sig.pdf
+        return inputFile.substring(0,inputFile.lastIndexOf(".pdf")) + "-sig.pdf";
+    }
+    
+    private String getDir (String absFile) {
+        // get Dir component from file as string
+        java.io.File myfile = new java.io.File(absFile);
+        return myfile.getParent();
+    }
     
     /** Opens dialog for user to choose an PDF file to open and read.
      *
      * @return PDF file or null if user cancelled the dialog
      */
     private String choosePDFFile() {
-        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(prefs.lastInputFile);
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(getDir(prefs.lastInputFile));
         chooser.setFileFilter(new PDFFilter());
         
         int returnVal = chooser.showOpenDialog(this);
@@ -926,7 +937,7 @@ public class Main extends javax.swing.JFrame {
      * @return PDF file or null if user cancelled the dialog
      */
     private String choosePDFFileSave() {
-        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(prefs.lastOutputFile);
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(getDir(jTextFieldOutputfile.getText()));
         chooser.setFileFilter(new PDFFilter());
         
         int returnVal = chooser.showSaveDialog(this);
@@ -942,7 +953,7 @@ public class Main extends javax.swing.JFrame {
      * @return P12 file or null if user cancelled the dialog
      */
     private String chooseP12File() {
-        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(prefs.lastP12File);
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(getDir(prefs.lastP12File));
         chooser.setFileFilter(new P12Filter());
         
         int returnVal = chooser.showOpenDialog(this);
@@ -958,7 +969,13 @@ public class Main extends javax.swing.JFrame {
      * @return image file or null if user cancelled the dialog
      */
     private String chooseImageFile() {
-        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(prefs.sigLogo);
+        String imagefile;
+        if (jTextFieldOptionLogo.getText().equals("")) {
+            imagefile = prefs.sigLogo; 
+        } else {
+            imagefile = jTextFieldOptionLogo.getText();
+        }    
+        javax.swing.JFileChooser chooser = new javax.swing.JFileChooser(getDir(imagefile));
         chooser.setFileFilter(new ImageFilter());
         
         int returnVal = chooser.showOpenDialog(this);

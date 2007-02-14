@@ -19,7 +19,7 @@ public class Preferences {
     // public static java.util.Locale Language;
     
     public String lastInputFile = "",
-            lastOutputFile = "",
+            // lastOutputFile = "",
             lastP12File = "",
             signLanguage = "",
             sigLogo = "";
@@ -34,7 +34,7 @@ public class Preferences {
     private void get() {
         // Language = new java.util.Locale(prefs.get("Language", "de"));
         lastInputFile = prefs.get("LastInputFile", "");
-        lastOutputFile = prefs.get("LastOutputFile", "");
+        // lastOutputFile = prefs.get("LastOutputFile", "");
         lastP12File = prefs.get("LastP12File", "");
         signText = prefs.getBoolean("SignText", false);
         signLanguage = prefs.get("SignLanguage", "");

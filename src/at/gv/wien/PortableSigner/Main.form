@@ -432,10 +432,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator1" alignment="0" pref="469" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="0" pref="516" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="195" max="32767" attributes="0"/>
+                      <EmptySpace pref="242" max="32767" attributes="0"/>
                       <Component id="jButtonAbout" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -484,17 +484,17 @@
                       </Group>
                       <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelFinished" alignment="0" pref="356" max="32767" attributes="0"/>
+                          <Component id="jLabelFinished" alignment="0" pref="403" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabelFinishNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="176" max="32767" attributes="0"/>
+                              <EmptySpace pref="223" max="32767" attributes="0"/>
                               <Component id="jButtonCancelMain" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButtonPasswordOK" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jTextFieldOutputfile" pref="253" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldOutputfile" pref="300" max="32767" attributes="0"/>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -503,13 +503,13 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPasswordFieldPassword" alignment="0" pref="253" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="253" max="32767" attributes="0"/>
-                                          <Component id="jProgressBar1" alignment="0" pref="253" max="32767" attributes="0"/>
+                                          <Component id="jPasswordFieldPassword" alignment="0" pref="300" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="300" max="32767" attributes="0"/>
+                                          <Component id="jProgressBar1" alignment="0" pref="300" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextFieldInputfile" pref="253" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldInputfile" pref="300" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -816,7 +816,6 @@
     <Component class="javax.swing.JLabel" name="jLabelFinished">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="2"/>
-        <Property name="text" type="java.lang.String" value="?"/>
         <Property name="verticalAlignment" type="int" value="1"/>
         <Property name="verticalTextPosition" type="int" value="1"/>
       </Properties>
