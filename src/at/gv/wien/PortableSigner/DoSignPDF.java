@@ -31,7 +31,9 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.security.cert.CertificateException;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
 
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfSignatureAppearance;
@@ -58,18 +60,16 @@ public class DoSignPDF {
 			String pkcs12FileName, String password, Boolean signText, String signLanguage,
                         String sigLogo) {
 		try {
-                        System.out.println("-> DoSignPDF <-");
-                        System.out.println("Eingabedatei: " + pdfInputFileName);
-                        System.out.println("Ausgabedatei: " + pdfOutputFileName);
-                        System.out.println("Signaturdatei: " + pkcs12FileName);
-                        System.out.println("Signaturblock?: " + signText);
-                        System.out.println("Sprache der Blocks: " + signLanguage);
-                        System.out.println("Signaturlogo: " + sigLogo);
+                        //System.out.println("-> DoSignPDF <-");
+                        //System.out.println("Eingabedatei: " + pdfInputFileName);
+                        //System.out.println("Ausgabedatei: " + pdfOutputFileName);
+                        //System.out.println("Signaturdatei: " + pkcs12FileName);
+                        //System.out.println("Signaturblock?: " + signText);
+                        //System.out.println("Sprache der Blocks: " + signLanguage);
+                        //System.out.println("Signaturlogo: " + sigLogo);
                         
-			java.security.Security
-					.insertProviderAt(
-							new org.bouncycastle.jce.provider.BouncyCastleProvider(),
-							2);
+			java.security.Security.insertProviderAt(
+                            new org.bouncycastle.jce.provider.BouncyCastleProvider(),2);
                         
                         pkcs12 = new GetPKCS12(pkcs12FileName, password);
 
@@ -78,7 +78,9 @@ public class DoSignPDF {
 				reader = new PdfReader(pdfInputFileName);
 			} catch (IOException e) {
 				Main.setResult(
-                                        java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CouldNotBeOpened"), 
+                                        java.util.ResourceBundle.getBundle(
+                                            "at/gv/wien/PortableSigner/i18n").getString(
+                                                "CouldNotBeOpened"), 
                                         true,
                                         e.getLocalizedMessage());
 			}
@@ -100,28 +102,26 @@ public class DoSignPDF {
                                 Rectangle size = reader.getPageSize(pages);
                                 stp = PdfStamper.createSignature(reader, fout, '\0');
                                 if (signText) {
-                                    String greet, signator, datestr, ca, serial;
-                                    if (signLanguage.equals("german")) {
-                                                greet = "Dieses Dokument wurde signiert von:";
-                                                signator = "Signator:";
-                                                datestr = "Datum:";
-                                                ca = "Aussteller:";
-                                                serial = "Seriennummer:";
-                                    } else {
-                                                greet = "This document is signed from:";
-                                                signator = "Signer:";
-                                                datestr = "Date:";
-                                                ca = "Issuer:";
-                                                serial = "Serialn.:";
-                                    }
+                                    String greet, signator, datestr, ca, serial, special;
+                                    int specialcount = 0;
+                                    ResourceBundle block = ResourceBundle.getBundle(
+                                            "at/gv/wien/PortableSigner/Signatureblock");
+                                    greet = block.getString(signLanguage + "-greeting");
+                                    signator = block.getString(signLanguage + "-signator");
+                                    datestr = block.getString(signLanguage + "-date");
+                                    ca = block.getString(signLanguage + "-issuer");
+                                    serial = block.getString(signLanguage + "-serial");
+                                    special = block.getString(signLanguage + "-special");
                                     stp.insertPage(pages + 1, size);
-                                
+                                    if(!pkcs12.atEgovOID.equals("")) {
+                                        specialcount = 1;
+                                    }
                                     PdfContentByte content =  stp.getOverContent(pages + 1);
                                     float topy = size.top();
                                     float rightx = size.right();
                                     float [] cellsize = new float[2];
                                     cellsize[0] = 80f;
-                                    cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 60;
+                                    cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
                                 
                                     PdfPTable table = new PdfPTable(2);
                                     PdfPTable otable = new PdfPTable(2);
@@ -129,6 +129,7 @@ public class DoSignPDF {
                                         new PdfPCell(new Paragraph(
                                             new Chunk(greet, 
                                                 new Font(Font.TIMES_ROMAN, 12))));
+                                    cell.setPaddingBottom(5);
                                     cell.setColspan(2);
                                     cell.setBorderWidth(0f);
                                     table.addCell(cell);
@@ -139,25 +140,37 @@ public class DoSignPDF {
                                             new Chunk(signator, new Font(Font.TIMES_ROMAN, 12))));
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(pkcs12.subject, new Font(Font.COURIER, 12))));
+                                            new Chunk(pkcs12.subject, new Font(Font.COURIER, 10))));
+                                    // L 1
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(datestr, new Font(Font.TIMES_ROMAN, 12))));
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(datum.toString(), new Font(Font.COURIER, 12))));
+                                            new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
+                                    // L 2
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(ca, new Font(Font.TIMES_ROMAN, 12))));
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(pkcs12.issuer, new Font(Font.COURIER, 12))));
+                                            new Chunk(pkcs12.issuer, new Font(Font.COURIER, 10))));
+                                    // L 3
                                     otable.addCell(
                                         new Paragraph(
                                             new Chunk(serial, new Font(Font.TIMES_ROMAN, 12))));
                                     otable.addCell(
                                         new Paragraph(
-                                            new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 12))));
+                                            new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 10))));
+                                    // L 4
+                                    if (specialcount == 1) {
+                                        otable.addCell(
+                                            new Paragraph(
+                                                new Chunk(special, new Font(Font.TIMES_ROMAN, 12))));
+                                        otable.addCell(
+                                            new Paragraph(
+                                                new Chunk(pkcs12.atEgovOID, new Font(Font.COURIER, 10))));
+                                    }
                                     otable.setTotalWidth(cellsize);
                                     // inner table end
                                 
@@ -166,7 +179,7 @@ public class DoSignPDF {
                                     // System.out.println("Logo:" + sigLogo + ":");
                                     if (sigLogo.equals("") || sigLogo == null) {
                                         logo = Image.getInstance(getClass().getResource(
-                                            "/at/gv/wien/PortableSigner/PortableSignerLogo-small.png"));
+                                            "/at/gv/wien/PortableSigner/SignatureLogo.png"));
                                     } else {
                                         logo = Image.getInstance(sigLogo);
                                     }
@@ -179,9 +192,9 @@ public class DoSignPDF {
                                     PdfPCell incell = new PdfPCell(otable);
                                     incell.setBorderWidth(0f);
                                     table.addCell(incell);
-                                    float [] cells = {60, cellsize[0] + cellsize[1]};
+                                    float [] cells = {70, cellsize[0] + cellsize[1]};
                                     table.setTotalWidth(cells);
-                                    table.writeSelectedRows(0, 4, 30, topy - 20, content );
+                                    table.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content );
                                 }
                                 
                                 PdfSignatureAppearance sap = stp.getSignatureAppearance();

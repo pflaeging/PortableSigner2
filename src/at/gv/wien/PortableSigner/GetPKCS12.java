@@ -22,6 +22,7 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.security.cert.CertificateException;
 import java.util.NoSuchElementException;
+import java.util.Enumeration;
 
 /**
  *
@@ -36,6 +37,7 @@ public class GetPKCS12 {
     public static java.math.BigInteger serial;
     public static java.util.Date notBefore, notAfter;
     public static String issuer;
+    public static String atEgovOID;
     
     X509Certificate x509cert;
     
@@ -96,6 +98,20 @@ public class GetPKCS12 {
         notBefore = x509cert.getNotBefore();
         notAfter = x509cert.getNotAfter();
         issuer = x509cert.getIssuerX500Principal().toString();
+        java.util.ResourceBundle oid = 
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SpecialOID");
+        atEgovOID = "";
+        
+        for ( Enumeration<String> o = oid.getKeys(); o.hasMoreElements(); ) {
+            String element = o.nextElement();
+            // System.out.println(element + ":" + oid.getString(element));
+            if (x509cert.getNonCriticalExtensionOIDs().contains(element)) {
+                if (!atEgovOID.equals("")) { atEgovOID += ", "; }
+                atEgovOID += oid.getString(element) + " (OID=" + element + ")";
+            }
+        }
+        
+        
     }
     
     
