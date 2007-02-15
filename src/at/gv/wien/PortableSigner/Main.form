@@ -487,7 +487,7 @@
                           <Component id="jLabelFinished" alignment="0" pref="403" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabelFinishNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="223" max="32767" attributes="0"/>
+                              <EmptySpace pref="241" max="32767" attributes="0"/>
                               <Component id="jButtonCancelMain" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButtonPasswordOK" alignment="0" min="-2" max="-2" attributes="0"/>

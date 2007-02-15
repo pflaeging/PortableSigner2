@@ -907,11 +907,13 @@ public class Main extends javax.swing.JFrame {
     private String generateOutputFile(String inputFile) {
         // generating filename by appending -sig to filename:
         // /i/am/here.pdf becomes /i/am/here-sig.pdf
+        if (inputFile.equals("")) { return ""; }
         return inputFile.substring(0,inputFile.lastIndexOf(".pdf")) + "-sig.pdf";
     }
     
     private String getDir (String absFile) {
         // get Dir component from file as string
+        if (absFile.equals("")) { return ""; }
         java.io.File myfile = new java.io.File(absFile);
         return myfile.getParent();
     }

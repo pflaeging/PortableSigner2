@@ -17,7 +17,7 @@ public class Version {
         public static String release = "1.3";
         
 
-	public String print;
+        public String print;
 	
 	public Version() {
 		String cleanDate, cleanAuthor, cleanRevision;
