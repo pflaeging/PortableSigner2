@@ -4,7 +4,7 @@
     <errTitle/>
     <jarArgs/>
     <chdir/>
-    <icon>/Users/pfp/src/NetBeansProjects/PortableSigner-working/Icons/PortableSignerLogo.ico</icon>
+    <icon>/Users/pfp/src/NetBeansProjects/PortableSigner/Icons/PortableSignerLogo.ico</icon>
     <stayAlive/>
     <jre>
         <maxVersion/>
@@ -17,6 +17,6 @@
     <dontWrapJar>true</dontWrapJar>
     <headerType>0</headerType>
     <jar>PortableSigner.jar</jar>
-    <outfile>/Users/pfp/src/NetBeansProjects/PortableSigner-working/dist/PortableSigner.exe</outfile>
+    <outfile>/Users/pfp/src/NetBeansProjects/PortableSigner/dist/PortableSigner.exe</outfile>
     <customProcName>PortableSigner</customProcName>
 </launch4jConfig>
