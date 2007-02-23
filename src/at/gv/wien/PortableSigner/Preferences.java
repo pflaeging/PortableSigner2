@@ -37,7 +37,7 @@ public class Preferences {
         // lastOutputFile = prefs.get("LastOutputFile", "");
         lastP12File = prefs.get("LastP12File", "");
         signText = prefs.getBoolean("SignText", false);
-        signLanguage = prefs.get("SignLanguage", "");
+        signLanguage = prefs.get("SignLanguage", "german");
         sigLogo = prefs.get("SignatureLogo", "");
     }
     
