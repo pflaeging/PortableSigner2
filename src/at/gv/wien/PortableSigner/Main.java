@@ -279,6 +279,7 @@ public class Main extends javax.swing.JFrame {
                 .add(jButtonLicenseOK)
                 .addContainerGap())
         );
+        jFrameOption.setTitle("PortableSigner: Options");
         jFrameOption.setAlwaysOnTop(true);
         jButtonOptionSearchLogo.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonOptionSearchLogo.addActionListener(new java.awt.event.ActionListener() {
@@ -344,10 +345,10 @@ public class Main extends javax.swing.JFrame {
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                                 .add(jButtonResetLogo)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 105, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 114, Short.MAX_VALUE)
                                 .add(jButtonOptionOK))
                             .add(jFrameOptionLayout.createSequentialGroup()
-                                .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                                .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonOptionSearchLogo)))))
                 .addContainerGap())
@@ -378,6 +379,7 @@ public class Main extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("PortableSigner");
         setLocationByPlatform(true);
         jLabelInput.setText(bundle.getString("InputLabel")); // NOI18N
 

@@ -246,6 +246,7 @@
     </Container>
     <Container class="javax.swing.JFrame" name="jFrameOption">
       <Properties>
+        <Property name="title" type="java.lang.String" value="PortableSigner: Options"/>
         <Property name="alwaysOnTop" type="boolean" value="true"/>
       </Properties>
 
@@ -268,11 +269,11 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jButtonResetLogo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="105" max="32767" attributes="0"/>
+                                  <EmptySpace pref="114" max="32767" attributes="0"/>
                                   <Component id="jButtonOptionOK" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextFieldOptionLogo" pref="183" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldOptionLogo" pref="192" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonOptionSearchLogo" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -412,6 +413,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="PortableSigner"/>
     <Property name="locationByPlatform" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
