@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<langpack>
+    <str id="base" txt="Basispaket"/>
+    <str id="base.description" txt="Das eigentliche Programm PortableSigner"/>
+    <str id="jce" txt="JCE unbeschränkte Policy"/>
+    <str id="jce.description" txt="Die Policy Dateien für unbeschränkte Verschlüsselung in Java 1.5"/>
+</langpack>

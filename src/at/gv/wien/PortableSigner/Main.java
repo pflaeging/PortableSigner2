@@ -53,11 +53,9 @@ public class Main extends javax.swing.JFrame {
         if (mycommand.password != null) {
             jPasswordFieldPassword.setText(mycommand.password);
         }
-        if (mycommand.sigimage == null) {
+        if (mycommand.sigimage.equals("")) {
             jTextFieldOptionLogo.setText(prefs.sigLogo);
-            mycommand.sigimage = "";
         } else {
-            mycommand.sigimage = "";
             jTextFieldOptionLogo.setText(mycommand.sigimage);
         }
         if (!mycommand.sigblock.equals("")) {
@@ -541,7 +539,7 @@ public class Main extends javax.swing.JFrame {
                                 .add(jLabelWorking))
                             .add(layout.createSequentialGroup()
                                 .add(jLabel10)
-                                .add(12, 12, 12)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jLabel9))
                             .add(layout.createSequentialGroup()
                                 .add(jLabel8)
@@ -552,7 +550,7 @@ public class Main extends javax.swing.JFrame {
                             .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 403, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(jLabelFinishNext)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 223, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 241, Short.MAX_VALUE)
                                 .add(jButtonCancelMain))
                             .add(jButtonPasswordOK)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
@@ -635,9 +633,9 @@ public class Main extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButtonCancelMain)
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jLabel9)
                         .add(jLabelFinishNext)
-                        .add(jLabel10)))
+                        .add(jLabel10)
+                        .add(jLabel9)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         pack();

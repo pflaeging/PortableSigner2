@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<shortcuts>
+  	<skipIfNotSupported/>
+  	<programGroup defaultName="MagWien-Applikationen"
+                location="applications"/>
+  	<shortcut
+            name="PortableSigner"
+            type="Application"
+            target="$INSTALL_PATH/PortableSigner.jar"
+            commandLine=""
+            iconFile="$INSTALL_PATH/PortableSignerLogo.png"
+            iconIndex="0"
+            workingDirectory="$USER_HOME"
+            description="Start PortableSigner"
+            programGroup="yes"
+            desktop="yes"
+            applications="yes"
+            startMenu="no"
+            encoding="UTF-8"
+            KdeSubstUID="false"
+            initialState="normal"
+            startup="no">
+            <createForPack name="Base"/>
+  </shortcut>
+</shortcuts>

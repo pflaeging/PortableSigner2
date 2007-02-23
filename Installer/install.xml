@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+<!-- 
+Installer for PortableSigner
+    
+    To compile it :
+    - go in the bin directory where you installed IzPack
+    - call "compile ../sample/install.xml -b ../sample"
+-->
+<installation version="1.0">
+     <info>
+        <appname>PortableSigner</appname>
+        <appversion>1.3</appversion>
+        <appsubpath>MagWien/PortableSigner</appsubpath>
+        <authors>
+            <author name="Peter Pfläging" email="pfp@adv.magwien.gv.at"/>
+        </authors>
+        <url>http://portablesigner.sourceforge.net/</url>
+        <javaversion>1.5</javaversion>
+    </info>
+    <guiprefs width="640" height="480" resizable="yes"/>
+    <variables>
+        <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
+    </variables>
+    <locale>
+        <langpack iso3="deu"/>
+        <langpack iso3="eng"/>
+    </locale>
+    <resources>
+        <res id="Installer.image" src="Icons/PortableSignerLogo.png" />
+        <res id="LicencePanel.licence" src="doc/License-LGPL.txt"/>
+        <res id="InfoPanel.info" src="Readme.txt"/>
+        <res id="packsLang.xml_deu" src="Installer/packsLang.xml_deu" />
+        <res id="shortcutSpec.xml" src="Installer/win_shortcutSpec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="Installer/unix_shortcutSpec.xml"/>
+    </resources>
+    <panels>
+        <panel classname="HelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="TargetPanel"/> 
+        <panel classname="PacksPanel"/>
+        <panel classname="ShortcutPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+    <packs>
+        <pack name="Base" required="yes" id="base">
+            <description>
+            The original program PortableSigner
+            </description>
+            <file src="Readme.txt" targetdir="$INSTALL_PATH"/>
+            <file src="doc/License-LGPL.txt" targetdir="$INSTALL_PATH"/>
+            <file src="dist/lib" targetdir="$INSTALL_PATH"/>
+            <file src="dist/PortableSigner.jar" targetdir="$INSTALL_PATH"/>
+            <file src="dist/PortableSigner.exe" targetdir="$INSTALL_PATH" os="windows"/>
+            <file src="Icons/PortableSignerLogo.ico" targetdir="$INSTALL_PATH" os="windows"/>
+            <file src="Icons/PortableSignerLogo.png" targetdir="$INSTALL_PATH" os="unix"/>
+        </pack>
+        <pack name="JCE unrestricted policy" required="no" id="jce">
+            <description>
+            Java JCE unrestricted policy files for Java 1.5
+            </description>
+            <file src="Installer/jce/local_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
+            <file src="Installer/jce/US_export_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
+        </pack>
+    </packs>
+    <native type="izpack" name="ShellLink.dll" os="windows"/>
+</installation>

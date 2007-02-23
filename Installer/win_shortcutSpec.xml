@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?> 
+<shortcuts>
+  	<skipIfNotSupported/>
+  	<programGroup defaultName="MagWien-Applikationen"
+                location="applications"/>
+  	<shortcut
+            name="PortableSigner"
+            target="$INSTALL_PATH\PortableSigner.exe"
+            commandLine=""
+            iconFile="$INSTALL_PATH\PortableSignerLogo.ico"
+            iconIndex="0"
+            workingDirectory="$USER_HOME"
+            description="Start PortableSigner"
+            programGroup="yes"
+            desktop="yes"
+            applications="yes"
+            startMenu="no"
+            startup="no">
+            <createForPack name="Base"/>
+  </shortcut>
+</shortcuts>

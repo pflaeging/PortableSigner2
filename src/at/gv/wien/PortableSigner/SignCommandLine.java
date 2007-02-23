@@ -58,16 +58,19 @@ public class SignCommandLine {
             if (sigimage == null) { sigimage = ""; }
             
             if (cmd.getArgs().length != 0) {
-                throw new ParseException(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-UnknownArguments"));
+                throw new ParseException(java.util.ResourceBundle
+                        .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-UnknownArguments"));
             }
        } catch(ParseException e) {
-           System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WrongArguments"));
+           System.err.println(java.util.ResourceBundle
+                   .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WrongArguments"));
            usage.printHelp("PortableSigner", options);
            System.exit(3);
        }
        if (nogui) {
            if (input == null || output == null || signature == null ) {
-               System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingArguments"));
+               System.err.println(java.util.ResourceBundle
+                       .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingArguments"));
                usage.printHelp("PortableSigner", options);
                System.exit(2);
            }
@@ -75,7 +78,8 @@ public class SignCommandLine {
        
        // System.out.println("Sigblock:" + sigblock + ":");
        if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals(""))) {
-           System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));
+           System.err.println(java.util.ResourceBundle
+                   .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));
                usage.printHelp("PortableSigner", options);
                System.exit(4);
        }
