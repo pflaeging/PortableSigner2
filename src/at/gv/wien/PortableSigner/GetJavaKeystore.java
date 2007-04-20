@@ -82,7 +82,7 @@ public class GetJavaKeystore {
             }
         } catch (NoSuchElementException e) {
             Main.setResult(
-                    "Beim Lesen des Zertifikates trat ein Fehler auf (Keine Schlüssel)",
+                    "Beim Lesen des Zertifikates trat ein Fehler auf (Keine Schluessel)",
                     true,
                     e.getLocalizedMessage());
         } catch (KeyStoreException e) {

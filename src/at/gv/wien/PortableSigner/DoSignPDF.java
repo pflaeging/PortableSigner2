@@ -209,7 +209,8 @@ public class DoSignPDF {
 //                                Rectangle sigRect = new Rectangle(100, topy - 300, rightx - 100, topy - 100);
 //                                sigRect.setBorder(Rectangle.LEFT | Rectangle.RIGHT | Rectangle.TOP | Rectangle.BOTTOM);
 //                                stp.getWriter().add(); 
-				sap.setCertified(true);
+//				sap.setCertified(true);
+                                sap.setCertificationLevel(sap.CERTIFIED_NO_CHANGES_ALLOWED);
 				stp.close();
 				Main.setResult(
                                         java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"),

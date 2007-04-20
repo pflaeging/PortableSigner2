@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 public class Main extends javax.swing.JFrame {
     
     private static SignCommandLine mycommand;
-    public String copyright = "Peter Pfläging <pfp@adv.magwien.gv.at>)";
+    public String copyright = "Peter Pfl√§ging <pfp@adv.magwien.gv.at>)";
     public String url = "http://sourceforge.net/projects/portablesigner";
     private Preferences  prefs;
     private Version version = new Version();
