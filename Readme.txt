@@ -24,13 +24,16 @@ For the use of Bouncycastle the Java Strong export Security must be used.
 
 java.lang.SecurityException: Unsupported keysize or algorithm parameters
 		at javax.crypto.Cipher.init(DashoA6275)
-
 "
 
-Die neue JCE Policy ist zu finden unter 
+The new JCE Policy can be found 
 http://java.sun.com/javase/downloads/index.jsp
-gegen Ende der Seite als:
+at the end of the page:
 "Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy "
+
+The Windows installer is installing all required patches automagic.
+If you'r upgrading your Java runtime, please reinstall PortableSigner to apply
+the security policies again.
 
 -peter pfläging <pfp@adv.magwien.gv.at>
 
@@ -66,10 +69,14 @@ java.lang.SecurityException: Unsupported keysize or algorithm parameters
 
 "
 
-The new JCE Policy can be found 
+Die neue JCE Policy ist zu finden unter 
 http://java.sun.com/javase/downloads/index.jsp
-at the end of the page:
+gegen Ende der Seite als:
 "Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy "
+
+Der Windows Installer installiert die Security Policy automatisch mit.
+Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableSigner 
+noch einmal installieren, damit die Security Policy auch dort wirkt.
 
 -peter pfläging <pfp@adv.magwien.gv.at>
 
