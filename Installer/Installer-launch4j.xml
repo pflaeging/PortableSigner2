@@ -1,0 +1,20 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <icon>/Users/pfp/src/NetBeansProjects/trunk/Icons/PortableSignerInstaller.ico</icon>
+  <headerType>0</headerType>
+  <jar>/Users/pfp/src/NetBeansProjects/trunk/dist/ship/PortableSigner-Install.jar</jar>
+  <outfile>/Users/pfp/src/NetBeansProjects/trunk/dist/ship/PortableSigner-Installer.exe</outfile>
+  <errTitle></errTitle>
+  <jarArgs></jarArgs>
+  <chdir></chdir>
+  <stayAlive>false</stayAlive>
+  <jre>
+    <path></path>
+    <minVersion>1.5.0</minVersion>
+    <maxVersion></maxVersion>
+    <initialHeapSize>0</initialHeapSize>
+    <maxHeapSize>0</maxHeapSize>
+    <args></args>
+  </jre>
+  <customProcName>PortableSigner-Installer</customProcName>
+</launch4jConfig>

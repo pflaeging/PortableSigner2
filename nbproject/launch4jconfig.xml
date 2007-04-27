@@ -17,6 +17,6 @@
     <dontWrapJar>true</dontWrapJar>
     <headerType>0</headerType>
     <jar>PortableSigner.jar</jar>
-    <outfile>/Users/pfp/src/NetBeansProjects/PortableSigner/dist/PortableSigner.exe</outfile>
+    <outfile>/Users/pfp/src/NetBeansProjects/trunk/dist/PortableSigner.exe</outfile>
     <customProcName>PortableSigner</customProcName>
 </launch4jConfig>

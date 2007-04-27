@@ -119,6 +119,13 @@
                 <include name="Readme.txt"/>
             </fileset>
         </zip>
+        <exec executable="/bin/sh">
+            <arg value="-c" />
+            <arg value="./Installer/install.sh" />
+        </exec>        
+        <taskdef classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" name="launch4j"/>
+        <launch4j configFile="./Installer/Installer-launch4j.xml"/>
+
 
         
     </target>
