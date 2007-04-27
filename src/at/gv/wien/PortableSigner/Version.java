@@ -26,5 +26,4 @@ public class Version {
 		cleanRevision = revision.replace('$', ' ').trim();
 		print =  cleanRevision + "\n" + cleanAuthor + "\n" + cleanDate;
 	}
-
 }
