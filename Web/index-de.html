@@ -1,356 +1,126 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="de-at">
-<head>
-
-
-
-
-  
-  
-  
-  <meta content="text/html; charset=ISO-8859-15" http-equiv="content-type">
-
-
-
-  
-
-
-  
-  
-  
-  
-  
-  <title>PortableSigner Hauptseite</title>
-  <meta content="Peter Pflaeging" name="author">
-</head>
-
-
-<body>
-
-
-
-
-<div style="text-align: right;"><a href="index-de.html"><img style="height: 18px;" alt="Austria" src="austria.png"><img style="width: 30px; height: 18px;" alt="Deutschland" src="germany.png"></a> &nbsp; <a href="index-en.html"><img style="width: 30px; height: 15px;" alt="England" src="united_kingdom.png"><img style="width: 30px; height: 16px;" alt="USA" src="united_states.png"></a></div>
-
-
-
-
-<h1 style="text-align: center;"><img style="width: 139px; height: 115px;" alt="Logo" src="PortableSignerLogo.png">PortableSigner</h1>
-
-
-
-
-<h2>Ein Tool zum Signieren von PDF (Portable Document Format)
-Dateien</h2>
-
-
-
-
-PortableSigner ist ein Java Programm zum digitalen Signieren (mit X.509
-Zertifikaten) von PDF Dateien. Es ist plattformunabh&auml;ngig und
-l&auml;uft derzeit (zumindest) unter Windows (2000, XP, ...), Linux
-und Mac OS X.<br>
-
-
-
-
-<h2>Funktionen</h2>
-
-
-
-
-Man kann PDF Dokumente mit X.509 Zertifikaten digital signieren, und
-daf&uuml;r sorgen, das diese Dokumente nicht weiter
-ver&auml;ndert werden k&ouml;nnen, ohne dass das Dokument seine
-Signatur verliert. Damit erreicht man eine elektronische "Unterschrift"
-auf nahezu beliebigen Dokumenten. Dies entspricht wohl am ehesten dem
-Ansatz "Electronic Paper".<br>
-
-
-
-
-<h2>Download</h2>
-
-<a href="http://sourceforge.net/project/showfiles.php?group_id=181271">http://sourceforge.net/project/showfiles.php?group_id=181271</a>
-
-<br>
-
-
-
-
-<h2>Was ben&ouml;tigt man?</h2>
-
-
-
-
-<ul>
-
-
-
-
-  <li>Dieses Programm</li>
-
-
-
-
-  <li>Eine Java 1.5 kompatibele Runtime</li>
-
-
-
-
-  <li>Eine PKCS#12 Datei mit einem pers&ouml;nlichen
-Zertifikat (zum Beispiel von <a href="http://www.cacert.org">CaCert</a>)</li>
-
-
-
-
-  <li>PDF Dateien (eh' klar, oder?)</li>
-
-
-
-
-</ul>
-
-
-
-
-<h2>Betriebsmodi</h2>
-
-
-
-
-PortableSigner kann in 2 unterschiedlichen Modi betrieben werden:<br>
-
-
-
-
-<ul>
-
-
-
-
-  <li><span style="font-weight: bold;">GUI Desktop
-Modus</span> : Grafische Benutzeroberfl&auml;che f&uuml;r
-das interaktive Signieren von einzelnen Dokumenten</li>
-
-
-
-
-  <li><span style="font-weight: bold;">Commandline
-Modus</span> : Betrieb des selben Programms &uuml;ber die
-Kommandozeile (f&uuml;r Batch oder Operatorlosen Betrieb)</li>
-
-
-
-
-</ul>
-
-
-
-
-<h3>GUI Desktop Modus</h3>
-
-
-
-
-Sollte wie oben schon erw&auml;hnt eine Java 1.5 Runtime
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>PortableSigner Hauptseite</TITLE>
+	<META NAME="AUTHOR" CONTENT="Peter Pflaeging">
+	<META NAME="CREATED" CONTENT="20070416;12204100">
+	<META NAME="CHANGEDBY" CONTENT="Peter Pfl&auml;ging">
+	<META NAME="CHANGED" CONTENT="20070416;12412100">
+</HEAD>
+<BODY LANG="de-AT" DIR="LTR">
+<P ALIGN=RIGHT><A HREF=""><FONT COLOR="#800000"><IMG SRC="austria.png" NAME="graphics1" ALT="Austria" ALIGN=BOTTOM WIDTH=26 HEIGHT=18 BORDER=1></FONT></A><A HREF=""><FONT COLOR="#800000"><IMG SRC="germany.png" NAME="graphics2" ALT="Deutschland" ALIGN=BOTTOM WIDTH=30 HEIGHT=18 BORDER=1></FONT></A>
+&nbsp; 
+<A HREF="index-en.html"><FONT COLOR="#000080"><IMG SRC="united_kingdom.png" NAME="graphics3" ALT="England" ALIGN=BOTTOM WIDTH=30 HEIGHT=15 BORDER=1></FONT></A><A HREF="index-en.html"><FONT COLOR="#000080"><IMG SRC="united_states.png" NAME="graphics4" ALT="USA" ALIGN=BOTTOM WIDTH=30 HEIGHT=16 BORDER=1></FONT></A></P>
+<H1 ALIGN=CENTER><IMG SRC="PortableSignerLogo.png" NAME="graphics5" ALT="Logo" ALIGN=BOTTOM WIDTH=139 HEIGHT=115 BORDER=0>PortableSigner</H1>
+<H2>Ein Tool zum Signieren von PDF (Portable Document Format) Dateien</H2>
+<P>PortableSigner ist ein Java Programm zum digitalen Signieren (mit
+X.509 Zertifikaten) von PDF Dateien. Es ist plattformunabh&auml;ngig
+und l&auml;uft derzeit (zumindest) unter Windows (2000, XP, ...),
+Linux und Mac OS X.</P>
+<H2>Funktionen</H2>
+<P>Man kann PDF Dokumente mit X.509 Zertifikaten digital signieren,
+und daf&uuml;r sorgen, das diese Dokumente nicht weiter ver&auml;ndert
+werden k&ouml;nnen, ohne dass das Dokument seine Signatur verliert.
+Damit erreicht man eine elektronische &quot;Unterschrift&quot; auf
+nahezu beliebigen Dokumenten. Dies entspricht wohl am ehesten dem
+Ansatz &quot;Electronic Paper&quot;.</P>
+<H2>Homepage und download des Projektes bei Sourceforge.net</H2>
+<P><A HREF="http://sf.net/projects/portablesigner/">http://sf.net/projects/portablesigner/</A></P>
+<H2>Was ben&ouml;tigt man?</H2>
+<UL>
+	<LI>Dieses Programm 
+	<LI>Eine Java 1.5 kompatible
+	Laufzeitumgebung (siehe auch <A HREF="http://www.java.com/">http://www.java.com</A>)
+	<LI>Eine PKCS#12 Datei mit einem
+	pers&ouml;nlichen Zertifikat (zum Beispiel von <A HREF="http://www.cacert.org/">CaCert</A>
+	oder bei <A HREF="http://www.thawte.com/">Thawte</A>) 
+	<LI>PDF Dateien (eh' klar, oder?) 
+</UL>
+<H2>Betriebsmodi</H2>
+<P>PortableSigner kann in 2 unterschiedlichen Modi betrieben werden:</P>
+<UL>
+	<LI><B>GUI Desktop Modus</B> :
+	Grafische Benutzeroberfl&auml;che f&uuml;r das interaktive Signieren
+	von einzelnen Dokumenten 
+	<LI><B>Commandline Modus</B> : Betrieb des selben Programms &uuml;ber
+	die Kommandozeile (f&uuml;r Batch oder Operatorlosen Betrieb) 
+</UL>
+<P>
+	Alternativ gibt es unter Windows einen eigenen Installer, der eine Programmgruppe und die entsprechenden Men&uuml;eintr&auml;ge generiert.
+</P>
+<P>
+	F&uuml;r Mac OS X gibt es ein Diskimage (".DMG") welches das Programm als Bundle
+</P>
+<H3>GUI Desktop Modus</H3>
+<P>Sollte wie oben schon erw&auml;hnt eine Java 1.5 Runtime
 installiert sein, so muss man nur die ZIP Datei (siehe Download)
-auspacken und doppelklicken oder in dem ausgepackten Verzeichnis via
-<pre>java -jar PortableSigner.jar<br></pre>
-
-
-
-
-starten.<br>
-
-
-
-
-<br>
-
-
-
-
-Nun sieht man etwas &auml;hnliches wie hier:<br>
-
-
-
-
-<br>
-
-
-
-
-<img style="width: 553px; height: 250px;" alt="Bild des Hauptfenster" src="Hauptfenster.png"><br>
-
-
-
-
-<br>
-
-
-
-
-Die Bedienung d&uuml;rfte auf Basis dieser Maske relativ klar sein:<br>
-
-
-
-
-<ol>
-
-
-
-
-  <li>Man selektiert eine Eingabedatei (die letzte Eingabedatei
-bleibt vorselektiert).</li>
-
-
-
-
-  <li>Man sucht sich eine Ausgabedatei.</li>
-
-
-
-
-  <li>Man selektiert die PKCS#12 Datei (sp&auml;ter werden
-uch andere Typen von Dateiformaten unterst&uuml;tzt sein. Siehe
-    <a href="todo.txt">ToDo</a>)</li>
-
-
-
-
-  <li>Das Passwort der PKCS#12 Datei eingeben</li>
-
-
-
-
-  <li>Den Button "Signieren" dr&uuml;cken</li>
-
-
-
-
-  <li>fertig!</li>
-
-
-
-
-</ol>
-
-
-
-
-Als Abschluss kommt folgender Dialog:<br>
-
-
-
-
-<br>
-
-
-
-
-<img style="width: 600px; height: 200px;" alt="Bild vom Abschlussdialog" src="Abschluss.png"><br>
-
-
-
-
-<br>
-
-
-
-
-Weiterhin gibt es noch einen "&Uuml;ber ..." Dialog auf dem
-Hauptbildschirm. Dort erf&auml;hrt man die aktuelle Version, welche
-man auch anmerken sollte, wenn man mit mir in Kontakt tritt:<br>
-
-
-
-
-<br>
-
-
-
-
-<img style="width: 500px; height: 250px;" alt="Bild vom About Dialog" src="Ueber.png"><br>
-
-
-
-
-<br>
-
-
-
-
-<h3>Commandline Modus</h3>
-
-
-
-
-Das Programm unterst&uuml;tzt auch den Aufruf &uuml;ber
-Commandline Parameter:<br>
-
-
-
-
-<br>
-
-
-
-
-<pre><span style="font-family: monospace;"><span style="font-weight: bold;">pfp$</span> java -jar PortableSigner.jar -h<br>usage: PortableSigner<br> -h Hilfe (diese Seite)<br> -n Ohne GUI<br> -o Ausgabedatei (PDF)<br> -p Signaturpasswort<br> -s Signaturdatei (P12)<br> -t Eingabedatei (PDF)<br></span><span style="font-weight: bold;">pfp$</span><br><br></pre>
-
-
-
-
-Um das Beispiel von oben noch einmal als Kommandozeile
-auszuf&uuml;hren, w&auml;re also folgende Kommandozeile
-notwendig:<br>
-
-
-
-
-<br>
-
-
-
-
-<pre><span style="font-family: monospace;"><span style="font-weight: bold;">pfp$</span> java -jar PortableSigner.jar -n \<br>	-t /Users/pfp/Desktop/unsigned.pdf \<br>	-o /Users/pfp/Desktop/signed.pdf \<br>	-s /Users/pfp/Desktop/pfp.p12 \ <br>	-p MeinGeheimesPasswort</span><br>Das Dokument\n/Users/pfp/Desktop/signed.pdf\nwurde erzeugt und signiert!<br><span style="font-weight: bold;">pfp$</span><br></pre>
-
-
-
-
+auspacken und doppelklicken oder in dem ausgepackten Verzeichnis via</p> 
+<PRE>java -jar PortableSigner.jar</PRE>
+<p>starten.</p><p>Nun sieht man etwas &auml;hnliches wie hier:</P>
+
+<P><IMG SRC="1.3/Hauptbildschirm.png" NAME="Main Screen" BORDER=0 ALT="Screenshot">
+</P>
+
+<P>Die Bedienung d&uuml;rfte auf Basis dieser Maske relativ klar
+sein:</P>
+<OL>
+	<LI>Man selektiert eine Eingabedatei
+	(die letzte Eingabedatei bleibt vorselektiert). 
+	<LI>Man sucht sich eine Ausgabedatei
+	(Standard ist der Eingabedateiname mit â"-sig" angeh&auml;ngt). 
+	<LI>Man selektiert die PKCS#12 Datei
+	(sp&auml;ter werden auch andere Typen von Dateiformaten unterst&uuml;tzt
+	sein. Siehe <A HREF="todo.txt">ToDo</A>) 
+	<LI>Es l&auml;sst sich ein
+	Signaturblock auf der letzten Seite des Dokumentes aufbringen.
+	<LI>Das Passwort der PKCS#12 Datei
+	eingeben 
+	<LI>Den Button &quot;Signieren&quot;
+	dr&uuml;cken 
+	<LI>fertig! 
+</OL>
+<P><BR>Weiterhin gibt es noch einen &quot;&Uuml;ber ...&quot;
+Dialog auf dem Hauptbildschirm. Dort erf&auml;hrt man die aktuelle
+Version, welche man auch anmerken sollte, wenn man mit mir in Kontakt
+tritt:
+</P>
+<P><IMG SRC="1.3/Ueber.png" NAME="About Box" BORDER=0 ALT="Screenshot">
+</P>
+
+<H3>Commandline Modus</H3>
+<P>Das Programm unterst&uuml;tzt auch den Aufruf &uuml;ber
+Commandline Parameter:</P>
+<PRE><B>pfp$</B> java -jar PortableSigner.jar -h
+usage: PortableSigner
+ 	-b    Signaturblock anhaengen. Parameter: [german|english]
+ 	-h    Hilfe (diese Seite)
+ 	-i    Bild im Signaturblock
+ 	-n    Ohne GUI
+ 	-o    Ausgabedatei (PDF)
+ 	-p    Signaturpasswort
+ 	-s    Signaturdatei (P12)
+ 	-t    Eingabedatei (PDF)
+<B>pfp$</B></PRE>
+<P>
+Um das Beispiel von oben noch einmal als Kommandozeile auszuf&uuml;hren,
+w&auml;re also folgende Kommandozeile notwendig:</P>
+
+<PRE><B>pfp$</B> java -jar PortableSigner.jar -n \
+        -t /Users/pfp/Desktop/unsigned.pdf \
+        -o /Users/pfp/Desktop/signed.pdf \
+        -s /Users/pfp/Desktop/pfp.p12 \
+        -p MeinGeheimesPasswort
+Das Dokument\n/Users/pfp/Desktop/signed.pdf\nwurde erzeugt und signiert!
+<B>pfp$</B></PRE>
+<P>
 Um auch den Aufruf aus Macros zu unterst&uuml;tzen schaltet nur der
-Schalter "-n" die GUI Komponente des Programms komplett aus!<br>
-
-
-
-
-<br>
-
-
-
-
-<hr style="width: 100%; height: 2px;">Peter
-Pfl&auml;ging &lt;<a href="mailto:pfp@adv.magwien.gv.at">pfp@adv.magwien.gv.at</a>&gt;<br>
-
-
-
-
-<br>
-
-
-
-
-Dieses Programm wurde vom Rechenzentrum der Stadt Wien (<a href="http://www.wien.gv.at/ma14/">http://www.wien.gv.at/ma14/</a>)
-erstellt.<br>
-
-
-
-
-<br>
-
-
-
-
-</body>
-</html>
+Schalter &quot;<tt>-n</tt>&quot; die GUI Komponente des Programms komplett
+aus!</P>
+<HR>
+<P>Peter Pfl&auml;ging &lt;<A HREF="mailto:pfp@adv.magwien.gv.at">pfp@adv.magwien.gv.at</A>&gt;</P>
+<P>Dieses Programm wurde vom Rechenzentrum der Stadt Wien
+(<A HREF="http://www.wien.gv.at/ma14/">http://www.wien.gv.at/ma14/</A>)
+erstellt.</P>
+</BODY>
+</HTML>
