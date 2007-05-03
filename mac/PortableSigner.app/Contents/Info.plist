@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
-<plist version="0.9">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
 <dict>
-	<key>CFBundleName</key>
-	<string>PortableSigner</string>
-	<key>CFBundleVersion</key>
-	<string>100.0</string>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<string>true</string>
-	<key>CFBundleExecutable</key>
-	<string>JavaApplicationStub</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>JavaApplicationStub</string>
+	<key>CFBundleGetInfoString</key>
+	<string>PortableSigner 1.3</string>
+	<key>CFBundleIconFile</key>
+	<string>PortableSigner.icns</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>PortableSigner</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleGetInfoString</key>
-	<string>PortableSigner 1.0</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleIconFile</key>
-	<string>PortableSigner.icns</string>
+	<key>CFBundleVersion</key>
+	<string>100.0</string>
 	<key>Java</key>
 	<dict>
-		<key>MainClass</key>
-		<string>at.gv.wien.PortableSigner.Main</string>
-		<key>JVMVersion</key>
-		<string>1.5*</string>
 		<key>ClassPath</key>
-			<array>
+		<array>
 			<string>$JAVAROOT/PortableSigner.jar</string>
 			<string>$JAVAROOT/AbsoluteLayout.jar</string>
-			<string>$JAVAROOT/bcprov-jdk15-133.jar</string>
+			<string>$JAVAROOT/bcprov-jdk15-136.jar</string>
 			<string>$JAVAROOT/commons-cli-1.0.jar</string>
-			<string>$JAVAROOT/itext-1.4.4.jar</string>
+			<string>$JAVAROOT/itext-2.0.2.jar</string>
 			<string>$JAVAROOT/swing-layout-1.0.1.jar</string>
-			</array>
+		</array>
+		<key>JVMVersion</key>
+		<string>1.5*</string>
+		<key>MainClass</key>
+		<string>at.gv.wien.PortableSigner.Main</string>
 	</dict>
 </dict>
 </plist>
