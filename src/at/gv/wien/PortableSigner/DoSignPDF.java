@@ -12,27 +12,14 @@ package at.gv.wien.PortableSigner;
 import com.lowagie.text.Chunk;
 import com.lowagie.text.Font;
 import com.lowagie.text.Image;
-import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.StampContent;
-import java.awt.Graphics;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.KeyStore;
 import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
-import java.security.UnrecoverableKeyException;
 import java.security.cert.Certificate;
-import java.security.cert.X509Certificate;
-import java.security.cert.CertificateException;
 import java.util.Date;
-import java.util.Enumeration;
-import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 
 import com.lowagie.text.pdf.PdfReader;
@@ -68,7 +55,7 @@ public class DoSignPDF {
                         //System.out.println("Sprache der Blocks: " + signLanguage);
                         //System.out.println("Signaturlogo: " + sigLogo);
                         
-			java.security.Security.insertProviderAt(
+			java.security.Security.insertProviderAt( 
                             new org.bouncycastle.jce.provider.BouncyCastleProvider(),2);
                         
                         pkcs12 = new GetPKCS12(pkcs12FileName, password);
@@ -117,8 +104,10 @@ public class DoSignPDF {
                                         specialcount = 1;
                                     }
                                     PdfContentByte content =  stp.getOverContent(pages + 1);
-                                    float topy = size.top();
-                                    float rightx = size.right();
+                                    // float topy = size.top();
+                                    float topy = size.getTop(); 
+                                    //float rightx = size.right();
+                                    float rightx = size.getRight();
                                     float [] cellsize = new float[2];
                                     cellsize[0] = 85f;
                                     cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;

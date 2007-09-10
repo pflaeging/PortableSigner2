@@ -6,8 +6,6 @@
 
 package at.gv.wien.PortableSigner;
 
-import javax.swing.JLabel;
-
 
 /**
  *
