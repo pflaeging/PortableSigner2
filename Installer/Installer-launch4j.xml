@@ -1,9 +1,9 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
-  <icon>/Users/pfp/src/NetBeansProjects/trunk/Icons/PortableSignerInstaller.ico</icon>
+  <icon>/Users/pfp/src/PortableSigner/Icons/PortableSignerInstaller.ico</icon>
   <headerType>0</headerType>
-  <jar>/Users/pfp/src/NetBeansProjects/trunk/dist/ship/PortableSigner-Install.jar</jar>
-  <outfile>/Users/pfp/src/NetBeansProjects/trunk/dist/ship/PortableSigner-Installer.exe</outfile>
+  <jar>/Users/pfp/src/PortableSigner/dist/ship/PortableSigner-Install.jar</jar>
+  <outfile>/Users/pfp/src/PortableSigner/dist/ship/PortableSigner-Installer.exe</outfile>
   <errTitle></errTitle>
   <jarArgs></jarArgs>
   <chdir></chdir>

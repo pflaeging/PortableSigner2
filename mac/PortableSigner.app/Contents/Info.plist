@@ -28,10 +28,10 @@
 		<array>
 			<string>$JAVAROOT/PortableSigner.jar</string>
 			<string>$JAVAROOT/AbsoluteLayout.jar</string>
-			<string>$JAVAROOT/bcprov-jdk15-136.jar</string>
+			<string>$JAVAROOT/bcprov-jdk15-137.jar</string>
 			<string>$JAVAROOT/commons-cli-1.0.jar</string>
-			<string>$JAVAROOT/itext-2.0.2.jar</string>
-			<string>$JAVAROOT/swing-layout-1.0.1.jar</string>
+			<string>$JAVAROOT/itext-2.0.5.jar</string>
+			<string>$JAVAROOT/swing-layout-1.0.2.jar</string>
 		</array>
 		<key>JVMVersion</key>
 		<string>1.5*</string>

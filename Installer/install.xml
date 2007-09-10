@@ -12,7 +12,7 @@ Installer for PortableSigner
         <appversion>1.3</appversion>
         <appsubpath>MagWien/PortableSigner</appsubpath>
         <authors>
-            <author name="Peter Pfläging" email="pfp@adv.magwien.gv.at"/>
+            <author name="Peter Pfläging" email="peter.pflaeging@wien.gv.at"/>
         </authors>
         <url>http://portablesigner.sourceforge.net/</url>
         <javaversion>1.5</javaversion>
