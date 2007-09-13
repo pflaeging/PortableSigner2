@@ -35,24 +35,24 @@ The Windows installer is installing all required patches automagic.
 If you'r upgrading your Java runtime, please reinstall PortableSigner to apply
 the security policies again.
 
--peter pfläging <pfp@adv.magwien.gv.at>
+:peter pflaeging <pfp@adv.magwien.gv.at>
 
 
 
 Deutsch
 =======
 
-Das vorliegende Programm lässt sich in einer Java 1.5.0 Umgebung mit
+Das vorliegende Programm laesst sich in einer Java 1.5.0 Umgebung mit
 
 java -jar PortableSigner.jar starten.
 
-Es verwendet folgende zusätzliche Klassenbibliotheken:
+Es verwendet folgende zusaetzliche Klassenbibliotheken:
 
     - itext (siehe auch http://itext.sourceforge.net)
     - BouncyCastle (siehe auch http://www.bouncycastle.org)
     - Swing-layout (siehe auch http://layout.jdesktop.org)
 
-Für die Verwendung von Bouncycastle muss das Schema für Strong Export Security
+Fuer die Verwendung von Bouncycastle muss das Schema fuer Strong Export Security
 in der Java Runtime installiert sein (siehe auch Zitat 
 von http://www.bouncycastle.org/documentation.html): 
 
@@ -78,5 +78,5 @@ Der Windows Installer installiert die Security Policy automatisch mit.
 Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableSigner 
 noch einmal installieren, damit die Security Policy auch dort wirkt.
 
--peter pfläging <pfp@adv.magwien.gv.at>
+:peter pflaeging <peter.pflaeging@wien.gv.at>
 

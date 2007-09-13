@@ -8,7 +8,7 @@
 package at.gv.wien.PortableSigner;
 
 /**
- * @author pfp
+ * @author peter.pflaeging
  */
 public class Version {
 	private static String date = "$Date$";
