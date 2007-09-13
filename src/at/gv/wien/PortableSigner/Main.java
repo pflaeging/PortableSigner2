@@ -14,12 +14,13 @@ package at.gv.wien.PortableSigner;
 public class Main extends javax.swing.JFrame {
     
     private static SignCommandLine mycommand;
-    public String copyright = "Peter Pfläging <peter.pflaeging@wien.gv.at>)";
+    public String copyright = "Peter Pfl\u00e4ging <peter.pflaeging@wien.gv.at>)";
     public String url = "http://portablesigner.sf.net/";
     private Preferences  prefs;
     private Version version = new Version();
     private static java.awt.Color resultcolor;
     private static String result, exceptionstring;
+    public static String platform;
     String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
     String password = "";
     private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
@@ -29,9 +30,34 @@ public class Main extends javax.swing.JFrame {
     /** Creates new form Main */
     public Main() {
         prefs = new Preferences();
+//        ReadStore teststore;
         
 //        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);
+        String operatingSystem = System.getProperty("os.name");
+        if (operatingSystem.contains("Mac OS X")) {
+            platform = "mac";
+        }
+        else if (operatingSystem.contains("Windows")) {
+            platform = "windows";
+        }
+        else
+        {
+            platform = "other";
+        }
         
+/**        teststore = new ReadStore();
+        
+        System.out.println("Start: " + PSCertificate.count);
+        for (int xx = 0; xx < PSCertificate.count; xx++) {
+            if (teststore.certs[xx].isKey) {
+                   System.out.println("\t:" + xx + " Alias: " + teststore.certs[xx].aliasname + " | Name: " + teststore.certs[xx].subject 
+                    + " | Serial: " + teststore.certs[xx].serial);
+            } else {
+                System.out.println(":" + xx + " Alias: " + teststore.certs[xx].aliasname + " | Name: " + teststore.certs[xx].subject 
+                    + " | Serial: " + teststore.certs[xx].serial);
+            }
+        }
+**/        
         initComponents();
         if (mycommand.signature == null) {
             jTextFieldSignaturefile.setText(prefs.lastP12File);
@@ -74,6 +100,7 @@ public class Main extends javax.swing.JFrame {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jDialogCancel = new javax.swing.JDialog();
         jPanelCancel = new javax.swing.JPanel();
         jButtonCancelYes = new javax.swing.JButton();
@@ -100,6 +127,16 @@ public class Main extends javax.swing.JFrame {
         jButtonOptionOK = new javax.swing.JButton();
         jButtonResetLogo = new javax.swing.JButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jFrameSelectKeystore = new javax.swing.JFrame();
+        jButtonSelectKeystoreFile = new javax.swing.JButton();
+        jButtonSelectKeystoreKeystore = new javax.swing.JButton();
+        jButtonSelectKeystoreCancel = new javax.swing.JButton();
+        jFrameChooseCert = new javax.swing.JFrame();
+        jScrollPaneCerts = new javax.swing.JScrollPane();
+        jListCerts = new javax.swing.JList();
+        jButtonCertOK = new javax.swing.JButton();
+        jButtonCertCancel = new javax.swing.JButton();
+        jButtonCertInfo = new javax.swing.JButton();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -135,11 +172,11 @@ public class Main extends javax.swing.JFrame {
         jButtonOption = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
-        jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
-
         jDialogCancel.setAlwaysOnTop(true);
         jDialogCancel.setLocationByPlatform(true);
         jDialogCancel.setModal(true);
+        jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
+
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n"); // NOI18N
         jButtonCancelYes.setText(bundle.getString("Yes")); // NOI18N
         jButtonCancelYes.addActionListener(new java.awt.event.ActionListener() {
@@ -183,10 +220,12 @@ public class Main extends javax.swing.JFrame {
                     .add(jButtonCancelNo)
                     .add(jButtonCancelYes)))
         );
+
         jDialogCancel.getContentPane().add(jPanelCancel);
 
         jDialogAbout.setLocationByPlatform(true);
         jDialogAbout.setResizable(false);
+
         jLabelAboutText.setFont(new java.awt.Font("Lucida Grande", 1, 18));
         jLabelAboutText.setText("PortableSigner " + Version.release);
 
@@ -222,7 +261,7 @@ public class Main extends javax.swing.JFrame {
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jDialogAboutLayout.createSequentialGroup()
                                 .add(jLabelAboutCopyright)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 137, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 144, Short.MAX_VALUE)
                                 .add(jButtonLicense)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonAboutOk))))
@@ -245,6 +284,7 @@ public class Main extends javax.swing.JFrame {
                     .add(jButtonLicense))
                 .addContainerGap())
         );
+
         jButtonLicenseOK.setText("OK");
         jButtonLicenseOK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,8 +317,10 @@ public class Main extends javax.swing.JFrame {
                 .add(jButtonLicenseOK)
                 .addContainerGap())
         );
+
         jFrameOption.setTitle("PortableSigner: Options");
         jFrameOption.setAlwaysOnTop(true);
+
         jButtonOptionSearchLogo.setText(bundle.getString("SearchButton")); // NOI18N
         jButtonOptionSearchLogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,7 +330,6 @@ public class Main extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonOptionEnglish);
         jRadioButtonOptionEnglish.setText(bundle.getString("EnglishButton")); // NOI18N
-        jRadioButtonOptionEnglish.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jRadioButtonOptionEnglish.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jRadioButtonOptionEnglish.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +339,6 @@ public class Main extends javax.swing.JFrame {
 
         buttonGroup1.add(jRadioButtonOptionGerman);
         jRadioButtonOptionGerman.setText(bundle.getString("GermanButton")); // NOI18N
-        jRadioButtonOptionGerman.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jRadioButtonOptionGerman.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jRadioButtonOptionGerman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,9 +416,119 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jFrameSelectKeystore.setTitle("Select Keystore Type");
+        jFrameSelectKeystore.setAlwaysOnTop(true);
+
+        jButtonSelectKeystoreFile.setText("Select PKCS#12 File ...");
+        jButtonSelectKeystoreFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelectKeystoreFileActionPerformed(evt);
+            }
+        });
+
+        jButtonSelectKeystoreKeystore.setText("Select from Windows Keystore ...");
+        jButtonSelectKeystoreKeystore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelectKeystoreKeystoreActionPerformed(evt);
+            }
+        });
+
+        jButtonSelectKeystoreCancel.setText("Cancel");
+        jButtonSelectKeystoreCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSelectKeystoreCancelActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jFrameSelectKeystoreLayout = new org.jdesktop.layout.GroupLayout(jFrameSelectKeystore.getContentPane());
+        jFrameSelectKeystore.getContentPane().setLayout(jFrameSelectKeystoreLayout);
+        jFrameSelectKeystoreLayout.setHorizontalGroup(
+            jFrameSelectKeystoreLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jFrameSelectKeystoreLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jFrameSelectKeystoreLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jButtonSelectKeystoreFile)
+                    .add(jButtonSelectKeystoreKeystore))
+                .addContainerGap(132, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameSelectKeystoreLayout.createSequentialGroup()
+                .addContainerGap(290, Short.MAX_VALUE)
+                .add(jButtonSelectKeystoreCancel)
+                .addContainerGap())
+        );
+        jFrameSelectKeystoreLayout.setVerticalGroup(
+            jFrameSelectKeystoreLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jFrameSelectKeystoreLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jButtonSelectKeystoreFile)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonSelectKeystoreKeystore)
+                .addContainerGap(48, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameSelectKeystoreLayout.createSequentialGroup()
+                .addContainerGap(81, Short.MAX_VALUE)
+                .add(jButtonSelectKeystoreCancel)
+                .addContainerGap())
+        );
+
+        jFrameChooseCert.setTitle("Choose Certificate");
+        jFrameChooseCert.setAlwaysOnTop(true);
+
+        jListCerts.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jListCerts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPaneCerts.setViewportView(jListCerts);
+
+        jButtonCertOK.setText("Use");
+
+        jButtonCertCancel.setText("Cancel");
+        jButtonCertCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCertCancelActionPerformed(evt);
+            }
+        });
+
+        jButtonCertInfo.setText("Info");
+        jButtonCertInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCertInfoActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jFrameChooseCertLayout = new org.jdesktop.layout.GroupLayout(jFrameChooseCert.getContentPane());
+        jFrameChooseCert.getContentPane().setLayout(jFrameChooseCertLayout);
+        jFrameChooseCertLayout.setHorizontalGroup(
+            jFrameChooseCertLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameChooseCertLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jFrameChooseCertLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jScrollPaneCerts, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                    .add(jFrameChooseCertLayout.createSequentialGroup()
+                        .add(jButtonCertInfo)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 391, Short.MAX_VALUE)
+                        .add(jButtonCertCancel)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jButtonCertOK)))
+                .addContainerGap())
+        );
+        jFrameChooseCertLayout.setVerticalGroup(
+            jFrameChooseCertLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameChooseCertLayout.createSequentialGroup()
+                .add(26, 26, 26)
+                .add(jScrollPaneCerts, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                .add(24, 24, 24)
+                .add(jFrameChooseCertLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButtonCertOK)
+                    .add(jButtonCertCancel)
+                    .add(jButtonCertInfo))
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PortableSigner");
         setLocationByPlatform(true);
+
         jLabelInput.setText(bundle.getString("InputLabel")); // NOI18N
 
         jLabelOutput.setText(bundle.getString("OutputLabel")); // NOI18N
@@ -413,7 +563,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/at/gv/wien/PortableSigner/PortableSignerLogo-small.png")));
+        jButtonAbout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/at/gv/wien/PortableSigner/PortableSignerLogo-small.png"))); // NOI18N
         jButtonAbout.setText(bundle.getString("AboutButton")); // NOI18N
         jButtonAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -480,7 +630,6 @@ public class Main extends javax.swing.JFrame {
 
         jCheckBoxSignatureBlock.setSelected(prefs.signText);
         jCheckBoxSignatureBlock.setText(bundle.getString("SignatureBlockLabel")); // NOI18N
-        jCheckBoxSignatureBlock.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jCheckBoxSignatureBlock.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jCheckBoxSignatureBlock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -567,7 +716,7 @@ public class Main extends javax.swing.JFrame {
                                             .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                             .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -638,8 +787,40 @@ public class Main extends javax.swing.JFrame {
                         .add(jLabel9)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jButtonCertInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCertInfoActionPerformed
+    if (jListCerts.getSelectedIndex() != -1)
+    {
+        System.out.println("Index: " + jListCerts.getSelectedIndex());
+    }
+}//GEN-LAST:event_jButtonCertInfoActionPerformed
+
+private void jButtonCertCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCertCancelActionPerformed
+    jFrameChooseCert.setVisible(false);
+}//GEN-LAST:event_jButtonCertCancelActionPerformed
+
+private void jButtonSelectKeystoreKeystoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectKeystoreKeystoreActionPerformed
+    jFrameChooseCert.setSize(500, 300);
+    jFrameChooseCert.setVisible(true);
+}//GEN-LAST:event_jButtonSelectKeystoreKeystoreActionPerformed
+
+private void jButtonSelectKeystoreCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectKeystoreCancelActionPerformed
+    jFrameSelectKeystore.setVisible(false);
+}//GEN-LAST:event_jButtonSelectKeystoreCancelActionPerformed
+
+private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectKeystoreFileActionPerformed
+        jFrameSelectKeystore.setVisible(false);
+        String file = chooseP12File();
+        // do nothing if open dialog was cancelled
+        if (file == null) {
+            return;
+        }
+        jTextFieldSignaturefile.setText(file);
+//        System.out.println(file);
+}//GEN-LAST:event_jButtonSelectKeystoreFileActionPerformed
 
     private void jButtonResetLogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetLogoActionPerformed
         jTextFieldOptionLogo.setText("");
@@ -779,13 +960,17 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelMainActionPerformed
     
     private void jButtonSignaturefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignaturefileActionPerformed
-        String file = chooseP12File();
+
+// At the moment the action for selecting the keystore is disabled. Keystores are not working!        
+//        jFrameSelectKeystore.setSize(380, 130);
+//        jFrameSelectKeystore.setVisible(true);
+                String file = chooseP12File();
         // do nothing if open dialog was cancelled
         if (file == null) {
             return;
         }
         jTextFieldSignaturefile.setText(file);
-//        System.out.println(file);
+
     }//GEN-LAST:event_jButtonSignaturefileActionPerformed
     
     private void jButtonOutputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOutputfileActionPerformed
@@ -845,6 +1030,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCancelMain;
     private javax.swing.JButton jButtonCancelNo;
     private javax.swing.JButton jButtonCancelYes;
+    private javax.swing.JButton jButtonCertCancel;
+    private javax.swing.JButton jButtonCertInfo;
+    private javax.swing.JButton jButtonCertOK;
     private javax.swing.JButton jButtonInputfile;
     private javax.swing.JButton jButtonLicense;
     private javax.swing.JButton jButtonLicenseOK;
@@ -854,12 +1042,17 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButtonOutputfile;
     private javax.swing.JButton jButtonPasswordOK;
     private javax.swing.JButton jButtonResetLogo;
+    private javax.swing.JButton jButtonSelectKeystoreCancel;
+    private javax.swing.JButton jButtonSelectKeystoreFile;
+    private javax.swing.JButton jButtonSelectKeystoreKeystore;
     private javax.swing.JButton jButtonSignaturefile;
     private javax.swing.JCheckBox jCheckBoxSignatureBlock;
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
     private javax.swing.JDialog jDialogLicense;
+    private javax.swing.JFrame jFrameChooseCert;
     private javax.swing.JFrame jFrameOption;
+    private javax.swing.JFrame jFrameSelectKeystore;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -885,6 +1078,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSignature;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelWorking;
+    private javax.swing.JList jListCerts;
     private javax.swing.JPanel jPanelCancel;
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JProgressBar jProgressBar1;
@@ -892,6 +1086,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonOptionGerman;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
+    private javax.swing.JScrollPane jScrollPaneCerts;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaAboutVersion;
     private javax.swing.JTextArea jTextAreaLicenseText;
