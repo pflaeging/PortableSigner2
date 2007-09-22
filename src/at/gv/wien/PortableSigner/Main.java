@@ -6,6 +6,7 @@
 
 package at.gv.wien.PortableSigner;
 
+import javax.swing.UIManager;
 
 /**
  *
@@ -36,12 +37,23 @@ public class Main extends javax.swing.JFrame {
         String operatingSystem = System.getProperty("os.name");
         if (operatingSystem.contains("Mac OS X")) {
             platform = "mac";
-        }
-        else if (operatingSystem.contains("Windows")) {
+            System.setProperty(
+                    "Quaqua.tabLayoutPolicy","wrap"
+                    );
+            // set the Quaqua Look and Feel in the UIManager
+            try {
+                UIManager.setLookAndFeel(
+                        "ch.randelshofer.quaqua.QuaquaLookAndFeel"
+                        );
+                // set UI manager properties here that affect Quaqua
+            } catch (Exception e) {
+                // take an appropriate action here
+                System.err.println("Unable to load Aqua UI");
+            }
+            
+        } else if (operatingSystem.contains("Windows")) {
             platform = "windows";
-        }
-        else
-        {
+        } else {
             platform = "other";
         }
         
@@ -171,6 +183,15 @@ public class Main extends javax.swing.JFrame {
         jCheckBoxSignatureBlock = new javax.swing.JCheckBox();
         jButtonOption = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jMenuBarMain = new javax.swing.JMenuBar();
+        jMenuFile = new javax.swing.JMenu();
+        jMenuItemInputfile = new javax.swing.JMenuItem();
+        jMenuItemOutputfile = new javax.swing.JMenuItem();
+        jMenuItemSignaturefile = new javax.swing.JMenuItem();
+        jMenuItemSign = new javax.swing.JMenuItem();
+        jMenuItemQuit = new javax.swing.JMenuItem();
+        jMenuEdit = new javax.swing.JMenu();
+        jMenuItemOptions = new javax.swing.JMenuItem();
 
         jDialogCancel.setAlwaysOnTop(true);
         jDialogCancel.setLocationByPlatform(true);
@@ -647,6 +668,69 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel10.setText("9.");
 
+        jMenuFile.setText("File");
+        jMenuFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuFileActionPerformed(evt);
+            }
+        });
+
+        jMenuItemInputfile.setText("Inputfile...");
+        jMenuItemInputfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInputfileActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemInputfile);
+
+        jMenuItemOutputfile.setText("Outputfile...");
+        jMenuItemOutputfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOutputfileActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemOutputfile);
+
+        jMenuItemSignaturefile.setText("Signaturfile...");
+        jMenuItemSignaturefile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSignaturefileActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemSignaturefile);
+
+        jMenuItemSign.setText("Sign");
+        jMenuItemSign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSignActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemSign);
+
+        jMenuItemQuit.setText("Quit");
+        jMenuItemQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemQuitActionPerformed(evt);
+            }
+        });
+        jMenuFile.add(jMenuItemQuit);
+
+        jMenuBarMain.add(jMenuFile);
+
+        jMenuEdit.setText("Edit");
+
+        jMenuItemOptions.setText("Options...");
+        jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOptionsActionPerformed(evt);
+            }
+        });
+        jMenuEdit.add(jMenuItemOptions);
+
+        jMenuBarMain.add(jMenuEdit);
+
+        setJMenuBar(jMenuBarMain);
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -785,11 +869,39 @@ public class Main extends javax.swing.JFrame {
                         .add(jLabelFinishNext)
                         .add(jLabel10)
                         .add(jLabel9)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
+    jButtonOptionActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemOptionsActionPerformed
+
+private void jMenuItemQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitActionPerformed
+    jButtonCancelYesActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemQuitActionPerformed
+
+private void jMenuItemSignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSignActionPerformed
+    jButtonPasswordOKActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemSignActionPerformed
+
+private void jMenuItemSignaturefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSignaturefileActionPerformed
+    jButtonSignaturefileActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemSignaturefileActionPerformed
+
+private void jMenuItemOutputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOutputfileActionPerformed
+    jButtonOutputfileActionPerformed(evt);    
+}//GEN-LAST:event_jMenuItemOutputfileActionPerformed
+
+private void jMenuItemInputfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInputfileActionPerformed
+    jButtonInputfileActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemInputfileActionPerformed
+
+    private void jMenuFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuFileActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_jMenuFileActionPerformed
 
 private void jButtonCertInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCertInfoActionPerformed
     if (jListCerts.getSelectedIndex() != -1)
@@ -1079,6 +1191,15 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel jLabelWorking;
     private javax.swing.JList jListCerts;
+    private javax.swing.JMenuBar jMenuBarMain;
+    private javax.swing.JMenu jMenuEdit;
+    private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenuItem jMenuItemInputfile;
+    private javax.swing.JMenuItem jMenuItemOptions;
+    private javax.swing.JMenuItem jMenuItemOutputfile;
+    private javax.swing.JMenuItem jMenuItemQuit;
+    private javax.swing.JMenuItem jMenuItemSign;
+    private javax.swing.JMenuItem jMenuItemSignaturefile;
     private javax.swing.JPanel jPanelCancel;
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JProgressBar jProgressBar1;

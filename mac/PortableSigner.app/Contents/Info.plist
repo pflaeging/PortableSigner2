@@ -21,9 +21,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>100.0</string>
+	<string>1.3</string>
 	<key>Java</key>
-	<dict>
+	<dict>		
+		<key>JVMVersion</key>
+		<string>1.5*</string>
+		<key>MainClass</key>
+		<string>at.gv.wien.PortableSigner.Main</string>
 		<key>ClassPath</key>
 		<array>
 			<string>$JAVAROOT/PortableSigner.jar</string>
@@ -32,11 +36,14 @@
 			<string>$JAVAROOT/commons-cli-1.0.jar</string>
 			<string>$JAVAROOT/itext-2.0.5.jar</string>
 			<string>$JAVAROOT/swing-layout-1.0.2.jar</string>
+			<string>$JAVAROOT/quaqua.jar</string>
+			<string>$JAVAROOT/</string>
 		</array>
-		<key>JVMVersion</key>
-		<string>1.5*</string>
-		<key>MainClass</key>
-		<string>at.gv.wien.PortableSigner.Main</string>
+		<key>Properties</key>
+		<dict>
+			<key>apple.laf.useScreenMenuBar</key>
+			<string>true</string>
+		</dict>
 	</dict>
 </dict>
 </plist>
