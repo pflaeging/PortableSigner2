@@ -6,6 +6,8 @@
 
 package at.gv.wien.PortableSigner;
 
+import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
+import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
 import javax.swing.UIManager;
 
 /**
@@ -50,9 +52,18 @@ public class Main extends javax.swing.JFrame {
                 // take an appropriate action here
                 System.err.println("Unable to load Aqua UI");
             }
-            
         } else if (operatingSystem.contains("Windows")) {
             platform = "windows";
+            try {
+                UIManager.setLookAndFeel(
+                        "net.java.plaf.windows.WindowsLookAndFeel"
+                        );
+                // set UI manager properties here that affect Quaqua
+            } catch (Exception e) {
+                // take an appropriate action here
+                System.err.println("Unable to load Windows UI");
+            }
+
         } else {
             platform = "other";
         }
@@ -149,6 +160,9 @@ public class Main extends javax.swing.JFrame {
         jButtonCertOK = new javax.swing.JButton();
         jButtonCertCancel = new javax.swing.JButton();
         jButtonCertInfo = new javax.swing.JButton();
+        jFrameHelp = new javax.swing.JFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPaneHelp = new javax.swing.JEditorPane();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -192,6 +206,9 @@ public class Main extends javax.swing.JFrame {
         jMenuItemQuit = new javax.swing.JMenuItem();
         jMenuEdit = new javax.swing.JMenu();
         jMenuItemOptions = new javax.swing.JMenuItem();
+        jMenuHelp = new javax.swing.JMenu();
+        jMenuItemHelp = new javax.swing.JMenuItem();
+        jMenuItemAbout = new javax.swing.JMenuItem();
 
         jDialogCancel.setAlwaysOnTop(true);
         jDialogCancel.setLocationByPlatform(true);
@@ -546,6 +563,29 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jFrameHelp.setTitle(bundle.getString("PortableSigner_Help")); // NOI18N
+
+        jEditorPaneHelp.setContentType("text/html"); // NOI18N
+        jEditorPaneHelp.setEditable(false);
+        jScrollPane2.setViewportView(jEditorPaneHelp);
+
+        org.jdesktop.layout.GroupLayout jFrameHelpLayout = new org.jdesktop.layout.GroupLayout(jFrameHelp.getContentPane());
+        jFrameHelp.getContentPane().setLayout(jFrameHelpLayout);
+        jFrameHelpLayout.setHorizontalGroup(
+            jFrameHelpLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jFrameHelpLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jFrameHelpLayout.setVerticalGroup(
+            jFrameHelpLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jFrameHelpLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("PortableSigner");
         setLocationByPlatform(true);
@@ -668,14 +708,14 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel10.setText("9.");
 
-        jMenuFile.setText("File");
+        jMenuFile.setText(bundle.getString("MenuFile")); // NOI18N
         jMenuFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuFileActionPerformed(evt);
             }
         });
 
-        jMenuItemInputfile.setText("Inputfile...");
+        jMenuItemInputfile.setText(bundle.getString("MenuInputfile")); // NOI18N
         jMenuItemInputfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemInputfileActionPerformed(evt);
@@ -683,7 +723,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemInputfile);
 
-        jMenuItemOutputfile.setText("Outputfile...");
+        jMenuItemOutputfile.setText(bundle.getString("MenuOutputfile")); // NOI18N
         jMenuItemOutputfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOutputfileActionPerformed(evt);
@@ -691,7 +731,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemOutputfile);
 
-        jMenuItemSignaturefile.setText("Signaturfile...");
+        jMenuItemSignaturefile.setText(bundle.getString("MenuSignaturfile")); // NOI18N
         jMenuItemSignaturefile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemSignaturefileActionPerformed(evt);
@@ -699,7 +739,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemSignaturefile);
 
-        jMenuItemSign.setText("Sign");
+        jMenuItemSign.setText(bundle.getString("MenuSign")); // NOI18N
         jMenuItemSign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemSignActionPerformed(evt);
@@ -707,7 +747,7 @@ public class Main extends javax.swing.JFrame {
         });
         jMenuFile.add(jMenuItemSign);
 
-        jMenuItemQuit.setText("Quit");
+        jMenuItemQuit.setText(bundle.getString("MenuQuit")); // NOI18N
         jMenuItemQuit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemQuitActionPerformed(evt);
@@ -717,9 +757,9 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBarMain.add(jMenuFile);
 
-        jMenuEdit.setText("Edit");
+        jMenuEdit.setText(bundle.getString("MenuEdit")); // NOI18N
 
-        jMenuItemOptions.setText("Options...");
+        jMenuItemOptions.setText(bundle.getString("MenuOptions")); // NOI18N
         jMenuItemOptions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemOptionsActionPerformed(evt);
@@ -728,6 +768,26 @@ public class Main extends javax.swing.JFrame {
         jMenuEdit.add(jMenuItemOptions);
 
         jMenuBarMain.add(jMenuEdit);
+
+        jMenuHelp.setText(bundle.getString("MenuHelp")); // NOI18N
+
+        jMenuItemHelp.setText(bundle.getString("MenuHelpHelp")); // NOI18N
+        jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHelpActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemHelp);
+
+        jMenuItemAbout.setText(bundle.getString("MenuAbout")); // NOI18N
+        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAboutActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jMenuItemAbout);
+
+        jMenuBarMain.add(jMenuHelp);
 
         setJMenuBar(jMenuBarMain);
 
@@ -874,6 +934,21 @@ public class Main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
+        try {
+            edu.stanford.ejalbert.BrowserLauncher launch = new edu.stanford.ejalbert.BrowserLauncher();
+            launch.openURLinBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("HomepageURL"));
+        } catch (BrowserLaunchingInitializingException ex) {
+            System.err.println("Cannot start Browser");
+        } catch (UnsupportedOperatingSystemException ex) {
+            System.err.println("Unsupported Operating System");
+        }
+}//GEN-LAST:event_jMenuItemHelpActionPerformed
+
+    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
+    jButtonAboutActionPerformed(evt);
+}//GEN-LAST:event_jMenuItemAboutActionPerformed
 
 private void jMenuItemOptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOptionsActionPerformed
     jButtonOptionActionPerformed(evt);
@@ -1162,7 +1237,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
     private javax.swing.JDialog jDialogLicense;
+    private javax.swing.JEditorPane jEditorPaneHelp;
     private javax.swing.JFrame jFrameChooseCert;
+    private javax.swing.JFrame jFrameHelp;
     private javax.swing.JFrame jFrameOption;
     private javax.swing.JFrame jFrameSelectKeystore;
     private javax.swing.JLabel jLabel1;
@@ -1194,6 +1271,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JMenuBar jMenuBarMain;
     private javax.swing.JMenu jMenuEdit;
     private javax.swing.JMenu jMenuFile;
+    private javax.swing.JMenu jMenuHelp;
+    private javax.swing.JMenuItem jMenuItemAbout;
+    private javax.swing.JMenuItem jMenuItemHelp;
     private javax.swing.JMenuItem jMenuItemInputfile;
     private javax.swing.JMenuItem jMenuItemOptions;
     private javax.swing.JMenuItem jMenuItemOutputfile;
@@ -1206,6 +1286,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JRadioButton jRadioButtonOptionEnglish;
     private javax.swing.JRadioButton jRadioButtonOptionGerman;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
     private javax.swing.JScrollPane jScrollPaneCerts;
     private javax.swing.JSeparator jSeparator1;
