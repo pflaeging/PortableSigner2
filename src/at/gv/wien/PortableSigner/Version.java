@@ -16,7 +16,8 @@ public class Version {
 	private static String revision = "$Revision$";
         public static String release = "1.3";      
         
-        public String print;
+        public static String print;
+        public static String version;
 	
 	public Version() {
 		String cleanDate, cleanAuthor, cleanRevision;
@@ -24,5 +25,6 @@ public class Version {
 		cleanAuthor = author.replace('$', ' ').trim();
 		cleanRevision = revision.replace('$', ' ').trim();
 		print =  cleanRevision + "\n" + cleanAuthor + "\n" + cleanDate;
+                version = release + " " + cleanRevision;
 	}
 }

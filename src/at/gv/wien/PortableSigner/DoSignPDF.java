@@ -29,6 +29,7 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import java.util.HashMap;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class DoSignPDF {
         private static GetPKCS12 pkcs12;
 
 	/** Creates a new instance of DoSignPDF */
-	public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
+public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
 			String pkcs12FileName, String password, Boolean signText, String signLanguage,
                         String sigLogo) {
 		try {
@@ -88,6 +89,10 @@ public class DoSignPDF {
                              
                                 Rectangle size = reader.getPageSize(pages);
                                 stp = PdfStamper.createSignature(reader, fout, '\0');
+                                HashMap pdfInfo = reader.getInfo();
+                                String pdfInfoProducer = pdfInfo.get("Producer").toString();
+                                pdfInfo.put("Producer", pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")");
+                                stp.setMoreInfo(pdfInfo);
                                 if (signText) {
                                     String greet, signator, datestr, ca, serial, special;
                                     int specialcount = 0;
@@ -185,7 +190,6 @@ public class DoSignPDF {
                                     table.setTotalWidth(cells);
                                     table.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content );
                                 }
-                                
                                 PdfSignatureAppearance sap = stp.getSignatureAppearance();
 				sap.setCrypto(pkcs12.privateKey, pkcs12.certificateChain, null,
 						PdfSignatureAppearance.WINCER_SIGNED);
