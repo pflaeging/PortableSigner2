@@ -6,8 +6,7 @@
 
 package at.gv.wien.PortableSigner;
 
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+import java.lang.reflect.Method;
 import javax.swing.UIManager;
 
 /**
@@ -939,11 +938,12 @@ private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN
         try {
             edu.stanford.ejalbert.BrowserLauncher launch = new edu.stanford.ejalbert.BrowserLauncher();
             launch.openURLinBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("HomepageURL"));
-        } catch (BrowserLaunchingInitializingException ex) {
-            System.err.println("Cannot start Browser");
-        } catch (UnsupportedOperatingSystemException ex) {
-            System.err.println("Unsupported Operating System");
+        } catch (edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException ex) {
+           System.err.println("Cannot start Browser");
+        } catch (edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException ex) {
+           System.err.println("Unsupported Operating System");
         }
+      
 }//GEN-LAST:event_jMenuItemHelpActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
