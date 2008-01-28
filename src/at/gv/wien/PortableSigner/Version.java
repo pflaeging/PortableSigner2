@@ -14,7 +14,7 @@ public class Version {
 	private static String date = "$Date$";
 	private static String author = "$Author$";
 	private static String revision = "$Revision$";
-        public static String release = "1.3";      
+        public static String release = "1.4";      
         
         public static String print;
         public static String version;
