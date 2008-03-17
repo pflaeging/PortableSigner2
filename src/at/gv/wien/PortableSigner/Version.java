@@ -1,8 +1,7 @@
 /*
  * Version.java
  *
- * Created on 25. Oktober 2006, 14:56
- *
+ * for 1.4.80
  */
 
 package at.gv.wien.PortableSigner;
