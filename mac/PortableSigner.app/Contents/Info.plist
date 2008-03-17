@@ -34,7 +34,7 @@
 			<string>$JAVAROOT/AbsoluteLayout.jar</string>
 			<string>$JAVAROOT/bcprov-jdk15-138.jar</string>
 			<string>$JAVAROOT/commons-cli-1.1.jar</string>
-			<string>$JAVAROOT/itext-2.0.6.jar</string>
+			<string>$JAVAROOT/iText-2.0.8.jar</string>
 			<string>$JAVAROOT/swing-layout-1.0.3.jar</string>
 			<string>$JAVAROOT/quaqua.jar</string>
                         <string>$JAVAROOT/BrowserLauncher2-all-1_3.jar</string>

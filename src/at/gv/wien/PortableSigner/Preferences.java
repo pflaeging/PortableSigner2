@@ -22,8 +22,9 @@ public class Preferences {
             // lastOutputFile = "",
             lastP12File = "",
             signLanguage = "",
-            sigLogo = "";
-    public Boolean signText = false;
+            sigLogo = "",
+            signComment = "";
+    public Boolean signText = false, useComment = true, toolTip = true;
     private java.util.prefs.Preferences prefs = java.util.prefs.Preferences.userNodeForPackage (Main.class);
                 
     /** Creates a new instance of Preferences */
@@ -31,7 +32,7 @@ public class Preferences {
         get();
     }
     
-    private void get() {
+    public void get() {
         // Language = new java.util.Locale(prefs.get("Language", "de"));
         lastInputFile = prefs.get("LastInputFile", "");
         // lastOutputFile = prefs.get("LastOutputFile", "");
@@ -39,6 +40,9 @@ public class Preferences {
         signText = prefs.getBoolean("SignText", false);
         signLanguage = prefs.get("SignLanguage", "german");
         sigLogo = prefs.get("SignatureLogo", "");
+        signComment = prefs.get("SignComment", "");
+        useComment = prefs.getBoolean("useComment", true);
+        toolTip = prefs.getBoolean("ToolTip", true);
     }
     
     public void set(String property, String value) {

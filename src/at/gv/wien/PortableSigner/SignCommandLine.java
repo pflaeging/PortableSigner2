@@ -18,8 +18,8 @@ import org.apache.commons.cli.*;
  */
 public class SignCommandLine {
     public String input = "", output = "", signature = "", password = "",
-            sigblock = "", sigimage = "";
-    public Boolean nogui = false;
+            sigblock = "", sigimage = "", comment = "";
+    public Boolean nogui = false, finalize = true;
     private Boolean help = false;
     
     /** Creates a new instance of CommandLine */
@@ -36,12 +36,16 @@ public class SignCommandLine {
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Password"));
        options.addOption("n", false, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WithoutGUI"));
+       options.addOption("f", false, 
+               java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Finalize"));
        options.addOption("h", false, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Help"));
        options.addOption("b", true, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigBlock"));
        options.addOption("i", true, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigImage"));
+       options.addOption("c", true, 
+               java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigComment"));
        CommandLineParser parser = new PosixParser();
        HelpFormatter usage = new HelpFormatter();
        try {
@@ -52,9 +56,11 @@ public class SignCommandLine {
             password = cmd.getOptionValue("p");
             nogui = cmd.hasOption("n");
             help = cmd.hasOption("h");
+            finalize = !cmd.hasOption("f");
             sigblock = cmd.getOptionValue("b");
             sigimage = cmd.getOptionValue("i");
-            if (sigblock == null) { sigblock = ""; }
+            comment = cmd.getOptionValue("c");
+            if (sigblock == null) { sigblock = ""; comment = ""; }
             if (sigimage == null) { sigimage = ""; }
             
             if (cmd.getArgs().length != 0) {

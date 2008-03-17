@@ -46,7 +46,7 @@ public class DoSignPDF {
 	/** Creates a new instance of DoSignPDF */
 public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
 			String pkcs12FileName, String password, Boolean signText, String signLanguage,
-                        String sigLogo) {
+                        String sigLogo, Boolean finalize, String sigComment) {
 		try {
                         //System.out.println("-> DoSignPDF <-");
                         //System.out.println("Eingabedatei: " + pdfInputFileName);
@@ -88,13 +88,14 @@ public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
                                 int pages = reader.getNumberOfPages();
                              
                                 Rectangle size = reader.getPageSize(pages);
-                                stp = PdfStamper.createSignature(reader, fout, '\0');
+                                // stp = PdfStamper.createSignature(reader, fout, '\0');
+                                stp = PdfStamper.createSignature(reader, fout, '\0', null, true);
                                 HashMap pdfInfo = reader.getInfo();
                                 String pdfInfoProducer = pdfInfo.get("Producer").toString();
                                 pdfInfo.put("Producer", pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")");
                                 stp.setMoreInfo(pdfInfo);
                                 if (signText) {
-                                    String greet, signator, datestr, ca, serial, special;
+                                    String greet, signator, datestr, ca, serial, special, sigcomment;
                                     int specialcount = 0;
                                     ResourceBundle block = ResourceBundle.getBundle(
                                             "at/gv/wien/PortableSigner/Signatureblock");
@@ -104,6 +105,7 @@ public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
                                     ca = block.getString(signLanguage + "-issuer");
                                     serial = block.getString(signLanguage + "-serial");
                                     special = block.getString(signLanguage + "-special");
+                                    //sigcomment = block.getString(signLanguage + "-comment");
                                     stp.insertPage(pages + 1, size);
                                     if(!pkcs12.atEgovOID.equals("")) {
                                         specialcount = 1;
@@ -117,58 +119,60 @@ public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
                                     cellsize[0] = 85f;
                                     cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
                                 
-                                    PdfPTable table = new PdfPTable(2);
-                                    PdfPTable otable = new PdfPTable(2);
-                                    PdfPCell  cell = 
+                                    // Pagetable = Greeting, signatureblock, comment
+                                    PdfPTable sigpagetable = new PdfPTable(2);
+                                    PdfPTable sigblocktable = new PdfPTable(2);
+                                    PdfPCell  greetingcell = 
                                         new PdfPCell(new Paragraph(
                                             new Chunk(greet, 
                                                 new Font(Font.HELVETICA, 12))));
-                                    cell.setPaddingBottom(5);
-                                    cell.setColspan(2);
-                                    cell.setBorderWidth(0f);
-                                    table.addCell(cell);
+                                    greetingcell.setPaddingBottom(5);
+                                    greetingcell.setColspan(2);
+                                    greetingcell.setBorderWidth(0f);
+                                    sigpagetable.addCell(greetingcell);
                                 
                                     // inner table start
-                                    otable.addCell(
+                                    // Line 1
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(signator, new Font(Font.HELVETICA, 10))));
-                                    otable.addCell(
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.subject, new Font(Font.COURIER, 10))));
-                                    // L 1
-                                    otable.addCell(
+                                    // Line 2
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(datestr, new Font(Font.HELVETICA, 10))));
-                                    otable.addCell(
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
-                                    // L 2
-                                    otable.addCell(
+                                    // Line 3
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(ca, new Font(Font.HELVETICA, 10))));
-                                    otable.addCell(
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.issuer, new Font(Font.COURIER, 10))));
-                                    // L 3
-                                    otable.addCell(
+                                    // Line 4
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(serial, new Font(Font.HELVETICA, 10))));
-                                    otable.addCell(
+                                    sigblocktable.addCell(
                                         new Paragraph(
                                             new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 10))));
-                                    // L 4
+                                    // Line 5
                                     if (specialcount == 1) {
-                                        otable.addCell(
+                                        sigblocktable.addCell(
                                             new Paragraph(
                                                 new Chunk(special, new Font(Font.HELVETICA, 10))));
-                                        otable.addCell(
+                                        sigblocktable.addCell(
                                             new Paragraph(
                                                 new Chunk(pkcs12.atEgovOID, new Font(Font.COURIER, 10))));
                                     }
-                                    otable.setTotalWidth(cellsize);
+                                    sigblocktable.setTotalWidth(cellsize);
                                     // inner table end
                                 
-                                    table.setHorizontalAlignment(table.ALIGN_CENTER);
+                                    sigpagetable.setHorizontalAlignment(sigpagetable.ALIGN_CENTER);
                                     Image logo;
                                     // System.out.println("Logo:" + sigLogo + ":");
                                     if (sigLogo.equals("") || sigLogo == null) {
@@ -182,13 +186,23 @@ public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
                                     logocell.setVerticalAlignment(logocell.ALIGN_MIDDLE);
                                     logocell.setHorizontalAlignment(logocell.ALIGN_CENTER);
                                     logocell.setImage(logo);
-                                    table.addCell(logocell);
-                                    PdfPCell incell = new PdfPCell(otable);
+                                    sigpagetable.addCell(logocell);
+                                    PdfPCell incell = new PdfPCell(sigblocktable);
                                     incell.setBorderWidth(0f);
-                                    table.addCell(incell);
+                                    sigpagetable.addCell(incell);
+                                    PdfPCell  commentcell = 
+                                        new PdfPCell(new Paragraph(
+                                            new Chunk(sigComment, 
+                                                new Font(Font.HELVETICA, 10))));
+                                    commentcell.setPaddingTop(10);
+                                    commentcell.setColspan(2);
+                                    commentcell.setBorderWidth(0f);
+                                    if (!sigComment.equals("")) {
+                                        sigpagetable.addCell(commentcell);
+                                    }
                                     float [] cells = {70, cellsize[0] + cellsize[1]};
-                                    table.setTotalWidth(cells);
-                                    table.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content );
+                                    sigpagetable.setTotalWidth(cells);
+                                    sigpagetable.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content );
                                 }
                                 PdfSignatureAppearance sap = stp.getSignatureAppearance();
 				sap.setCrypto(pkcs12.privateKey, pkcs12.certificateChain, null,
@@ -201,9 +215,12 @@ public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
                               
 //                                Rectangle sigRect = new Rectangle(100, topy - 300, rightx - 100, topy - 100);
 //                                sigRect.setBorder(Rectangle.LEFT | Rectangle.RIGHT | Rectangle.TOP | Rectangle.BOTTOM);
-//                                stp.getWriter().add(); 
-//				sap.setCertified(true);
-                                sap.setCertificationLevel(sap.CERTIFIED_NO_CHANGES_ALLOWED);
+//                                stp.getWriter().add();
+                                if (finalize) {
+                                    sap.setCertificationLevel(sap.CERTIFIED_NO_CHANGES_ALLOWED);
+                                } else {
+                                    sap.setCertificationLevel(sap.NOT_CERTIFIED);
+                                }
 				stp.close();
 				Main.setResult(
                                         java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("IsGeneratedAndSigned"),

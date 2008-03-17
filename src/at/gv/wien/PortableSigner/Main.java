@@ -6,11 +6,12 @@
 
 package at.gv.wien.PortableSigner;
 
-import java.lang.reflect.Method;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
+import java.awt.Cursor;
 
 /**
  *
@@ -30,7 +31,10 @@ public class Main extends javax.swing.JFrame {
     String password = "";
     private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
     private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
-    private static boolean workingJCE = true;
+    private static java.awt.Color helpcolor = new java.awt.Color(0, 0, 240);
+    private static boolean workingJCE = true, finalize = true;
+    Cursor questionCursor = new Cursor(Cursor.HAND_CURSOR);
+    Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
     
     
     /** Creates new form Main */
@@ -72,8 +76,10 @@ public class Main extends javax.swing.JFrame {
         } else {
             platform = "other";
         }
-
-        
+      MultiLineToolTipUI.setMaximumWidth(250);
+      MultiLineToolTipUI.initialize();
+      javax.swing.ToolTipManager.sharedInstance().setDismissDelay(20000);
+      
         initComponents();
         if (mycommand.signature == null) {
             jTextFieldSignaturefile.setText(prefs.lastP12File);
@@ -98,6 +104,17 @@ public class Main extends javax.swing.JFrame {
         } else {
             jTextFieldOptionLogo.setText(mycommand.sigimage);
         }
+        if (mycommand.comment.equals("")) {
+            jTextPaneCommentField.setText(prefs.signComment);
+        } else {
+            jTextPaneCommentField.setText(mycommand.comment);
+            prefs.set("useComment", true);
+            jCheckBoxComment.setSelected(true);
+        }
+        if (mycommand.finalize == false) {
+            finalize = false;
+        }
+
         if (!mycommand.sigblock.equals("")) {
             if (mycommand.sigblock.equals("german")) {
                 jRadioButtonOptionGerman.setSelected(true);
@@ -107,12 +124,21 @@ public class Main extends javax.swing.JFrame {
             }
             prefs.set("SignText", true);
         }
+        
         if (!workingJCE) {
             jDialogJCEAlert.setSize(650, 170);
             jDialogJCEAlert.setVisible(true);
             System.exit(254);
         }
 
+        if (prefs.toolTip) {
+            jCheckBoxTooltip.setSelected(true);
+            setTooltips(true);
+        } else {
+            jCheckBoxTooltip.setSelected(false);
+            setTooltips(false);
+        }
+        
     }
     
     /** This method is called from within the constructor to
@@ -148,6 +174,10 @@ public class Main extends javax.swing.JFrame {
         jLabelOptionLogo = new javax.swing.JLabel();
         jButtonOptionOK = new javax.swing.JButton();
         jButtonResetLogo = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPaneCommentField = new javax.swing.JTextPane();
+        jButtonResetCommentField = new javax.swing.JButton();
+        jCheckBoxComment = new javax.swing.JCheckBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jFrameSelectKeystore = new javax.swing.JFrame();
         jButtonSelectKeystoreFile = new javax.swing.JButton();
@@ -165,6 +195,10 @@ public class Main extends javax.swing.JFrame {
         jDialogJCEAlert = new javax.swing.JDialog();
         jButtonJCEAlertOK = new javax.swing.JButton();
         jLabelJCEAlert = new javax.swing.JLabel();
+        jDialogErrorReport = new javax.swing.JDialog();
+        jLabelErrorReportHeading = new javax.swing.JLabel();
+        jTextFieldErrorReport = new javax.swing.JTextField();
+        jButtonErrorReportOK = new javax.swing.JButton();
         jLabelInput = new javax.swing.JLabel();
         jLabelOutput = new javax.swing.JLabel();
         jLabelSignature = new javax.swing.JLabel();
@@ -194,11 +228,13 @@ public class Main extends javax.swing.JFrame {
         jLabelResult = new javax.swing.JLabel();
         jLabelFinished = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelRestart = new javax.swing.JLabel();
         jLabelFinishNext = new javax.swing.JLabel();
         jCheckBoxSignatureBlock = new javax.swing.JCheckBox();
         jButtonOption = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jCheckBoxFinalize = new javax.swing.JCheckBox();
+        jButtonErrorReport = new javax.swing.JButton();
         jMenuBarMain = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemInputfile = new javax.swing.JMenuItem();
@@ -209,6 +245,7 @@ public class Main extends javax.swing.JFrame {
         jMenuEdit = new javax.swing.JMenu();
         jMenuItemOptions = new javax.swing.JMenuItem();
         jMenuHelp = new javax.swing.JMenu();
+        jCheckBoxTooltip = new javax.swing.JCheckBoxMenuItem();
         jMenuItemHelp = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
 
@@ -298,7 +335,7 @@ public class Main extends javax.swing.JFrame {
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogAboutLayout.createSequentialGroup()
                         .addContainerGap()
                         .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jDialogAboutLayout.createSequentialGroup()
                                 .add(jLabelAboutCopyright)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 144, Short.MAX_VALUE)
@@ -404,6 +441,23 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane3.setViewportView(jTextPaneCommentField);
+
+        jButtonResetCommentField.setText(bundle.getString("ResetCommentField")); // NOI18N
+        jButtonResetCommentField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonResetCommentFieldActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxComment.setSelected(prefs.useComment);
+        jCheckBoxComment.setText(bundle.getString("UseCommentField")); // NOI18N
+        jCheckBoxComment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxCommentActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jFrameOptionLayout = new org.jdesktop.layout.GroupLayout(jFrameOption.getContentPane());
         jFrameOption.getContentPane().setLayout(jFrameOptionLayout);
         jFrameOptionLayout.setHorizontalGroup(
@@ -411,9 +465,10 @@ public class Main extends javax.swing.JFrame {
             .add(jFrameOptionLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                         .add(jLabelOptionLanguage)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 45, Short.MAX_VALUE)
                         .add(jRadioButtonOptionEnglish)
                         .add(11, 11, 11)
                         .add(jRadioButtonOptionGerman))
@@ -423,12 +478,14 @@ public class Main extends javax.swing.JFrame {
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                                 .add(jButtonResetLogo)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 114, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 111, Short.MAX_VALUE)
                                 .add(jButtonOptionOK))
-                            .add(jFrameOptionLayout.createSequentialGroup()
-                                .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
+                                .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jButtonOptionSearchLogo)))))
+                                .add(jButtonOptionSearchLogo))))
+                    .add(jButtonResetCommentField)
+                    .add(jCheckBoxComment))
                 .addContainerGap())
         );
         jFrameOptionLayout.setVerticalGroup(
@@ -445,15 +502,17 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabelOptionLogo)
                     .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButtonOptionSearchLogo))
-                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jFrameOptionLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 48, Short.MAX_VALUE)
-                        .add(jButtonOptionOK)
-                        .addContainerGap())
-                    .add(jFrameOptionLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButtonResetLogo)
-                        .addContainerGap())))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonResetLogo)
+                .add(18, 18, 18)
+                .add(jCheckBoxComment)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonResetCommentField)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 6, Short.MAX_VALUE)
+                .add(jButtonOptionOK)
+                .addContainerGap())
         );
 
         jFrameSelectKeystore.setTitle("Select Keystore Type");
@@ -491,7 +550,7 @@ public class Main extends javax.swing.JFrame {
                     .add(jButtonSelectKeystoreKeystore))
                 .addContainerGap(132, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameSelectKeystoreLayout.createSequentialGroup()
-                .addContainerGap(290, Short.MAX_VALUE)
+                .addContainerGap(295, Short.MAX_VALUE)
                 .add(jButtonSelectKeystoreCancel)
                 .addContainerGap())
         );
@@ -543,7 +602,7 @@ public class Main extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameChooseCertLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jFrameChooseCertLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jScrollPaneCerts, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                    .add(jScrollPaneCerts, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
                     .add(jFrameChooseCertLayout.createSequentialGroup()
                         .add(jButtonCertInfo)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 391, Short.MAX_VALUE)
@@ -623,6 +682,50 @@ public class Main extends javax.swing.JFrame {
                 .add(jLabelJCEAlert, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 41, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonJCEAlertOK)
+                .addContainerGap())
+        );
+
+        jDialogErrorReport.setTitle(bundle.getString("ErrorReportTitle")); // NOI18N
+        jDialogErrorReport.setAlwaysOnTop(true);
+
+        jLabelErrorReportHeading.setText(bundle.getString("ErrorReportLabel")); // NOI18N
+
+        jTextFieldErrorReport.setEditable(false);
+        jTextFieldErrorReport.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextFieldErrorReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldErrorReportActionPerformed(evt);
+            }
+        });
+
+        jButtonErrorReportOK.setText(bundle.getString("OK")); // NOI18N
+        jButtonErrorReportOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonErrorReportOKActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jDialogErrorReportLayout = new org.jdesktop.layout.GroupLayout(jDialogErrorReport.getContentPane());
+        jDialogErrorReport.getContentPane().setLayout(jDialogErrorReportLayout);
+        jDialogErrorReportLayout.setHorizontalGroup(
+            jDialogErrorReportLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDialogErrorReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jDialogErrorReportLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jTextFieldErrorReport, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                    .add(jLabelErrorReportHeading)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonErrorReportOK))
+                .addContainerGap())
+        );
+        jDialogErrorReportLayout.setVerticalGroup(
+            jDialogErrorReportLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jDialogErrorReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jLabelErrorReportHeading)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jTextFieldErrorReport, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jButtonErrorReportOK)
                 .addContainerGap())
         );
 
@@ -724,7 +827,7 @@ public class Main extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel8.setText("8.");
 
-        jLabel9.setText(bundle.getString("Restart")); // NOI18N
+        jLabelRestart.setText(bundle.getString("Restart")); // NOI18N
 
         jLabelFinishNext.setFont(new java.awt.Font("Lucida Grande", 1, 13));
         jLabelFinishNext.setText(bundle.getString("Goto_1")); // NOI18N
@@ -747,6 +850,21 @@ public class Main extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 3, 13));
         jLabel10.setText("9.");
+
+        jCheckBoxFinalize.setSelected(true);
+        jCheckBoxFinalize.setText(bundle.getString("FinalizeDocument")); // NOI18N
+        jCheckBoxFinalize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxFinalizeActionPerformed(evt);
+            }
+        });
+
+        jButtonErrorReport.setText(bundle.getString("ErrorReportButton")); // NOI18N
+        jButtonErrorReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonErrorReportActionPerformed(evt);
+            }
+        });
 
         jMenuFile.setText(bundle.getString("MenuFile")); // NOI18N
         jMenuFile.addActionListener(new java.awt.event.ActionListener() {
@@ -811,6 +929,14 @@ public class Main extends javax.swing.JFrame {
 
         jMenuHelp.setText(bundle.getString("MenuHelp")); // NOI18N
 
+        jCheckBoxTooltip.setText(bundle.getString("ToolTips")); // NOI18N
+        jCheckBoxTooltip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTooltipActionPerformed(evt);
+            }
+        });
+        jMenuHelp.add(jCheckBoxTooltip);
+
         jMenuItemHelp.setText(bundle.getString("MenuHelpHelp")); // NOI18N
         jMenuItemHelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -838,10 +964,10 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(jLabelTitle)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 252, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 261, Short.MAX_VALUE)
                         .add(jButtonAbout))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -873,24 +999,19 @@ public class Main extends javax.swing.JFrame {
                             .add(layout.createSequentialGroup()
                                 .add(jLabel10)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jLabel9))
+                                .add(jLabelRestart))
                             .add(layout.createSequentialGroup()
                                 .add(jLabel8)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jLabelResult)))
                         .add(10, 10, 10)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(jLabelFinishNext)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 241, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 250, Short.MAX_VALUE)
                                 .add(jButtonCancelMain))
-                            .add(jButtonPasswordOK)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(layout.createSequentialGroup()
-                                        .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                                     .add(layout.createSequentialGroup()
                                         .add(jCheckBoxSignatureBlock)
                                         .add(128, 128, 128))
@@ -898,15 +1019,26 @@ public class Main extends javax.swing.JFrame {
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                             .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
                                             .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(layout.createSequentialGroup()
+                                                .add(jCheckBoxFinalize)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 86, Short.MAX_VALUE)
+                                                .add(jButtonPasswordOK)))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
-                                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOption, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOption, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .add(jButtonErrorReport))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -921,9 +1053,9 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelInput)
-                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel1)
-                    .add(jButtonInputfile))
+                    .add(jButtonInputfile)
+                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOutput)
@@ -948,29 +1080,32 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabel5))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButtonPasswordOK)
                     .add(jLabelSign)
-                    .add(jLabel6))
+                    .add(jLabel6)
+                    .add(jButtonPasswordOK)
+                    .add(jCheckBoxFinalize))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jLabel7)
                     .add(jLabelWorking)
                     .add(jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel8)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jLabelResult)
-                        .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabelResult)
+                    .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButtonErrorReport)
+                    .add(jLabel8))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButtonCancelMain)
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabelFinishNext)
                         .add(jLabel10)
-                        .add(jLabel9)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(jLabelRestart)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
+
+        jButtonErrorReport.setVisible(false);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1077,20 +1212,29 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonOptionOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionOKActionPerformed
         prefs.set("SignatureLogo",jTextFieldOptionLogo.getText());
+        prefs.set("SignComment", jTextPaneCommentField.getText());
         // System.out.println("SigLogo: " + prefs.sigLogo );
         jFrameOption.setVisible(false);
     }//GEN-LAST:event_jButtonOptionOKActionPerformed
 
     private void jButtonOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionActionPerformed
         
-        jFrameOption.setSize(450,180);
+        jFrameOption.setSize(450,400);
         String lang = prefs.signLanguage;
+        java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
+                                            "at/gv/wien/PortableSigner/Signatureblock");
         // System.out.println(lang);
         if (lang.equals("german")) {
             jRadioButtonOptionGerman.setSelected(true);
         } 
         if (lang.equals("english")) {
             jRadioButtonOptionEnglish.setSelected(true);
+        }
+//        jCheckBoxComment.setSelected(prefs.useComment);
+//        jTextPaneCommentField.setText(prefs.signComment);
+        jTextPaneCommentField.setEditable(prefs.useComment);
+        if (prefs.signComment.equals("")) {
+            jTextPaneCommentField.setText(block.getString(lang + "-comment"));
         }
         jFrameOption.setVisible(true);
     }//GEN-LAST:event_jButtonOptionActionPerformed
@@ -1116,7 +1260,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private void jButtonPasswordOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPasswordOKActionPerformed
         // DoSign Sign;
         
-        
+        jButtonErrorReport.setVisible(false);
         jProgressBar1.setIndeterminate(true);
         jLabelFinished.setText("");
         jLabelFinished.setForeground(new java.awt.Color(0,0,0));
@@ -1129,7 +1273,13 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         if (inputPDFFile == null || outputPDFFile == null || signatureP12File == null) {
             return;
         }
-        
+        final String sigComment;
+        if (prefs.useComment) {
+            sigComment = prefs.signComment;
+        } else {
+            sigComment = "";
+        }
+        // System.err.println("Comment:" + prefs.useComment + ">" + sigComment + "<");
         prefs.set("LastInputFile", inputPDFFile);
         // prefs.set("LastOutputFile", outputPDFFile);
         prefs.set("LastP12File", signatureP12File);
@@ -1145,13 +1295,20 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         password,
                         prefs.signText,
                         prefs.signLanguage,
-                        prefs.sigLogo);
+                        prefs.sigLogo,
+                        finalize,
+                        sigComment);
                 jProgressBar1.setIndeterminate(false);
                 jProgressBar1.setValue(100);
                 //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
                 jLabelFinished.setForeground(resultcolor);
                 jLabelFinished.setToolTipText(exceptionstring);
                 jLabelFinished.setText(result);
+                jDialogErrorReport.setSize(500, 200);
+                if (resultcolor.equals(colorerror)) {
+                    jButtonErrorReport.setVisible(true);
+                }
+                jTextFieldErrorReport.setText(exceptionstring);
             }
         };
         
@@ -1225,6 +1382,46 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private void jButtonJCEAlertOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJCEAlertOKActionPerformed
         System.exit(254);
 }//GEN-LAST:event_jButtonJCEAlertOKActionPerformed
+
+    private void jCheckBoxCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxCommentActionPerformed
+       prefs.set("useComment", !prefs.useComment);
+       jTextPaneCommentField.setEditable(prefs.useComment);
+       jTextPaneCommentField.setEnabled(prefs.useComment);
+       // System.err.println("Comment = " + prefs.useComment);
+}//GEN-LAST:event_jCheckBoxCommentActionPerformed
+
+    private void jCheckBoxFinalizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFinalizeActionPerformed
+        finalize = !finalize;
+        // System.err.println("Finalize: " + finalize);
+    }//GEN-LAST:event_jCheckBoxFinalizeActionPerformed
+
+    private void jButtonResetCommentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetCommentFieldActionPerformed
+        String originalComment = 
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/Signatureblock")
+                .getString(prefs.signLanguage + "-comment");
+        prefs.set("SignComment", originalComment);
+        jTextPaneCommentField.setText(originalComment);        
+    }//GEN-LAST:event_jButtonResetCommentFieldActionPerformed
+
+    private void jTextFieldErrorReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldErrorReportActionPerformed
+        // TODO add your handling code here:
+}//GEN-LAST:event_jTextFieldErrorReportActionPerformed
+
+    private void jButtonErrorReportOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonErrorReportOKActionPerformed
+        jDialogErrorReport.setVisible(false);
+    }//GEN-LAST:event_jButtonErrorReportOKActionPerformed
+
+    private void jButtonErrorReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonErrorReportActionPerformed
+        jDialogErrorReport.setVisible(true);
+    }//GEN-LAST:event_jButtonErrorReportActionPerformed
+
+    private void jCheckBoxTooltipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTooltipActionPerformed
+        // TODO add your handling code here:
+        prefs.set("ToolTip", !prefs.toolTip);
+        prefs.get();
+        setTooltips(prefs.toolTip);
+
+    }//GEN-LAST:event_jCheckBoxTooltipActionPerformed
     
     /**
      * @param args the command line arguments
@@ -1244,7 +1441,15 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("JCEmissing");
                     System.exit(254);
                 }                    
-                new DoSignPDF(mycommand.input, mycommand.output, mycommand.signature, mycommand.password, !mycommand.sigblock.equals(""), mycommand.sigblock, mycommand.sigimage);
+                new DoSignPDF(mycommand.input,
+                        mycommand.output, 
+                        mycommand.signature, 
+                        mycommand.password, 
+                        !mycommand.sigblock.equals(""), 
+                        mycommand.sigblock, 
+                        mycommand.sigimage, 
+                        mycommand.finalize, 
+                        mycommand.comment);
                 System.exit(0);
             } else {
                 java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1270,6 +1475,8 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JButton jButtonCertCancel;
     private javax.swing.JButton jButtonCertInfo;
     private javax.swing.JButton jButtonCertOK;
+    private javax.swing.JButton jButtonErrorReport;
+    private javax.swing.JButton jButtonErrorReportOK;
     private javax.swing.JButton jButtonInputfile;
     private javax.swing.JButton jButtonJCEAlertOK;
     private javax.swing.JButton jButtonLicense;
@@ -1279,14 +1486,19 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JButton jButtonOptionSearchLogo;
     private javax.swing.JButton jButtonOutputfile;
     private javax.swing.JButton jButtonPasswordOK;
+    private javax.swing.JButton jButtonResetCommentField;
     private javax.swing.JButton jButtonResetLogo;
     private javax.swing.JButton jButtonSelectKeystoreCancel;
     private javax.swing.JButton jButtonSelectKeystoreFile;
     private javax.swing.JButton jButtonSelectKeystoreKeystore;
     private javax.swing.JButton jButtonSignaturefile;
+    private javax.swing.JCheckBox jCheckBoxComment;
+    private javax.swing.JCheckBox jCheckBoxFinalize;
     private javax.swing.JCheckBox jCheckBoxSignatureBlock;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxTooltip;
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
+    private javax.swing.JDialog jDialogErrorReport;
     private javax.swing.JDialog jDialogJCEAlert;
     private javax.swing.JDialog jDialogLicense;
     private javax.swing.JEditorPane jEditorPaneHelp;
@@ -1303,10 +1515,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAboutCopyright;
     private javax.swing.JLabel jLabelAboutText;
     private javax.swing.JLabel jLabelCancelQuestion;
+    private javax.swing.JLabel jLabelErrorReportHeading;
     private javax.swing.JLabel jLabelFinishNext;
     private javax.swing.JLabel jLabelFinished;
     private javax.swing.JLabel jLabelInput;
@@ -1315,6 +1527,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JLabel jLabelOptionLogo;
     private javax.swing.JLabel jLabelOutput;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelRestart;
     private javax.swing.JLabel jLabelResult;
     private javax.swing.JLabel jLabelSign;
     private javax.swing.JLabel jLabelSignature;
@@ -1340,15 +1553,18 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JRadioButton jRadioButtonOptionGerman;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
     private javax.swing.JScrollPane jScrollPaneCerts;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaAboutVersion;
     private javax.swing.JTextArea jTextAreaLicenseText;
+    private javax.swing.JTextField jTextFieldErrorReport;
     private javax.swing.JTextField jTextFieldInputfile;
     private javax.swing.JTextField jTextFieldOptionLogo;
     private javax.swing.JTextField jTextFieldOutputfile;
     private javax.swing.JTextField jTextFieldSignaturefile;
+    private javax.swing.JTextPane jTextPaneCommentField;
     // End of variables declaration//GEN-END:variables
 
     
@@ -1471,6 +1687,60 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     
     
     
+    private static String getTooltip(String value) {
+        return java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/ToolTips").getString(value);
+    }
+    
+    private void setTooltips(boolean visible) {
+        if (visible) {
+            jLabelInput.setToolTipText(getTooltip("Inputfile"));
+            jLabelInput.setCursor(questionCursor);
+            jLabelOutput.setToolTipText(getTooltip("Outputfile"));
+            jLabelOutput.setCursor(questionCursor);
+            jLabelSignature.setToolTipText(getTooltip("Signaturefile"));
+            jLabelSignature.setCursor(questionCursor);
+            jCheckBoxSignatureBlock.setToolTipText(getTooltip("Signatureblock"));
+            jCheckBoxSignatureBlock.setCursor(questionCursor);
+            jLabelPassword.setToolTipText(getTooltip("Password"));
+            jLabelPassword.setCursor(questionCursor);
+            jLabelResult.setToolTipText(getTooltip("Result"));
+            jLabelResult.setCursor(questionCursor);
+            jLabelRestart.setToolTipText(getTooltip("Again"));
+            jLabelRestart.setCursor(questionCursor);
+            jCheckBoxFinalize.setToolTipText(getTooltip("Finalize"));
+            jCheckBoxFinalize.setCursor(questionCursor);
+            jLabelOptionLanguage.setToolTipText(getTooltip("SignatureLanguage"));
+            jLabelOptionLanguage.setCursor(questionCursor);
+            jLabelOptionLogo.setToolTipText(getTooltip("SignatureLogo"));
+            jLabelOptionLogo.setCursor(questionCursor);
+            jCheckBoxComment.setToolTipText(getTooltip("CommentField"));
+            jCheckBoxComment.setCursor(questionCursor);
+        } else {
+            jLabelInput.setToolTipText(null);
+            jLabelInput.setCursor(defaultCursor);
+            jLabelOutput.setToolTipText(null);
+            jLabelOutput.setCursor(defaultCursor);
+            jLabelSignature.setToolTipText(null);
+            jLabelSignature.setCursor(defaultCursor);
+            jCheckBoxSignatureBlock.setToolTipText(null);
+            jCheckBoxSignatureBlock.setCursor(defaultCursor);
+            jLabelPassword.setToolTipText(null);
+            jLabelPassword.setCursor(defaultCursor);
+            jLabelResult.setToolTipText(null);
+            jLabelResult.setCursor(defaultCursor);
+            jLabelRestart.setToolTipText(null);
+            jLabelRestart.setCursor(defaultCursor);
+            jCheckBoxFinalize.setToolTipText(null);
+            jCheckBoxFinalize.setCursor(defaultCursor);
+            jLabelOptionLanguage.setToolTipText(null);
+            jLabelOptionLanguage.setCursor(defaultCursor);
+            jLabelOptionLogo.setToolTipText(null);
+            jLabelOptionLogo.setCursor(defaultCursor);
+            jCheckBoxComment.setToolTipText(null);
+            jCheckBoxComment.setCursor(defaultCursor);
+        }
+    }
+    
     
     public static void setResult(String resultText, Boolean errorState, String errorString) {
         if (errorState) {
@@ -1488,3 +1758,4 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         }
     }
 }
+
