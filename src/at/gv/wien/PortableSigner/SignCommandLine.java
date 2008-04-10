@@ -18,7 +18,7 @@ import org.apache.commons.cli.*;
  */
 public class SignCommandLine {
     public String input = "", output = "", signature = "", password = "",
-            sigblock = "", sigimage = "", comment = "";
+            sigblock = "", sigimage = "", comment = "", reason = "", location = "";
     public Boolean nogui = false, finalize = true;
     private Boolean help = false;
     
@@ -46,6 +46,10 @@ public class SignCommandLine {
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigImage"));
        options.addOption("c", true, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigComment"));
+       options.addOption("r", true, 
+               java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigReason"));
+       options.addOption("l", true, 
+               java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigLocation"));
        CommandLineParser parser = new PosixParser();
        HelpFormatter usage = new HelpFormatter();
        try {
@@ -60,6 +64,8 @@ public class SignCommandLine {
             sigblock = cmd.getOptionValue("b");
             sigimage = cmd.getOptionValue("i");
             comment = cmd.getOptionValue("c");
+            reason = cmd.getOptionValue("r");
+            location = cmd.getOptionValue("l");
             if (sigblock == null) { sigblock = ""; comment = ""; }
             if (sigimage == null) { sigimage = ""; }
             
@@ -82,7 +88,6 @@ public class SignCommandLine {
            }
        }
        
-       // System.out.println("Sigblock:" + sigblock + ":");
        if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals(""))) {
            System.err.println(java.util.ResourceBundle
                    .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));

@@ -104,6 +104,16 @@ public class Main extends javax.swing.JFrame {
         } else {
             jTextFieldOptionLogo.setText(mycommand.sigimage);
         }
+        if (mycommand.location ==  null) {
+            jTextFieldLocation.setText(prefs.signLocation);
+        } else {
+            jTextFieldLocation.setText(mycommand.location);
+        }
+        if (mycommand.reason == null) {
+            jTextFieldReason.setText(prefs.signReason);
+        } else {
+            jTextFieldReason.setText(mycommand.reason);
+        }
         if (mycommand.comment.equals("")) {
             jTextPaneCommentField.setText(prefs.signComment);
         } else {
@@ -128,6 +138,8 @@ public class Main extends javax.swing.JFrame {
         if (!workingJCE) {
             jDialogJCEAlert.setSize(650, 170);
             jDialogJCEAlert.setVisible(true);
+            System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                    .getString("JCEMissing"));
             System.exit(254);
         }
 
@@ -178,6 +190,10 @@ public class Main extends javax.swing.JFrame {
         jTextPaneCommentField = new javax.swing.JTextPane();
         jButtonResetCommentField = new javax.swing.JButton();
         jCheckBoxComment = new javax.swing.JCheckBox();
+        jLabelReason = new javax.swing.JLabel();
+        jTextFieldReason = new javax.swing.JTextField();
+        jLabelLocation = new javax.swing.JLabel();
+        jTextFieldLocation = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jFrameSelectKeystore = new javax.swing.JFrame();
         jButtonSelectKeystoreFile = new javax.swing.JButton();
@@ -235,6 +251,8 @@ public class Main extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jCheckBoxFinalize = new javax.swing.JCheckBox();
         jButtonErrorReport = new javax.swing.JButton();
+        jButtonViewOutput = new javax.swing.JButton();
+        jButtonViewSource = new javax.swing.JButton();
         jMenuBarMain = new javax.swing.JMenuBar();
         jMenuFile = new javax.swing.JMenu();
         jMenuItemInputfile = new javax.swing.JMenuItem();
@@ -458,6 +476,24 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabelReason.setText(bundle.getString("ReasonForSignature")); // NOI18N
+
+        jTextFieldReason.setText(prefs.signReason);
+        jTextFieldReason.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldReasonActionPerformed(evt);
+            }
+        });
+
+        jLabelLocation.setText(bundle.getString("Location")); // NOI18N
+
+        jTextFieldLocation.setText(prefs.signLocation);
+        jTextFieldLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLocationActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jFrameOptionLayout = new org.jdesktop.layout.GroupLayout(jFrameOption.getContentPane());
         jFrameOption.getContentPane().setLayout(jFrameOptionLayout);
         jFrameOptionLayout.setHorizontalGroup(
@@ -465,6 +501,8 @@ public class Main extends javax.swing.JFrame {
             .add(jFrameOptionLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jTextFieldReason, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                         .add(jLabelOptionLanguage)
@@ -485,7 +523,9 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonOptionSearchLogo))))
                     .add(jButtonResetCommentField)
-                    .add(jCheckBoxComment))
+                    .add(jCheckBoxComment)
+                    .add(jLabelReason)
+                    .add(jLabelLocation))
                 .addContainerGap())
         );
         jFrameOptionLayout.setVerticalGroup(
@@ -510,7 +550,15 @@ public class Main extends javax.swing.JFrame {
                 .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonResetCommentField)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 6, Short.MAX_VALUE)
+                .add(18, 18, 18)
+                .add(jLabelReason)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jTextFieldReason, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabelLocation)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 17, Short.MAX_VALUE)
                 .add(jButtonOptionOK)
                 .addContainerGap())
         );
@@ -866,6 +914,20 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jButtonViewOutput.setText("View");
+        jButtonViewOutput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewOutputActionPerformed(evt);
+            }
+        });
+
+        jButtonViewSource.setText("View");
+        jButtonViewSource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewSourceActionPerformed(evt);
+            }
+        });
+
         jMenuFile.setText(bundle.getString("MenuFile")); // NOI18N
         jMenuFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -964,10 +1026,10 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(jLabelTitle)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 261, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 351, Short.MAX_VALUE)
                         .add(jButtonAbout))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1008,7 +1070,7 @@ public class Main extends javax.swing.JFrame {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(jLabelFinishNext)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 250, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 340, Short.MAX_VALUE)
                                 .add(jButtonCancelMain))
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1017,27 +1079,32 @@ public class Main extends javax.swing.JFrame {
                                         .add(128, 128, 128))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                                             .add(layout.createSequentialGroup()
                                                 .add(jCheckBoxFinalize)
-                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 86, Short.MAX_VALUE)
+                                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 104, Short.MAX_VALUE)
                                                 .add(jButtonPasswordOK)))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                                            .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                            .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOption, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .add(9, 9, 9)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(layout.createSequentialGroup()
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOption, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                            .add(jButtonViewOutput)
+                                            .add(jButtonViewSource)))
                                     .add(jButtonErrorReport))))))
                 .addContainerGap())
         );
@@ -1055,13 +1122,15 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabelInput)
                     .add(jLabel1)
                     .add(jButtonInputfile)
-                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jTextFieldInputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jButtonViewSource))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOutput)
                     .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel2)
-                    .add(jButtonOutputfile))
+                    .add(jButtonOutputfile)
+                    .add(jButtonViewOutput))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelSignature)
@@ -1093,8 +1162,8 @@ public class Main extends javax.swing.JFrame {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelResult)
                     .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jButtonErrorReport)
-                    .add(jLabel8))
+                    .add(jLabel8)
+                    .add(jButtonErrorReport))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButtonCancelMain)
@@ -1112,13 +1181,13 @@ public class Main extends javax.swing.JFrame {
 
 private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
         try {
-            edu.stanford.ejalbert.BrowserLauncher launch = new edu.stanford.ejalbert.BrowserLauncher();
-            launch.openURLinBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("HomepageURL"));
-        } catch (edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException ex) {
-           System.err.println("Cannot start Browser");
-        } catch (edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException ex) {
-           System.err.println("Unsupported Operating System");
+            com.lowagie.tools.Executable HelpBrowser = new com.lowagie.tools.Executable();
+            HelpBrowser.launchBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                    .getString("HomepageURL"));
+        } catch (IOException ex) {
+            System.err.println("Unable to launch Browser for helppage");
         }
+
       
 }//GEN-LAST:event_jMenuItemHelpActionPerformed
 
@@ -1213,13 +1282,15 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private void jButtonOptionOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionOKActionPerformed
         prefs.set("SignatureLogo",jTextFieldOptionLogo.getText());
         prefs.set("SignComment", jTextPaneCommentField.getText());
+        prefs.set("SignReason", jTextFieldReason.getText());
+        prefs.set("SignLocation", jTextFieldLocation.getText());
         // System.out.println("SigLogo: " + prefs.sigLogo );
         jFrameOption.setVisible(false);
     }//GEN-LAST:event_jButtonOptionOKActionPerformed
 
     private void jButtonOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionActionPerformed
         
-        jFrameOption.setSize(450,400);
+        jFrameOption.setSize(450,500);
         String lang = prefs.signLanguage;
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
                                             "at/gv/wien/PortableSigner/Signatureblock");
@@ -1297,7 +1368,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         prefs.signLanguage,
                         prefs.sigLogo,
                         finalize,
-                        sigComment);
+                        sigComment,
+                        prefs.signReason,
+                        prefs.signLocation);
                 jProgressBar1.setIndeterminate(false);
                 jProgressBar1.setValue(100);
                 //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1422,6 +1495,39 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         setTooltips(prefs.toolTip);
 
     }//GEN-LAST:event_jCheckBoxTooltipActionPerformed
+
+    private void jTextFieldReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldReasonActionPerformed
+        prefs.set("SignReason", jTextFieldReason.getText());
+        prefs.get();
+        // System.err.println("Reason: " + prefs.signReason);
+}//GEN-LAST:event_jTextFieldReasonActionPerformed
+
+    private void jTextFieldLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldLocationActionPerformed
+        prefs.set("SignLocation", jTextFieldLocation.getText());
+        prefs.get();
+        // System.err.println("Location: " + prefs.signLocation);
+}//GEN-LAST:event_jTextFieldLocationActionPerformed
+
+    private void jButtonViewSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewSourceActionPerformed
+        try {
+            // TODO add your handling code here:
+            com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
+            ShowPDF.openDocument(jTextFieldInputfile.getText());
+            } catch (IOException ex) {
+            System.err.println("Unable to start PDF reader");
+        }
+
+    }//GEN-LAST:event_jButtonViewSourceActionPerformed
+
+    private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        try {
+            // TODO add your handling code here:
+            com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
+            ShowPDF.openDocument(jTextFieldOutputfile.getText());
+        } catch (IOException ex) {
+            System.err.println("Unable to start PDF reader");
+        }
+    }
     
     /**
      * @param args the command line arguments
@@ -1449,7 +1555,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         mycommand.sigblock, 
                         mycommand.sigimage, 
                         mycommand.finalize, 
-                        mycommand.comment);
+                        mycommand.comment,
+                        mycommand.reason,
+                        mycommand.location);
                 System.exit(0);
             } else {
                 java.awt.EventQueue.invokeLater(new Runnable() {
@@ -1492,6 +1600,8 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JButton jButtonSelectKeystoreFile;
     private javax.swing.JButton jButtonSelectKeystoreKeystore;
     private javax.swing.JButton jButtonSignaturefile;
+    private javax.swing.JButton jButtonViewOutput;
+    private javax.swing.JButton jButtonViewSource;
     private javax.swing.JCheckBox jCheckBoxComment;
     private javax.swing.JCheckBox jCheckBoxFinalize;
     private javax.swing.JCheckBox jCheckBoxSignatureBlock;
@@ -1523,10 +1633,12 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JLabel jLabelFinished;
     private javax.swing.JLabel jLabelInput;
     private javax.swing.JLabel jLabelJCEAlert;
+    private javax.swing.JLabel jLabelLocation;
     private javax.swing.JLabel jLabelOptionLanguage;
     private javax.swing.JLabel jLabelOptionLogo;
     private javax.swing.JLabel jLabelOutput;
     private javax.swing.JLabel jLabelPassword;
+    private javax.swing.JLabel jLabelReason;
     private javax.swing.JLabel jLabelRestart;
     private javax.swing.JLabel jLabelResult;
     private javax.swing.JLabel jLabelSign;
@@ -1561,8 +1673,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JTextArea jTextAreaLicenseText;
     private javax.swing.JTextField jTextFieldErrorReport;
     private javax.swing.JTextField jTextFieldInputfile;
+    private javax.swing.JTextField jTextFieldLocation;
     private javax.swing.JTextField jTextFieldOptionLogo;
     private javax.swing.JTextField jTextFieldOutputfile;
+    private javax.swing.JTextField jTextFieldReason;
     private javax.swing.JTextField jTextFieldSignaturefile;
     private javax.swing.JTextPane jTextPaneCommentField;
     // End of variables declaration//GEN-END:variables
@@ -1666,7 +1780,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     /** Filter which accepts only P12 files */
     private static class P12Filter extends javax.swing.filechooser.FileFilter {
         public boolean accept(java.io.File f) {
-            return f.isDirectory() || f.getName().endsWith(".p12");
+            return f.isDirectory() || f.getName().endsWith(".p12") || f.getName().endsWith(".pfx");
         }
         
         public String getDescription() {
@@ -1715,6 +1829,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
             jLabelOptionLogo.setCursor(questionCursor);
             jCheckBoxComment.setToolTipText(getTooltip("CommentField"));
             jCheckBoxComment.setCursor(questionCursor);
+            jLabelReason.setToolTipText(getTooltip("SignatureReason"));
+            jLabelReason.setCursor(questionCursor);
+            jLabelLocation.setToolTipText(getTooltip("SignatureLocation"));
+            jLabelLocation.setCursor(questionCursor);
         } else {
             jLabelInput.setToolTipText(null);
             jLabelInput.setCursor(defaultCursor);
@@ -1738,6 +1856,11 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
             jLabelOptionLogo.setCursor(defaultCursor);
             jCheckBoxComment.setToolTipText(null);
             jCheckBoxComment.setCursor(defaultCursor);
+            jLabelReason.setToolTipText(null);
+            jLabelReason.setCursor(defaultCursor);
+            jLabelLocation.setToolTipText(null);
+            jLabelLocation.setCursor(defaultCursor);
+ 
         }
     }
     

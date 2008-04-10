@@ -23,7 +23,9 @@ public class Preferences {
             lastP12File = "",
             signLanguage = "",
             sigLogo = "",
-            signComment = "";
+            signComment = "",
+            signLocation = "",
+            signReason = "";
     public Boolean signText = false, useComment = true, toolTip = true;
     private java.util.prefs.Preferences prefs = java.util.prefs.Preferences.userNodeForPackage (Main.class);
                 
@@ -43,6 +45,8 @@ public class Preferences {
         signComment = prefs.get("SignComment", "");
         useComment = prefs.getBoolean("useComment", true);
         toolTip = prefs.getBoolean("ToolTip", true);
+        signLocation = prefs.get("SignLocation", "");
+        signReason = prefs.get("SignReason", "");
     }
     
     public void set(String property, String value) {

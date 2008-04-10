@@ -251,9 +251,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jTextFieldLocation" alignment="0" pref="396" max="32767" attributes="0"/>
+                      <Component id="jTextFieldReason" alignment="1" pref="396" max="32767" attributes="0"/>
                       <Component id="jScrollPane3" alignment="0" pref="396" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabelOptionLanguage" min="-2" max="-2" attributes="0"/>
@@ -280,6 +282,8 @@
                       </Group>
                       <Component id="jButtonResetCommentField" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jCheckBoxComment" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelReason" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelLocation" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -310,7 +314,15 @@
                   <Component id="jScrollPane3" min="-2" pref="134" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonResetCommentField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="6" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="jLabelReason" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jTextFieldReason" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabelLocation" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jTextFieldLocation" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Component id="jButtonOptionOK" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -428,6 +440,40 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxCommentActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelReason">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="ReasonForSignature" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldReason">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="prefs.signReason" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldReasonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelLocation">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="at/gv/wien/PortableSigner/i18n.properties" key="Location" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldLocation">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="prefs.signLocation" type="code"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldLocationActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -908,10 +954,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator1" alignment="0" pref="537" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="0" pref="627" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="261" max="32767" attributes="0"/>
+                      <EmptySpace pref="351" max="32767" attributes="0"/>
                       <Component id="jButtonAbout" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -962,7 +1008,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabelFinishNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="250" max="32767" attributes="0"/>
+                              <EmptySpace pref="340" max="32767" attributes="0"/>
                               <Component id="jButtonCancelMain" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -973,13 +1019,13 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPasswordFieldPassword" alignment="0" pref="300" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="300" max="32767" attributes="0"/>
-                                          <Component id="jProgressBar1" alignment="0" pref="300" max="32767" attributes="0"/>
-                                          <Component id="jLabelFinished" alignment="0" pref="300" max="32767" attributes="0"/>
+                                          <Component id="jPasswordFieldPassword" alignment="0" pref="318" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="318" max="32767" attributes="0"/>
+                                          <Component id="jProgressBar1" alignment="0" pref="318" max="32767" attributes="0"/>
+                                          <Component id="jLabelFinished" alignment="0" pref="318" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="jCheckBoxFinalize" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="86" max="32767" attributes="0"/>
+                                              <EmptySpace pref="104" max="32767" attributes="0"/>
                                               <Component id="jButtonPasswordOK" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -987,21 +1033,28 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jTextFieldInputfile" alignment="0" pref="300" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldOutputfile" alignment="1" pref="300" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldInputfile" alignment="0" pref="318" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldOutputfile" alignment="1" pref="318" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButtonInputfile" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="jButtonOutputfile" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="jButtonSignaturefile" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="jButtonOption" alignment="1" max="32767" attributes="1"/>
+                              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jButtonInputfile" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="jButtonOutputfile" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="jButtonSignaturefile" alignment="1" max="32767" attributes="1"/>
+                                          <Component id="jButtonOption" alignment="1" max="32767" attributes="1"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jButtonViewOutput" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jButtonViewSource" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <Component id="jButtonErrorReport" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonErrorReport" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -1027,6 +1080,7 @@
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonInputfile" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldInputfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonViewSource" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -1034,6 +1088,7 @@
                   <Component id="jTextFieldOutputfile" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonOutputfile" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonViewOutput" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -1071,8 +1126,8 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelResult" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabelFinished" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
-                  <Component id="jButtonErrorReport" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonErrorReport" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -1371,6 +1426,22 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButtonErrorReport.setVisible(false);"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonViewOutput">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonViewOutputActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonViewSource">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonViewSourceActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
