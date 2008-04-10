@@ -31,7 +31,7 @@ public class Main extends javax.swing.JFrame {
     String password = "";
     private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
     private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
-    private static java.awt.Color helpcolor = new java.awt.Color(0, 0, 240);
+    private static java.awt.Color gotitcolor = new java.awt.Color(0, 0, 240);
     private static boolean workingJCE = true, finalize = true;
     Cursor questionCursor = new Cursor(Cursor.HAND_CURSOR);
     Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
@@ -914,14 +914,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jButtonViewOutput.setText("View");
+        jButtonViewOutput.setText(bundle.getString("ViewButton")); // NOI18N
         jButtonViewOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonViewOutputActionPerformed(evt);
             }
         });
 
-        jButtonViewSource.setText("View");
+        jButtonViewSource.setText(bundle.getString("ViewButton")); // NOI18N
         jButtonViewSource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonViewSourceActionPerformed(evt);
@@ -1093,9 +1093,9 @@ public class Main extends javax.swing.JFrame {
                                             .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
                                             .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
-                                .add(9, 9, 9)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(layout.createSequentialGroup()
+                                        .add(9, 9, 9)
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jButtonOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1105,7 +1105,10 @@ public class Main extends javax.swing.JFrame {
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                             .add(jButtonViewOutput)
                                             .add(jButtonViewSource)))
-                                    .add(jButtonErrorReport))))))
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .add(jButtonErrorReport)
+                                        .add(34, 34, 34)))))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1142,36 +1145,41 @@ public class Main extends javax.swing.JFrame {
                     .add(jLabel4)
                     .add(jCheckBoxSignatureBlock)
                     .add(jButtonOption))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabelPassword)
-                    .add(jLabel5))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabelSign)
-                    .add(jLabel6)
-                    .add(jButtonPasswordOK)
-                    .add(jCheckBoxFinalize))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel7)
-                    .add(jLabelWorking)
-                    .add(jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabelResult)
-                    .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel8)
-                    .add(jButtonErrorReport))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabelPassword)
+                            .add(jLabel5))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jLabelSign)
+                            .add(jLabel6)
+                            .add(jButtonPasswordOK)
+                            .add(jCheckBoxFinalize))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel7)
+                            .add(jLabelWorking)
+                            .add(jProgressBar1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(jLabelResult)
+                            .add(jLabelFinished, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jLabel8))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(jButtonErrorReport)
+                        .add(23, 23, 23)))
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jButtonCancelMain)
                     .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(jLabelFinishNext)
                         .add(jLabel10)
                         .add(jLabelRestart)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jButtonErrorReport.setVisible(false);
@@ -1379,8 +1387,14 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                 jLabelFinished.setText(result);
                 jDialogErrorReport.setSize(500, 200);
                 if (resultcolor.equals(colorerror)) {
-                    jButtonErrorReport.setVisible(true);
+                    jButtonErrorReport.setText(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                            .getString("ErrorReportButton"));
+                } else {
+                    jButtonErrorReport.setText(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                            .getString("ViewButton"));
+                    jButtonErrorReport.setForeground(gotitcolor);
                 }
+                jButtonErrorReport.setVisible(true);
                 jTextFieldErrorReport.setText(exceptionstring);
             }
         };
@@ -1485,7 +1499,16 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     }//GEN-LAST:event_jButtonErrorReportOKActionPerformed
 
     private void jButtonErrorReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonErrorReportActionPerformed
-        jDialogErrorReport.setVisible(true);
+        if (resultcolor.equals(colorerror)) {
+            jDialogErrorReport.setVisible(true);
+        } else {
+            try {
+                com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
+                ShowPDF.openDocument(jTextFieldOutputfile.getText());
+            } catch (IOException ex) {
+                System.err.println("Unable to start PDF reader");
+            }
+        }
     }//GEN-LAST:event_jButtonErrorReportActionPerformed
 
     private void jCheckBoxTooltipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTooltipActionPerformed
@@ -1510,7 +1533,6 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonViewSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewSourceActionPerformed
         try {
-            // TODO add your handling code here:
             com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
             ShowPDF.openDocument(jTextFieldInputfile.getText());
             } catch (IOException ex) {
@@ -1521,7 +1543,6 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         try {
-            // TODO add your handling code here:
             com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
             ShowPDF.openDocument(jTextFieldOutputfile.getText());
         } catch (IOException ex) {
