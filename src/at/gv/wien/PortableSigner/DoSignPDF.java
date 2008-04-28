@@ -23,8 +23,14 @@ import com.lowagie.text.pdf.PdfSignatureAppearance;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPKCS7;
 import com.lowagie.text.pdf.PdfPTable;
+import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.HashMap;
 
 /**
@@ -115,6 +121,8 @@ public class DoSignPDF {
                     cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
 
                     // Pagetable = Greeting, signatureblock, comment
+                    // sigpagetable = outer table
+                    //      consist: greetingcell, signatureblock , commentcell
                     PdfPTable sigpagetable = new PdfPTable(2);
                     PdfPTable sigblocktable = new PdfPTable(2);
                     PdfPCell greetingcell =
@@ -202,6 +210,51 @@ public class DoSignPDF {
                             topy - 20 - 20,
                             30 + sigpagetable.getTotalWidth(),
                             topy - 20);
+//                    //////
+//                    AcroFields af = reader.getAcroFields();
+//                    ArrayList names = af.getSignatureNames();
+//                    for (int k = 0; k < names.size(); ++k) {
+//                        String name = (String) names.get(k);
+//                        System.out.println("Signature name: " + name);
+//                        System.out.println("\tSignature covers whole document: " + af.signatureCoversWholeDocument(name));
+//                        System.out.println("\tDocument revision: " + af.getRevision(name) + " of " + af.getTotalRevisions());
+//                        PdfPKCS7 pk = af.verifySignature(name);
+//                        X509Certificate tempsigner = pk.getSigningCertificate();
+//                        Calendar cal = pk.getSignDate();
+//                        Certificate pkc[] = pk.getCertificates();
+//                        java.util.ResourceBundle tempoid =
+//                                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SpecialOID");
+//                        String tmpEgovOID = "";
+//
+//                        for (Enumeration<String> o = tempoid.getKeys(); o.hasMoreElements();) {
+//                            String element = o.nextElement();
+//                            // System.out.println(element + ":" + oid.getString(element));
+//                            if (tempsigner.getNonCriticalExtensionOIDs().contains(element)) {
+//                                if (!tmpEgovOID.equals("")) {
+//                                    tmpEgovOID += ", ";
+//                                }
+//                                tmpEgovOID += tempoid.getString(element) + " (OID=" + element + ")";
+//                            }
+//                        }
+//                        //System.out.println("\tSigniert von: " + PdfPKCS7.getSubjectFields(pk.getSigningCertificate()));
+//                        System.out.println("\tSigniert von: " + tempsigner.getSubjectX500Principal().toString());
+//                        System.out.println("\tDatum: " + cal.getTime().toString());
+//                        System.out.println("\tAusgestellt von: " + tempsigner.getIssuerX500Principal().toString());
+//                        System.out.println("\tSeriennummer: " + tempsigner.getSerialNumber());
+//                        if (!tmpEgovOID.equals("")) {
+//                            System.out.println("\tVerwaltungseigenschaft: " + tmpEgovOID);
+//                        }
+//                        System.out.println("\n");
+//                        System.out.println("\tDocument modified: " + !pk.verify());
+////                Object fails[] = PdfPKCS7.verifyCertificates(pkc, kall, null, cal);
+////                if (fails == null) {
+////                    System.out.println("\tCertificates verified against the KeyStore");
+////                } else {
+////                    System.out.println("\tCertificate failed: " + fails[1]);
+////                }
+//                    }
+//
+//                //////
                 } else {
                     signatureBlock = new Rectangle(0, 0, 0, 0); // fake definition
                 }
