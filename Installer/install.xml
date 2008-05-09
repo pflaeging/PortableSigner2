@@ -9,7 +9,7 @@ Installer for PortableSigner
 <installation version="1.0">
      <info>
         <appname>PortableSigner</appname>
-        <appversion>1.3</appversion>
+        <appversion>1.5</appversion>
         <appsubpath>MagWien/PortableSigner</appsubpath>
         <authors>
             <author name="Peter Pfläging" email="peter.pflaeging@wien.gv.at"/>
