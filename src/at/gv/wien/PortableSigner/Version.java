@@ -11,7 +11,7 @@ package at.gv.wien.PortableSigner;
  */
 public class Version {
 	private static String date = "$Date$";
-	private static String author = "$Author";
+	private static String author = "$Author$";
 	private static String revision = "$Revision$";
         public static String release = "1.5";      
         
