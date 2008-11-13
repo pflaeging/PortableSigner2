@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import java.awt.Cursor;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -29,6 +30,8 @@ public class Main extends javax.swing.JFrame {
     public static String platform;
     String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
     String password = "";
+    private static String[] signatureBlockLanguages = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                .getString("SignatureLanguages").split(",");;
     private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
     private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
     private static java.awt.Color gotitcolor = new java.awt.Color(0, 0, 240);
@@ -43,7 +46,10 @@ public class Main extends javax.swing.JFrame {
 
         prefs = new Preferences();
 //        ReadStore teststore;
-        
+        if (prefs.signLanguage.length() != 1) { // we have old prefs!
+            prefs.set("SignLanguage", "1");
+            prefs.get();
+        }
 //        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);
         String operatingSystem = System.getProperty("os.name");
         if (operatingSystem.contains("Mac OS X")) {
@@ -125,15 +131,22 @@ public class Main extends javax.swing.JFrame {
             finalize = false;
         }
 
+        // jComboBoxSignatureLanguage.setModel(new DefaultComboBoxModel(signatureBlockLanguages));
         if (!mycommand.sigblock.equals("")) {
+            // backward compatibility, !!!!
             if (mycommand.sigblock.equals("german")) {
-                jRadioButtonOptionGerman.setSelected(true);
+                prefs.set("SignLanguage", "2");
             } 
             if (mycommand.sigblock.equals("english")) {
-                jRadioButtonOptionEnglish.setSelected(true);
+                prefs.set("SignLanguage", "1");
             }
+
             prefs.set("SignText", true);
         }
+        
+        signatureBlockLanguages = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                .getString("SignatureLanguages").split(",");
+//        System.err.println("Languages: " + signatureBlockLanguages);
         
         if (!workingJCE) {
             jDialogJCEAlert.setSize(650, 170);
@@ -150,7 +163,7 @@ public class Main extends javax.swing.JFrame {
             jCheckBoxTooltip.setSelected(false);
             setTooltips(false);
         }
-        
+
     }
     
     /** This method is called from within the constructor to
@@ -179,8 +192,6 @@ public class Main extends javax.swing.JFrame {
         jTextAreaLicenseText = new javax.swing.JTextArea();
         jFrameOption = new javax.swing.JFrame();
         jButtonOptionSearchLogo = new javax.swing.JButton();
-        jRadioButtonOptionEnglish = new javax.swing.JRadioButton();
-        jRadioButtonOptionGerman = new javax.swing.JRadioButton();
         jLabelOptionLanguage = new javax.swing.JLabel();
         jTextFieldOptionLogo = new javax.swing.JTextField();
         jLabelOptionLogo = new javax.swing.JLabel();
@@ -194,6 +205,7 @@ public class Main extends javax.swing.JFrame {
         jTextFieldReason = new javax.swing.JTextField();
         jLabelLocation = new javax.swing.JLabel();
         jTextFieldLocation = new javax.swing.JTextField();
+        jComboBoxSignatureLanguage = new javax.swing.JComboBox();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jFrameSelectKeystore = new javax.swing.JFrame();
         jButtonSelectKeystoreFile = new javax.swing.JButton();
@@ -423,24 +435,6 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jRadioButtonOptionEnglish);
-        jRadioButtonOptionEnglish.setText(bundle.getString("EnglishButton")); // NOI18N
-        jRadioButtonOptionEnglish.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jRadioButtonOptionEnglish.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonOptionEnglishActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButtonOptionGerman);
-        jRadioButtonOptionGerman.setText(bundle.getString("GermanButton")); // NOI18N
-        jRadioButtonOptionGerman.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jRadioButtonOptionGerman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonOptionGermanActionPerformed(evt);
-            }
-        });
-
         jLabelOptionLanguage.setText(bundle.getString("LanguageOfSignatureBlock")); // NOI18N
 
         jLabelOptionLogo.setText(bundle.getString("SignatureLogo")); // NOI18N
@@ -494,6 +488,13 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxSignatureLanguage.setModel(new DefaultComboBoxModel(signatureBlockLanguages));
+        jComboBoxSignatureLanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSignatureLanguageActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout jFrameOptionLayout = new org.jdesktop.layout.GroupLayout(jFrameOption.getContentPane());
         jFrameOption.getContentPane().setLayout(jFrameOptionLayout);
         jFrameOptionLayout.setHorizontalGroup(
@@ -501,25 +502,22 @@ public class Main extends javax.swing.JFrame {
             .add(jFrameOptionLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jTextFieldReason, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
-                        .add(jLabelOptionLanguage)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 45, Short.MAX_VALUE)
-                        .add(jRadioButtonOptionEnglish)
-                        .add(11, 11, 11)
-                        .add(jRadioButtonOptionGerman))
+                    .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jTextFieldReason, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                    .add(jLabelOptionLanguage)
                     .add(jFrameOptionLayout.createSequentialGroup()
                         .add(jLabelOptionLogo)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                                 .add(jButtonResetLogo)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 111, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 310, Short.MAX_VALUE)
                                 .add(jButtonOptionOK))
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
-                                .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(jComboBoxSignatureLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 182, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                                 .add(jButtonOptionSearchLogo))))
                     .add(jButtonResetCommentField)
@@ -532,12 +530,10 @@ public class Main extends javax.swing.JFrame {
             jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jFrameOptionLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jRadioButtonOptionGerman)
-                        .add(jRadioButtonOptionEnglish))
-                    .add(jLabelOptionLanguage))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabelOptionLanguage)
+                    .add(jComboBoxSignatureLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(10, 10, 10)
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOptionLogo)
                     .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -558,7 +554,7 @@ public class Main extends javax.swing.JFrame {
                 .add(jLabelLocation)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 10, Short.MAX_VALUE)
                 .add(jButtonOptionOK)
                 .addContainerGap())
         );
@@ -1026,10 +1022,10 @@ public class Main extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .addContainerGap()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                    .add(jSeparator1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(jLabelTitle)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 351, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 361, Short.MAX_VALUE)
                         .add(jButtonAbout))
                     .add(layout.createSequentialGroup()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1070,7 +1066,7 @@ public class Main extends javax.swing.JFrame {
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(jLabelFinishNext)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 340, Short.MAX_VALUE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 348, Short.MAX_VALUE)
                                 .add(jButtonCancelMain))
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1079,10 +1075,10 @@ public class Main extends javax.swing.JFrame {
                                         .add(128, 128, 128))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jPasswordFieldPassword, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                            .add(jTextFieldSignaturefile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelFinished, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                                             .add(layout.createSequentialGroup()
                                                 .add(jCheckBoxFinalize)
                                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 104, Short.MAX_VALUE)
@@ -1090,8 +1086,8 @@ public class Main extends javax.swing.JFrame {
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
                                     .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
                                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
-                                            .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                                            .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldInputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                                            .add(jTextFieldOutputfile, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                                     .add(layout.createSequentialGroup()
@@ -1279,14 +1275,6 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         jFrameOption.setAlwaysOnTop(true);
     }//GEN-LAST:event_jButtonOptionSearchLogoActionPerformed
 
-    private void jRadioButtonOptionGermanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOptionGermanActionPerformed
-        prefs.set("SignLanguage", "german");
-    }//GEN-LAST:event_jRadioButtonOptionGermanActionPerformed
-
-    private void jRadioButtonOptionEnglishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonOptionEnglishActionPerformed
-        prefs.set("SignLanguage", "english");
-    }//GEN-LAST:event_jRadioButtonOptionEnglishActionPerformed
-
     private void jButtonOptionOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionOKActionPerformed
         prefs.set("SignatureLogo",jTextFieldOptionLogo.getText());
         prefs.set("SignComment", jTextPaneCommentField.getText());
@@ -1298,18 +1286,12 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionActionPerformed
         
-        jFrameOption.setSize(450,500);
+        jFrameOption.setSize(550,500);
         String lang = prefs.signLanguage;
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
                                             "at/gv/wien/PortableSigner/Signatureblock");
-        // System.out.println(lang);
-        if (lang.equals("german")) {
-            jRadioButtonOptionGerman.setSelected(true);
-        } 
-        if (lang.equals("english")) {
-            jRadioButtonOptionEnglish.setSelected(true);
-        }
-//        jCheckBoxComment.setSelected(prefs.useComment);
+        jComboBoxSignatureLanguage.setSelectedIndex(Integer.valueOf(lang).intValue()-1);
+                //        jCheckBoxComment.setSelected(prefs.useComment);
 //        jTextPaneCommentField.setText(prefs.signComment);
         jTextPaneCommentField.setEditable(prefs.useComment);
         if (prefs.signComment.equals("")) {
@@ -1512,7 +1494,6 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     }//GEN-LAST:event_jButtonErrorReportActionPerformed
 
     private void jCheckBoxTooltipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTooltipActionPerformed
-        // TODO add your handling code here:
         prefs.set("ToolTip", !prefs.toolTip);
         prefs.get();
         setTooltips(prefs.toolTip);
@@ -1536,10 +1517,18 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
             com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
             ShowPDF.openDocument(jTextFieldInputfile.getText());
             } catch (IOException ex) {
-            System.err.println("Unable to start PDF reader");
+//            System.err.println("Unable to start PDF reader");
         }
 
     }//GEN-LAST:event_jButtonViewSourceActionPerformed
+
+    private void jComboBoxSignatureLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSignatureLanguageActionPerformed
+
+        int tempI = jComboBoxSignatureLanguage.getSelectedIndex() + 1;
+        String tempLang = "" + tempI;
+        prefs.set("SignLanguage", tempLang);
+        System.out.println("Language: " + tempLang);
+    }//GEN-LAST:event_jComboBoxSignatureLanguageActionPerformed
 
     private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         try {
@@ -1627,6 +1616,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JCheckBox jCheckBoxFinalize;
     private javax.swing.JCheckBox jCheckBoxSignatureBlock;
     private javax.swing.JCheckBoxMenuItem jCheckBoxTooltip;
+    private javax.swing.JComboBox jComboBoxSignatureLanguage;
     private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogCancel;
     private javax.swing.JDialog jDialogErrorReport;
@@ -1682,8 +1672,6 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JPanel jPanelCancel;
     private javax.swing.JPasswordField jPasswordFieldPassword;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButton jRadioButtonOptionEnglish;
-    private javax.swing.JRadioButton jRadioButtonOptionGerman;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
