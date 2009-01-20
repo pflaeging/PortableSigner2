@@ -1286,7 +1286,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOptionActionPerformed
         
-        jFrameOption.setSize(550,500);
+        jFrameOption.setSize(550,550);
         String lang = prefs.signLanguage;
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
                                             "at/gv/wien/PortableSigner/Signatureblock");
@@ -1527,7 +1527,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         int tempI = jComboBoxSignatureLanguage.getSelectedIndex() + 1;
         String tempLang = "" + tempI;
         prefs.set("SignLanguage", tempLang);
-        System.out.println("Language: " + tempLang);
+//        System.out.println("Language: " + tempLang);
     }//GEN-LAST:event_jComboBoxSignatureLanguageActionPerformed
 
     private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  

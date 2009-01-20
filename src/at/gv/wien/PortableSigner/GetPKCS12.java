@@ -44,6 +44,9 @@ public class GetPKCS12 {
     public GetPKCS12(String pkcs12FileName,
             String pkcs12Password) throws KeyStoreException {
         KeyStore ks = null;
+        if (pkcs12Password == null) {
+            pkcs12Password="";
+        }
         try {
             ks = KeyStore.getInstance("pkcs12");
             ks.load(new FileInputStream(pkcs12FileName), pkcs12Password
@@ -104,9 +107,12 @@ public class GetPKCS12 {
         for ( Enumeration<String> o = oid.getKeys(); o.hasMoreElements(); ) {
             String element = o.nextElement();
             // System.out.println(element + ":" + oid.getString(element));
-            if (x509cert.getNonCriticalExtensionOIDs().contains(element)) {
-                if (!atEgovOID.equals("")) { atEgovOID += ", "; }
-                atEgovOID += oid.getString(element) + " (OID=" + element + ")";
+            java.util.Collection<String> bCert =x509cert.getNonCriticalExtensionOIDs();
+            if (bCert != null){
+                if (bCert.contains(element)) {
+                    if (!atEgovOID.equals("")) { atEgovOID += ", "; }
+                    atEgovOID += oid.getString(element) + " (OID=" + element + ")";
+                }
             }
         }
         

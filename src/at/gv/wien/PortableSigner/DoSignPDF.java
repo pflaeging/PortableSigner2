@@ -23,14 +23,8 @@ import com.lowagie.text.pdf.PdfSignatureAppearance;
 import com.lowagie.text.pdf.PdfStamper;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.AcroFields;
 import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPKCS7;
 import com.lowagie.text.pdf.PdfPTable;
-import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Enumeration;
 import java.util.HashMap;
 
 /**
@@ -96,7 +90,7 @@ public class DoSignPDF {
                 pdfInfo.put("Producer", pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")");
                 stp.setMoreInfo(pdfInfo);
                 if (signText) {
-                    String greet, signator, datestr, ca, serial, special, sigcomment;
+                    String greet, signator, datestr, ca, serial, special, note, urn, urnvalue;
                     int specialcount = 0;
                     ResourceBundle block = ResourceBundle.getBundle(
                             "at/gv/wien/PortableSigner/Signatureblock");
@@ -106,6 +100,9 @@ public class DoSignPDF {
                     ca = block.getString(signLanguage + "-issuer");
                     serial = block.getString(signLanguage + "-serial");
                     special = block.getString(signLanguage + "-special");
+                    note = block.getString(signLanguage + "-note");
+                    urn = block.getString(signLanguage + "-urn");
+                    urnvalue = block.getString(signLanguage + "-urnvalue");
                     //sigcomment = block.getString(signLanguage + "-comment");
                     stp.insertPage(pages + 1, size);
                     if (!pkcs12.atEgovOID.equals("")) {
@@ -117,98 +114,109 @@ public class DoSignPDF {
                     //float rightx = size.right();
                     float rightx = size.getRight();
                     float[] cellsize = new float[2];
-                    cellsize[0] = 85f;
+                    cellsize[0] = 100f;
                     cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
 
                     // Pagetable = Greeting, signatureblock, comment
                     // sigpagetable = outer table
                     //      consist: greetingcell, signatureblock , commentcell
-                    PdfPTable sigpagetable = new PdfPTable(2);
-                    PdfPTable sigblocktable = new PdfPTable(2);
-                    PdfPCell greetingcell =
+                    PdfPTable signatureBlockCompleteTable = new PdfPTable(2);
+                    PdfPTable signatureTextTable = new PdfPTable(2);
+                    PdfPCell signatureBlockHeadingCell =
                             new PdfPCell(new Paragraph(
                             new Chunk(greet,
                             new Font(Font.HELVETICA, 12))));
-                    greetingcell.setPaddingBottom(5);
-                    greetingcell.setColspan(2);
-                    greetingcell.setBorderWidth(0f);
-                    sigpagetable.addCell(greetingcell);
+                    signatureBlockHeadingCell.setPaddingBottom(5);
+                    signatureBlockHeadingCell.setColspan(2);
+                    signatureBlockHeadingCell.setBorderWidth(0f);
+                    signatureBlockCompleteTable.addCell(signatureBlockHeadingCell);
 
                     // inner table start
                     // Line 1
-                    sigblocktable.addCell(
+                    signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(signator, new Font(Font.HELVETICA, 10))));
-                    sigblocktable.addCell(
+                            new Chunk(signator, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    signatureTextTable.addCell(
                             new Paragraph(
                             new Chunk(pkcs12.subject, new Font(Font.COURIER, 10))));
                     // Line 2
-                    sigblocktable.addCell(
+                    signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(datestr, new Font(Font.HELVETICA, 10))));
-                    sigblocktable.addCell(
+                            new Chunk(datestr, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    signatureTextTable.addCell(
                             new Paragraph(
                             new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
                     // Line 3
-                    sigblocktable.addCell(
+                    signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(ca, new Font(Font.HELVETICA, 10))));
-                    sigblocktable.addCell(
+                            new Chunk(ca, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    signatureTextTable.addCell(
                             new Paragraph(
                             new Chunk(pkcs12.issuer, new Font(Font.COURIER, 10))));
                     // Line 4
-                    sigblocktable.addCell(
+                    signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(serial, new Font(Font.HELVETICA, 10))));
-                    sigblocktable.addCell(
+                            new Chunk(serial, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    signatureTextTable.addCell(
                             new Paragraph(
                             new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 10))));
                     // Line 5
                     if (specialcount == 1) {
-                        sigblocktable.addCell(
+                        signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(special, new Font(Font.HELVETICA, 10))));
-                        sigblocktable.addCell(
+                                new Chunk(special, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                        signatureTextTable.addCell(
                                 new Paragraph(
                                 new Chunk(pkcs12.atEgovOID, new Font(Font.COURIER, 10))));
                     }
-                    sigblocktable.setTotalWidth(cellsize);
+                    signatureTextTable.addCell(
+                            new Paragraph(
+                            new Chunk(urn, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    signatureTextTable.addCell(
+                            new Paragraph(
+                            new Chunk(urnvalue, new Font(Font.COURIER, 10))));
+                    signatureTextTable.setTotalWidth(cellsize);
                     // inner table end
 
-                    sigpagetable.setHorizontalAlignment(sigpagetable.ALIGN_CENTER);
+                    signatureBlockCompleteTable.setHorizontalAlignment(signatureBlockCompleteTable.ALIGN_CENTER);
                     Image logo;
-                    // System.out.println("Logo:" + sigLogo + ":");
+//                     System.out.println("Logo:" + sigLogo + ":");
                     if (sigLogo.equals("") || sigLogo == null) {
                         logo = Image.getInstance(getClass().getResource(
                                 "/at/gv/wien/PortableSigner/SignatureLogo.png"));
                     } else {
                         logo = Image.getInstance(sigLogo);
                     }
-
+                    
                     PdfPCell logocell = new PdfPCell();
                     logocell.setVerticalAlignment(logocell.ALIGN_MIDDLE);
                     logocell.setHorizontalAlignment(logocell.ALIGN_CENTER);
                     logocell.setImage(logo);
-                    sigpagetable.addCell(logocell);
-                    PdfPCell incell = new PdfPCell(sigblocktable);
+                    signatureBlockCompleteTable.addCell(logocell);
+                    PdfPCell incell = new PdfPCell(signatureTextTable);
                     incell.setBorderWidth(0f);
-                    sigpagetable.addCell(incell);
+                    signatureBlockCompleteTable.addCell(incell);
                     PdfPCell commentcell =
                             new PdfPCell(new Paragraph(
                             new Chunk(sigComment,
                             new Font(Font.HELVETICA, 10))));
-                    commentcell.setPaddingTop(10);
-                    commentcell.setColspan(2);
-                    commentcell.setBorderWidth(0f);
+                    PdfPCell notecell =
+                            new PdfPCell(new Paragraph(
+                            new Chunk(note,
+                            new Font(Font.HELVETICA, 10, Font.BOLD))));
+                    //commentcell.setPaddingTop(10);
+                    //commentcell.setColspan(2);
+                    // commentcell.setBorderWidth(0f);
                     if (!sigComment.equals("")) {
-                        sigpagetable.addCell(commentcell);
+                        signatureBlockCompleteTable.addCell(notecell);
+                        signatureBlockCompleteTable.addCell(commentcell);
                     }
                     float[] cells = {70, cellsize[0] + cellsize[1]};
-                    sigpagetable.setTotalWidth(cells);
-                    sigpagetable.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content);
-                    signatureBlock = new Rectangle( 30 + sigpagetable.getTotalWidth() - 20,
+                    signatureBlockCompleteTable.setTotalWidth(cells);
+                    signatureBlockCompleteTable.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content);
+                    signatureBlock = new Rectangle( 30 + signatureBlockCompleteTable.getTotalWidth() - 20,
                             topy - 20 - 20,
-                            30 + sigpagetable.getTotalWidth(),
+                            30 + signatureBlockCompleteTable.getTotalWidth(),
                             topy - 20);
 //                    //////
 //                    AcroFields af = reader.getAcroFields();

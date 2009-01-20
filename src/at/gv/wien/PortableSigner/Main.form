@@ -264,13 +264,13 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jButtonResetLogo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="310" max="32767" attributes="0"/>
+                                  <EmptySpace pref="314" max="32767" attributes="0"/>
                                   <Component id="jButtonOptionOK" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="jComboBoxSignatureLanguage" alignment="1" min="-2" pref="182" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldOptionLogo" alignment="1" pref="388" max="32767" attributes="0"/>
+                                      <Component id="jTextFieldOptionLogo" alignment="1" pref="395" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="jButtonOptionSearchLogo" min="-2" max="-2" attributes="0"/>
@@ -981,7 +981,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabelFinishNext" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="348" max="32767" attributes="0"/>
+                              <EmptySpace pref="350" max="32767" attributes="0"/>
                               <Component id="jButtonCancelMain" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -992,13 +992,13 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jPasswordFieldPassword" alignment="0" pref="326" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="326" max="32767" attributes="0"/>
-                                          <Component id="jProgressBar1" alignment="0" pref="326" max="32767" attributes="0"/>
-                                          <Component id="jLabelFinished" alignment="0" pref="326" max="32767" attributes="0"/>
+                                          <Component id="jPasswordFieldPassword" alignment="0" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldSignaturefile" alignment="1" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jProgressBar1" alignment="0" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jLabelFinished" alignment="0" pref="328" max="32767" attributes="0"/>
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="jCheckBoxFinalize" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace pref="104" max="32767" attributes="0"/>
+                                              <EmptySpace pref="106" max="32767" attributes="0"/>
                                               <Component id="jButtonPasswordOK" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
@@ -1006,8 +1006,8 @@
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jTextFieldInputfile" alignment="0" pref="326" max="32767" attributes="0"/>
-                                          <Component id="jTextFieldOutputfile" alignment="1" pref="326" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldInputfile" alignment="0" pref="328" max="32767" attributes="0"/>
+                                          <Component id="jTextFieldOutputfile" alignment="1" pref="328" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                   </Group>
