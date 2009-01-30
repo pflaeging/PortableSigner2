@@ -2,6 +2,8 @@
  * DoSignPDF.java
  *
  * Created on 21. September 2006, 15:25
+ * Patches and bugfixes from: dzoe@users.sourceforge.net
+ * 
  */
 package at.gv.wien.PortableSigner;
 
