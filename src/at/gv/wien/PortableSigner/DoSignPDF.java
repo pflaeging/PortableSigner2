@@ -42,7 +42,8 @@ public class DoSignPDF {
     /** Creates a new instance of DoSignPDF */
     public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
             String pkcs12FileName, String password, Boolean signText, String signLanguage,
-            String sigLogo, Boolean finalize, String sigComment, String signReason, String signLocation) {
+            String sigLogo, Boolean finalize, String sigComment, String signReason, String signLocation,
+            byte[] ownerPassword) {
         try {
             //System.out.println("-> DoSignPDF <-");
             //System.out.println("Eingabedatei: " + pdfInputFileName);
@@ -60,7 +61,10 @@ public class DoSignPDF {
 
             PdfReader reader = null;
             try {
-                reader = new PdfReader(pdfInputFileName);
+				if (ownerPassword == null)
+					reader = new PdfReader(pdfInputFileName);
+				else
+					reader = new PdfReader(pdfInputFileName, ownerPassword);
             } catch (IOException e) {
                 Main.setResult(
                         java.util.ResourceBundle.getBundle(

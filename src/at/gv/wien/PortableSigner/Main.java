@@ -1377,7 +1377,8 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         finalize,
                         sigComment,
                         prefs.signReason,
-                        prefs.signLocation);
+                        prefs.signLocation,
+                        null);
                 // password cleanup (from bogdandr@op.pl)
 				password = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 				System.gc ();
@@ -1584,7 +1585,8 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         mycommand.finalize, 
                         mycommand.comment,
                         mycommand.reason,
-                        mycommand.location);
+                        mycommand.location,
+                        mycommand.ownerPwd);
                 System.exit(0);
             } else {
                 java.awt.EventQueue.invokeLater(new Runnable() {
