@@ -10,6 +10,8 @@
 package at.gv.wien.PortableSigner;
 
 import org.apache.commons.cli.*;
+import java.io.FileInputStream;
+import java.util.Arrays;
 
 
 /**
@@ -18,7 +20,8 @@ import org.apache.commons.cli.*;
  */
 public class SignCommandLine {
     public String input = "", output = "", signature = "", password = "",
-            sigblock = "", sigimage = "", comment = "", reason = "", location = "";
+            sigblock = "", sigimage = "", comment = "", reason = "", location = "",
+            pwdFile = "";
     public Boolean nogui = false, finalize = true;
     private Boolean help = false;
     
@@ -50,6 +53,9 @@ public class SignCommandLine {
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigReason"));
        options.addOption("l", true, 
                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigLocation"));
+       options.addOption("pwdfile", true,
+               java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-PasswdFile"));
+
        CommandLineParser parser = new PosixParser();
        HelpFormatter usage = new HelpFormatter();
        try {
@@ -66,6 +72,7 @@ public class SignCommandLine {
             comment = cmd.getOptionValue("c");
             reason = cmd.getOptionValue("r");
             location = cmd.getOptionValue("l");
+            pwdFile = cmd.getOptionValue("pwdfile");
             if (sigblock == null) { sigblock = ""; comment = ""; }
             if (sigimage == null) { sigimage = ""; }
             
@@ -86,9 +93,45 @@ public class SignCommandLine {
                usage.printHelp("PortableSigner", options);
                System.exit(2);
            }
+           if (password == null) {
+			   // password missing
+			   if (pwdFile != null) {
+				   // read the password from the given file
+				   try {
+					   FileInputStream pwdfis = new FileInputStream (pwdFile);
+					   byte[] pwd = new byte[1024];
+					   password = "";
+					   try {
+						   do {
+								int r = pwdfis.read (pwd);
+								if (r < 0) break;
+								password += new String(Arrays.copyOfRange(pwd, 0, r));
+								password = password.trim ();
+						   } while (pwdfis.available() > 0);
+						   pwdfis.close ();
+					   } catch (java.io.IOException ex) {}
+				   } catch (java.io.FileNotFoundException fnfex) {}
+			   }
+			   else if (nogui)
+			   {
+				   // no password file given, read from standard input
+				   System.out.print(java.util.ResourceBundle
+						   .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingPassword"));
+				   byte[] pwd = new byte[1024];
+				   password = "";
+				   try {
+					   do {
+							int r = System.in.read (pwd);
+							if (r < 0) break;
+							password += new String(Arrays.copyOfRange(pwd, 0, r));
+							password = password.trim ();
+                          } while (System.in.available() > 0);
+                   } catch (java.io.IOException ex) {}
+			   }
+		   }
        }
        
-       if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals(""))) {
+       if (!(sigblock.equals("german") || sigblock.equals("english") ||  sigblock.equals("polish") || sigblock.equals(""))) {
            System.err.println(java.util.ResourceBundle
                    .getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));
                usage.printHelp("PortableSigner", options);

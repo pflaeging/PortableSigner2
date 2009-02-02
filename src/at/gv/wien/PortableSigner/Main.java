@@ -1185,9 +1185,8 @@ public class Main extends javax.swing.JFrame {
 
 private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
         try {
-            com.lowagie.tools.Executable HelpBrowser = new com.lowagie.tools.Executable();
-            HelpBrowser.launchBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
-                    .getString("HomepageURL"));
+            com.lowagie.tools.Executable.launchBrowser(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                .getString("HomepageURL"));
         } catch (IOException ex) {
             System.err.println("Unable to launch Browser for helppage");
         }
@@ -1328,6 +1327,24 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         //String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
         //String password = "";
         password = String.valueOf(jPasswordFieldPassword.getPassword());
+        // Clear password after using it (from bogdandr@op.pl)
+        jPasswordFieldPassword.setText ("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		jPasswordFieldPassword.setText ("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+		jPasswordFieldPassword.setText ("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
+		jPasswordFieldPassword.setText ("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
+		jPasswordFieldPassword.setText ("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+		jPasswordFieldPassword.setText ("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+		jPasswordFieldPassword.setText ("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+		jPasswordFieldPassword.setText ("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
+		jPasswordFieldPassword.setText ("IIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
+		jPasswordFieldPassword.setText ("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ");
+		jPasswordFieldPassword.setText ("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
+		jPasswordFieldPassword.setText ("LLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+		jPasswordFieldPassword.setText ("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMM");
+		jPasswordFieldPassword.setText ("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+		jPasswordFieldPassword.setText ("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+		jPasswordFieldPassword.setText ("");
+
         inputPDFFile = jTextFieldInputfile.getText();
         outputPDFFile = jTextFieldOutputfile.getText();
         signatureP12File = jTextFieldSignaturefile.getText();
@@ -1361,6 +1378,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                         sigComment,
                         prefs.signReason,
                         prefs.signLocation);
+                // password cleanup (from bogdandr@op.pl)
+				password = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+				System.gc ();
                 jProgressBar1.setIndeterminate(false);
                 jProgressBar1.setValue(100);
                 //getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1485,8 +1505,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
             jDialogErrorReport.setVisible(true);
         } else {
             try {
-                com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
-                ShowPDF.openDocument(jTextFieldOutputfile.getText());
+                com.lowagie.tools.Executable.openDocument(jTextFieldOutputfile.getText());
             } catch (IOException ex) {
                 System.err.println("Unable to start PDF reader");
             }
@@ -1514,8 +1533,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonViewSourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewSourceActionPerformed
         try {
-            com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
-            ShowPDF.openDocument(jTextFieldInputfile.getText());
+            com.lowagie.tools.Executable.openDocument(jTextFieldInputfile.getText());
             } catch (IOException ex) {
 //            System.err.println("Unable to start PDF reader");
         }
@@ -1532,8 +1550,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         try {
-            com.lowagie.tools.Executable ShowPDF = new com.lowagie.tools.Executable();
-            ShowPDF.openDocument(jTextFieldOutputfile.getText());
+            com.lowagie.tools.Executable.openDocument(jTextFieldOutputfile.getText());
         } catch (IOException ex) {
             System.err.println("Unable to start PDF reader");
         }
