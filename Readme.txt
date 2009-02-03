@@ -35,7 +35,7 @@ The Windows installer is installing all required patches automagic.
 If you'r upgrading your Java runtime, please reinstall PortableSigner to apply
 the security policies again.
 
-:peter pflaeging <pfp@adv.magwien.gv.at>
+:peter pflaeging <peter.pflaeging@wien.gv.at>
 
 
 

@@ -28,10 +28,11 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * 
- * @author pfp@adv.magwien.gv.at
+ * @author peter.pflaeging@wien.gv.at
  */
 public class DoSignPDF {
 
@@ -98,20 +99,32 @@ public class DoSignPDF {
                 if (signText) {
                     String greet, signator, datestr, ca, serial, special, note, urn, urnvalue;
                     int specialcount = 0;
+//                    ResourceBundle block = ResourceBundle.getBundle(
+//                            "at/gv/wien/PortableSigner/Signatureblock");
+//                    greet = block.getString(signLanguage + "-greeting");
+//                    signator = block.getString(signLanguage + "-signator");
+//                    datestr = block.getString(signLanguage + "-date");
+//                    ca = block.getString(signLanguage + "-issuer");
+//                    serial = block.getString(signLanguage + "-serial");
+//                    special = block.getString(signLanguage + "-special");
+//                    note = block.getString(signLanguage + "-note");
+//                    urn = block.getString(signLanguage + "-urn");
+//                    urnvalue = block.getString(signLanguage + "-urnvalue");
                     ResourceBundle block = ResourceBundle.getBundle(
-                            "at/gv/wien/PortableSigner/Signatureblock");
-                    greet = block.getString(signLanguage + "-greeting");
-                    signator = block.getString(signLanguage + "-signator");
-                    datestr = block.getString(signLanguage + "-date");
-                    ca = block.getString(signLanguage + "-issuer");
-                    serial = block.getString(signLanguage + "-serial");
-                    special = block.getString(signLanguage + "-special");
-                    note = block.getString(signLanguage + "-note");
-                    urn = block.getString(signLanguage + "-urn");
-                    urnvalue = block.getString(signLanguage + "-urnvalue");
+                            "at/gv/wien/PortableSigner/Signatureblock_" + signLanguage);
+                    greet = block.getString("greeting");
+                    signator = block.getString("signator");
+                    datestr = block.getString("date");
+                    ca = block.getString("issuer");
+                    serial = block.getString("serial");
+                    special = block.getString("special");
+                    note = block.getString("note");
+                    urn = block.getString("urn");
+                    urnvalue = block.getString("urnvalue");
+
                     //sigcomment = block.getString(signLanguage + "-comment");
                     stp.insertPage(pages + 1, size);
-                    if (!pkcs12.atEgovOID.equals("")) {
+                    if (!GetPKCS12.atEgovOID.equals("")) {
                         specialcount = 1;
                     }
                     PdfContentByte content = stp.getOverContent(pages + 1);
@@ -144,7 +157,7 @@ public class DoSignPDF {
                             new Chunk(signator, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(pkcs12.subject, new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.subject, new Font(Font.COURIER, 10))));
                     // Line 2
                     signatureTextTable.addCell(
                             new Paragraph(
@@ -158,14 +171,14 @@ public class DoSignPDF {
                             new Chunk(ca, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(pkcs12.issuer, new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.issuer, new Font(Font.COURIER, 10))));
                     // Line 4
                     signatureTextTable.addCell(
                             new Paragraph(
                             new Chunk(serial, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(pkcs12.serial.toString(), new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.serial.toString(), new Font(Font.COURIER, 10))));
                     // Line 5
                     if (specialcount == 1) {
                         signatureTextTable.addCell(
@@ -173,7 +186,7 @@ public class DoSignPDF {
                                 new Chunk(special, new Font(Font.HELVETICA, 10, Font.BOLD))));
                         signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(pkcs12.atEgovOID, new Font(Font.COURIER, 10))));
+                                new Chunk(GetPKCS12.atEgovOID, new Font(Font.COURIER, 10))));
                     }
                     signatureTextTable.addCell(
                             new Paragraph(
@@ -184,7 +197,7 @@ public class DoSignPDF {
                     signatureTextTable.setTotalWidth(cellsize);
                     // inner table end
 
-                    signatureBlockCompleteTable.setHorizontalAlignment(signatureBlockCompleteTable.ALIGN_CENTER);
+                    signatureBlockCompleteTable.setHorizontalAlignment(PdfPTable.ALIGN_CENTER);
                     Image logo;
 //                     System.out.println("Logo:" + sigLogo + ":");
                     if (sigLogo.equals("") || sigLogo == null) {
@@ -195,8 +208,8 @@ public class DoSignPDF {
                     }
                     
                     PdfPCell logocell = new PdfPCell();
-                    logocell.setVerticalAlignment(logocell.ALIGN_MIDDLE);
-                    logocell.setHorizontalAlignment(logocell.ALIGN_CENTER);
+                    logocell.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    logocell.setHorizontalAlignment(PdfPCell.ALIGN_CENTER);
                     logocell.setImage(logo);
                     signatureBlockCompleteTable.addCell(logocell);
                     PdfPCell incell = new PdfPCell(signatureTextTable);
@@ -273,7 +286,7 @@ public class DoSignPDF {
                     signatureBlock = new Rectangle(0, 0, 0, 0); // fake definition
                 }
                 PdfSignatureAppearance sap = stp.getSignatureAppearance();
-                sap.setCrypto(pkcs12.privateKey, pkcs12.certificateChain, null,
+                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null,
                         PdfSignatureAppearance.WINCER_SIGNED);
                 sap.setReason(signReason);
                 sap.setLocation(signLocation);
@@ -282,9 +295,9 @@ public class DoSignPDF {
 //                            pages + 1, "PortableSigner");
 //                }
                 if (finalize) {
-                    sap.setCertificationLevel(sap.CERTIFIED_NO_CHANGES_ALLOWED);
+                    sap.setCertificationLevel(PdfSignatureAppearance.CERTIFIED_NO_CHANGES_ALLOWED);
                 } else {
-                    sap.setCertificationLevel(sap.NOT_CERTIFIED);
+                    sap.setCertificationLevel(PdfSignatureAppearance.NOT_CERTIFIED);
                 }
                 stp.close();
                 Main.setResult(

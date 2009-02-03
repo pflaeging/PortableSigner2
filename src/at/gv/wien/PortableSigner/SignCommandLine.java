@@ -22,9 +22,20 @@ public class SignCommandLine {
     public byte[] ownerPwd = null;
     public Boolean nogui = false,  finalize = true;
     private Boolean help = false;
+    String langcodes;
 
     /** Creates a new instance of CommandLine */
     public SignCommandLine(String args[]) {
+        langcodes = "";
+        java.util.Enumeration<String> langCodes =
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SignatureblockLanguages").getKeys();
+
+        while ( langCodes.hasMoreElements() )  {
+            langcodes = langcodes + langCodes.nextElement() + "|";
+        }
+        langcodes = langcodes.substring(0, langcodes.length()-1);
+//        System.out.println("Langcodes: " + langcodes);
+
         CommandLine cmd;
         Options options = new Options();
         options.addOption("t", true,
@@ -42,7 +53,8 @@ public class SignCommandLine {
         options.addOption("h", false,
                 java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Help"));
         options.addOption("b", true,
-                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigBlock"));
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigBlock")
+                + langcodes);
         options.addOption("i", true,
                 java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigImage"));
         options.addOption("c", true,
@@ -86,16 +98,19 @@ public class SignCommandLine {
             }
 
             if (cmd.getArgs().length != 0) {
-                throw new ParseException(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-UnknownArguments"));
+                throw new ParseException(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                        .getString("CLI-UnknownArguments"));
             }
         } catch (ParseException e) {
-            System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-WrongArguments"));
+            System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                    .getString("CLI-WrongArguments"));
             usage.printHelp("PortableSigner", options);
             System.exit(3);
         }
         if (nogui) {
             if (input == null || output == null || signature == null) {
-                System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingArguments"));
+                System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                        .getString("CLI-MissingArguments"));
                 usage.printHelp("PortableSigner", options);
                 System.exit(2);
             }
@@ -123,7 +138,8 @@ public class SignCommandLine {
                     }
                 } else {
                     // no password file given, read from standard input
-                    System.out.print(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-MissingPassword"));
+                    System.out.print(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                            .getString("CLI-MissingPassword"));
                     byte[] pwd = new byte[1024];
                     password = "";
                     try {
@@ -169,9 +185,9 @@ public class SignCommandLine {
             }
 
         }
-        // add your language on the next line =>
-        if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals("polish") || sigblock.equals("italian") || sigblock.equals(""))) {
-            System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));
+        if (!(langcodes.contains(sigblock)|| sigblock.equals(""))) {
+            System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                    .getString("CLI-Only-german-english") + langcodes);
             usage.printHelp("PortableSigner", options);
             System.exit(4);
         }

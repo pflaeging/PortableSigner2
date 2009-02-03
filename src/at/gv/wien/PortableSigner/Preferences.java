@@ -12,7 +12,7 @@ package at.gv.wien.PortableSigner;
 
 /**
  *
- * @author  pfp@adv.magwien.gv.at
+ * @author  peter.pflaeging@wien.gv.at
  */
 public class Preferences {
     

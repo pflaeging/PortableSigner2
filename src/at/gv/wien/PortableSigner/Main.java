@@ -12,11 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
 import java.awt.Cursor;
+import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 
-/**
- *
- * @author  pfp@adv.magwien.gv.at
+/*
+ * @author  peter.pflaeging@wien.gv.at
  */
 public class Main extends javax.swing.JFrame {
     
@@ -24,14 +24,12 @@ public class Main extends javax.swing.JFrame {
     public String copyright = "Peter Pfl\u00e4ging <peter.pflaeging@wien.gv.at>)";
     public String url = "http://portablesigner.sf.net/";
     private Preferences  prefs;
-    private Version version = new Version();
     private static java.awt.Color resultcolor;
     private static String result, exceptionstring;
     public static String platform;
     String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
     String password = "";
-    private static String[] signatureBlockLanguages = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
-                .getString("SignatureLanguages").split(",");;
+    private Vector signatureBlockLanguages = new Vector();
     private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
     private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
     private static java.awt.Color gotitcolor = new java.awt.Color(0, 0, 240);
@@ -42,12 +40,21 @@ public class Main extends javax.swing.JFrame {
     
     /** Creates new form Main */
     public Main() {
-        
+
+        java.util.Enumeration<String> langNumbers =
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SignatureblockLanguages")
+                .getKeys();
+        while ( langNumbers.hasMoreElements() )  {
+            String languageCode = langNumbers.nextElement();
+            String language = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SignatureblockLanguages").getString(languageCode);
+//            System.out.println("Sprache: " +  language + " (" + languageCode + ")");
+            signatureBlockLanguages.add(language + " (" + languageCode + ")");
+        }
 
         prefs = new Preferences();
 //        ReadStore teststore;
-        if (prefs.signLanguage.length() != 1) { // we have old prefs!
-            prefs.set("SignLanguage", "1");
+        if (prefs.signLanguage.length() != 2) { // we have old prefs!
+            prefs.set("SignLanguage", "en");
             prefs.get();
         }
 //        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);
@@ -131,7 +138,6 @@ public class Main extends javax.swing.JFrame {
             finalize = false;
         }
 
-        // jComboBoxSignatureLanguage.setModel(new DefaultComboBoxModel(signatureBlockLanguages));
         if (!mycommand.sigblock.equals("")) {
             // backward compatibility, !!!!
             if (mycommand.sigblock.equals("german")) {
@@ -144,9 +150,6 @@ public class Main extends javax.swing.JFrame {
             prefs.set("SignText", true);
         }
         
-        signatureBlockLanguages = java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
-                .getString("SignatureLanguages").split(",");
-//        System.err.println("Languages: " + signatureBlockLanguages);
         
         if (!workingJCE) {
             jDialogJCEAlert.setSize(650, 170);
@@ -1288,13 +1291,11 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         jFrameOption.setSize(550,550);
         String lang = prefs.signLanguage;
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
-                                            "at/gv/wien/PortableSigner/Signatureblock");
-        jComboBoxSignatureLanguage.setSelectedIndex(Integer.valueOf(lang).intValue()-1);
-                //        jCheckBoxComment.setSelected(prefs.useComment);
-//        jTextPaneCommentField.setText(prefs.signComment);
+                                            "at/gv/wien/PortableSigner/Signatureblock_" + lang);
+        jComboBoxSignatureLanguage.setSelectedItem(lang);
         jTextPaneCommentField.setEditable(prefs.useComment);
         if (prefs.signComment.equals("")) {
-            jTextPaneCommentField.setText(block.getString(lang + "-comment"));
+            jTextPaneCommentField.setText(block.getString("comment"));
         }
         jFrameOption.setVisible(true);
     }//GEN-LAST:event_jButtonOptionActionPerformed
@@ -1415,7 +1416,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private void jButtonAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAboutActionPerformed
         jTextAreaAboutVersion.setText(
                 copyright + "\n" + url + "\n\n" +
-                version.print);
+                Version.print);
         jDialogAbout.setSize(500,250);
         jDialogAbout.setVisible(true);
     }//GEN-LAST:event_jButtonAboutActionPerformed
@@ -1487,8 +1488,8 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jButtonResetCommentFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonResetCommentFieldActionPerformed
         String originalComment = 
-                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/Signatureblock")
-                .getString(prefs.signLanguage + "-comment");
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/Signatureblock_" + prefs.signLanguage)
+                .getString("comment");
         prefs.set("SignComment", originalComment);
         jTextPaneCommentField.setText(originalComment);        
     }//GEN-LAST:event_jButtonResetCommentFieldActionPerformed
@@ -1543,10 +1544,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
     private void jComboBoxSignatureLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSignatureLanguageActionPerformed
 
-        int tempI = jComboBoxSignatureLanguage.getSelectedIndex() + 1;
-        String tempLang = "" + tempI;
+        String tempS = jComboBoxSignatureLanguage.getSelectedItem().toString();
+        String tempLang = tempS.substring(tempS.indexOf("(") + 1,tempS.indexOf(")"));
+//        System.out.println("Selected Languagecode: " + tempLang);
         prefs.set("SignLanguage", tempLang);
-//        System.out.println("Language: " + tempLang);
     }//GEN-LAST:event_jComboBoxSignatureLanguageActionPerformed
 
     private void jButtonViewOutputActionPerformed(java.awt.event.ActionEvent evt) {                                                  

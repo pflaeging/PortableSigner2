@@ -11,16 +11,14 @@ Translation of the User Interface:
     where xx is your language code.
 
 Translation of the signature block:
-- open the file Signatureblock.properties for editing
-- create new entries starting with x- where x is the next number in the file:
-    1 = english
-    2 = german
-    3 = polish
-    4 = ....
-- translate the entries in the file
-- In i18n*.properties (every file!) is an entry in the form of:
-    SignatureLanguages=english,german,polish
-    Add your language here!
-- In SignCommandLine.java look for:
-    "// add your language on the next line =>"
-    add your language after this line like the other languages
+- copy Signatureblock.properties to Signatureblock_xx.properties where xx is your two letter
+    language code.
+- edit Signatureblock_xx.properties and translate the strings in the file.
+- in SignatureblockLanguages.properties add you language in the form:
+
+    xx=longtext
+
+    where       xx => two letter iso code
+          longtext => longname of your language (in your language :-)
+
+:peter pflaeging
