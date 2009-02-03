@@ -1292,7 +1292,9 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         String lang = prefs.signLanguage;
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
                                             "at/gv/wien/PortableSigner/Signatureblock_" + lang);
-        jComboBoxSignatureLanguage.setSelectedItem(lang);
+        jComboBoxSignatureLanguage.setSelectedItem(
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SignatureblockLanguages")
+                .getString(lang) + " (" + lang + ")");
         jTextPaneCommentField.setEditable(prefs.useComment);
         if (prefs.signComment.equals("")) {
             jTextPaneCommentField.setText(block.getString("comment"));
