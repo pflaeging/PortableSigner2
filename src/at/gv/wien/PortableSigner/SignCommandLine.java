@@ -170,7 +170,7 @@ public class SignCommandLine {
 
         }
         // add your language on the next line =>
-        if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals("polish") || sigblock.equals(""))) {
+        if (!(sigblock.equals("german") || sigblock.equals("english") || sigblock.equals("polish") || sigblock.equals("italian") || sigblock.equals(""))) {
             System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-Only-german-english"));
             usage.printHelp("PortableSigner", options);
             System.exit(4);

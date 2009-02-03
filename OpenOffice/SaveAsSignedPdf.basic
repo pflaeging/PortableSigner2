@@ -1,0 +1,25 @@
+REM  *****  BASIC  *****
+
+
+sub SignAsPDF
+ Dim myProps(0) as New com.sun.star.beans.PropertyValue
+ Dim psBinary
+ Dim myDoc
+ Dim execCmd
+ psBinary = "/Applications/PortableSigner.app/Contents/MacOS/JavaApplicationStub -t "
+ myDoc = thisComponent
+ If Not myDoc.hasLocation Then
+ 	MsgBox "Bitte Dokument erst Speichern!"
+ 	Exit Sub
+ End If	
+ oldUrl=myDoc.url
+ sUrl=Left(oldUrl, Len(oldUrl) - 3) + "pdf"
+ pdfFileName=convertFromUrl(sUrl)
+ myProps(0).Name="FilterName"
+ myProps(0).Value = "writer_pdf_Export"
+ myDoc.storetoUrl(sUrl,myProps())
+' StarDesktop.CurrentComponent.Close(false)
+ execCmd = psBinary + """" + pdfFileName + """"
+' MsgBox execCmd
+ Shell(execCmd)
+end Sub
