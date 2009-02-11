@@ -28,7 +28,6 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * 

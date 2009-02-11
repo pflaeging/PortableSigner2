@@ -36,6 +36,7 @@ public class Main extends javax.swing.JFrame {
     private static boolean workingJCE = true, finalize = true;
     Cursor questionCursor = new Cursor(Cursor.HAND_CURSOR);
     Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
+    Version version = new Version();
     
     
     /** Creates new form Main */
