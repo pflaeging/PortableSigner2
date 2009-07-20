@@ -1,0 +1,18 @@
+What to do, if you want an internal deployment:
+
+Change (optional) the following files/values:
+
+src/at/gv/wien/PortableSigner/i18n_de.properties    HomepageURL=...
+src/at/gv/wien/PortableSigner/Version.java          internaltag = "-Org"
+
+you can change anything else like texts and default logo also, ...
+These things are typically in i18n_??.properties or in Signatureblock.properties
+
+After this compile and package the system.
+
+The easiest way for Deployment on Windows is to take the 
+PortableSigner-Windows.zip from your dist/ship directory anf unpack it under a
+directory on the PC's. It doesn't need anything else like Registry except Java 
+and the JCE unrestrictes Extension installed
+
+:peter

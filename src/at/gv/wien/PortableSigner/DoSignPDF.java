@@ -45,13 +45,6 @@ public class DoSignPDF {
             String sigLogo, Boolean finalize, String sigComment, String signReason, String signLocation,
             byte[] ownerPassword) {
         try {
-            //System.out.println("-> DoSignPDF <-");
-            //System.out.println("Eingabedatei: " + pdfInputFileName);
-            //System.out.println("Ausgabedatei: " + pdfOutputFileName);
-            //System.out.println("Signaturdatei: " + pkcs12FileName);
-            //System.out.println("Signaturblock?: " + signText);
-            //System.out.println("Sprache der Blocks: " + signLanguage);
-            //System.out.println("Signaturlogo: " + sigLogo);
             Rectangle signatureBlock;
 
             java.security.Security.insertProviderAt(
@@ -92,24 +85,20 @@ public class DoSignPDF {
                 // stp = PdfStamper.createSignature(reader, fout, '\0');
                 stp = PdfStamper.createSignature(reader, fout, '\0', null, true);
                 HashMap pdfInfo = reader.getInfo();
-                String pdfInfoProducer = pdfInfo.get("Producer").toString();
+//                String pdfInfoProducer = pdfInfo.get("Producer").toString();
+                Object pdfInfoProducerObject = pdfInfo.get("Producer");
+                String pdfInfoProducer = null;
+                if (pdfInfoProducerObject == null) {
+                    pdfInfoProducer = "unknown";
+                } else {
+                    pdfInfoProducer = pdfInfo.get("Producer").toString();
+                }
                 pdfInfo.put("Producer", pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")");
                 stp.setMoreInfo(pdfInfo);
                 if (signText) {
                     String greet, signator, datestr, ca, serial, special, note, urn, urnvalue;
                     int specialcount = 0;
-//                    ResourceBundle block = ResourceBundle.getBundle(
-//                            "at/gv/wien/PortableSigner/Signatureblock");
-//                    greet = block.getString(signLanguage + "-greeting");
-//                    signator = block.getString(signLanguage + "-signator");
-//                    datestr = block.getString(signLanguage + "-date");
-//                    ca = block.getString(signLanguage + "-issuer");
-//                    serial = block.getString(signLanguage + "-serial");
-//                    special = block.getString(signLanguage + "-special");
-//                    note = block.getString(signLanguage + "-note");
-//                    urn = block.getString(signLanguage + "-urn");
-//                    urnvalue = block.getString(signLanguage + "-urnvalue");
-                    ResourceBundle block = ResourceBundle.getBundle(
+                  ResourceBundle block = ResourceBundle.getBundle(
                             "at/gv/wien/PortableSigner/Signatureblock_" + signLanguage);
                     greet = block.getString("greeting");
                     signator = block.getString("signator");
@@ -222,9 +211,6 @@ public class DoSignPDF {
                             new PdfPCell(new Paragraph(
                             new Chunk(note,
                             new Font(Font.HELVETICA, 10, Font.BOLD))));
-                    //commentcell.setPaddingTop(10);
-                    //commentcell.setColspan(2);
-                    // commentcell.setBorderWidth(0f);
                     if (!sigComment.equals("")) {
                         signatureBlockCompleteTable.addCell(notecell);
                         signatureBlockCompleteTable.addCell(commentcell);
@@ -236,51 +222,6 @@ public class DoSignPDF {
                             topy - 20 - 20,
                             30 + signatureBlockCompleteTable.getTotalWidth(),
                             topy - 20);
-//                    //////
-//                    AcroFields af = reader.getAcroFields();
-//                    ArrayList names = af.getSignatureNames();
-//                    for (int k = 0; k < names.size(); ++k) {
-//                        String name = (String) names.get(k);
-//                        System.out.println("Signature name: " + name);
-//                        System.out.println("\tSignature covers whole document: " + af.signatureCoversWholeDocument(name));
-//                        System.out.println("\tDocument revision: " + af.getRevision(name) + " of " + af.getTotalRevisions());
-//                        PdfPKCS7 pk = af.verifySignature(name);
-//                        X509Certificate tempsigner = pk.getSigningCertificate();
-//                        Calendar cal = pk.getSignDate();
-//                        Certificate pkc[] = pk.getCertificates();
-//                        java.util.ResourceBundle tempoid =
-//                                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/SpecialOID");
-//                        String tmpEgovOID = "";
-//
-//                        for (Enumeration<String> o = tempoid.getKeys(); o.hasMoreElements();) {
-//                            String element = o.nextElement();
-//                            // System.out.println(element + ":" + oid.getString(element));
-//                            if (tempsigner.getNonCriticalExtensionOIDs().contains(element)) {
-//                                if (!tmpEgovOID.equals("")) {
-//                                    tmpEgovOID += ", ";
-//                                }
-//                                tmpEgovOID += tempoid.getString(element) + " (OID=" + element + ")";
-//                            }
-//                        }
-//                        //System.out.println("\tSigniert von: " + PdfPKCS7.getSubjectFields(pk.getSigningCertificate()));
-//                        System.out.println("\tSigniert von: " + tempsigner.getSubjectX500Principal().toString());
-//                        System.out.println("\tDatum: " + cal.getTime().toString());
-//                        System.out.println("\tAusgestellt von: " + tempsigner.getIssuerX500Principal().toString());
-//                        System.out.println("\tSeriennummer: " + tempsigner.getSerialNumber());
-//                        if (!tmpEgovOID.equals("")) {
-//                            System.out.println("\tVerwaltungseigenschaft: " + tmpEgovOID);
-//                        }
-//                        System.out.println("\n");
-//                        System.out.println("\tDocument modified: " + !pk.verify());
-////                Object fails[] = PdfPKCS7.verifyCertificates(pkc, kall, null, cal);
-////                if (fails == null) {
-////                    System.out.println("\tCertificates verified against the KeyStore");
-////                } else {
-////                    System.out.println("\tCertificate failed: " + fails[1]);
-////                }
-//                    }
-//
-//                //////
                 } else {
                     signatureBlock = new Rectangle(0, 0, 0, 0); // fake definition
                 }
@@ -289,10 +230,6 @@ public class DoSignPDF {
                         PdfSignatureAppearance.WINCER_SIGNED);
                 sap.setReason(signReason);
                 sap.setLocation(signLocation);
-//                if (signText) {
-//                    sap.setVisibleSignature(signatureBlock,
-//                            pages + 1, "PortableSigner");
-//                }
                 if (finalize) {
                     sap.setCertificationLevel(PdfSignatureAppearance.CERTIFIED_NO_CHANGES_ALLOWED);
                 } else {

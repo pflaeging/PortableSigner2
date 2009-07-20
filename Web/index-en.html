@@ -24,14 +24,13 @@
  alt="Logo" align="bottom" border="0" height="115" width="139">PortableSigner</h1>
 <div style="text-align: center;"><font
  style="color: rgb(153, 0, 0); font-weight: bold;" size="+1">New
-version 1.4!<br>
+version 1.6!<br>
 </font>
-<div style="text-align: left;">
-<br>
+<div style="text-align: left;"><br>
 </div>
 </div>
 <br>
-<ul class="readonly" id="mozToc">
+<ol class="readonly" id="mozToc">
 <!--mozToc h2 1 h3 2 h4 3 h5 4-->
   <li><a href="#mozTocId151173">Tool to sign Portable
 Document Files (PDF)</a></li>
@@ -41,13 +40,13 @@ Document Files (PDF)</a></li>
 and download</a></li>
   <li><a href="#mozTocId315610">What is needed?</a></li>
   <li><a href="#mozTocId962483">Operating modes</a>
-    <ul>
+    <ol>
       <li><a href="#mozTocId305467">GUI Desktop Modus</a></li>
       <li><a href="#mozTocId484218">Commandline Modus</a></li>
-    </ul>
+    </ol>
   </li>
-  <li><a href="#mozTocId782406">New in version 1.4</a></li>
-</ul>
+  <li><a href="#mozTocId782406">New in version 1.6</a></li>
+</ol>
 <h2><a class="mozTocH2" name="mozTocId151173"></a>Tool to sign Portable
 Document Files (PDF)</h2>
 <p><br>
@@ -80,6 +79,11 @@ erzeugt. [german]</li>
   <li>RubyPDFBlog <a
  href="http://blog.rubypdf.com/index.php?option=com_docman&amp;paged=9&amp;task=view">is
 mentioning PortableSigner</a>. [english]</li>
+  <li>"<a
+ href="http://www.linux-magazin.de/online_artikel/signieren_von_pdf_dokumenten_mit_portablesigner?category=0">Signieren
+von PDF-Dokumenten mit Portablesigner</a>" von Florian Effenberg im
+Linux Magazin [german]<br>
+  </li>
 </ul>
 <h2><a class="mozTocH2" name="mozTocId158777"></a>Sourceforge.net page
 and download</h2>
@@ -123,8 +127,8 @@ directory: </p>
 <br>
 Now you see something like this:<br>
 <br>
-<img style="border: 0px solid ; width: 611px; height: 518px;"
- alt="Screenshot" src="1.4/MainScreen.png" name="graphics6"
+<img style="border: 0px solid ; width: 707px; height: 520px;"
+ alt="Screenshot" src="1.6/MainScreen.png" name="graphics6"
  align="middle"><br>
 </p>
 <p><br>
@@ -158,8 +162,17 @@ block as last page of the document.</p>
     <p>Ready! </p>
   </li>
 </ol>
-<p><br>
-Here's the "About ..." dialog. please include the
+<p>Is the Checkbox for "Append signature block" checked, there's an
+additional page on the output document with the following block:<br>
+</p>
+<p><img style="width: 888px; height: 197px;" alt="Signatureblock"
+ src="1.6/Signatureblock.png"><br>
+</p>
+<p>Here's the option screen:<br>
+<img style="width: 550px; height: 550px;" alt="Options"
+ src="1.6/Options.png"><br>
+</p>
+<p>Here's the "About ..." dialog. please include the
 version info in every request to me!<br>
 </p>
 <p><img style="border: 0px solid ; width: 500px; height: 250px;"
@@ -169,13 +182,8 @@ version info in every request to me!<br>
 <h3><a class="mozTocH3" name="mozTocId484218"></a>Commandline Modus</h3>
 <p>You can use the following commandline parameter:</p>
 <pre><font face="monospace"><b>pfp$</b> java -jar PortableSigner.jar -h</font><br><font
- face="monospace">usage: PortableSigner<br> -c &lt;arg&gt;   Comment under signature block (text)<br> -f         If this is set, the document is NOT finalized<br></font>&nbsp;<font
- face="monospace">-h         Help (this page)</font><br> <font
- face="monospace">-n         Without GUI</font><br> <font
- face="monospace">-o &lt;arg&gt;   Outputfile (PDF)</font><br> <font
- face="monospace">-p &lt;arg&gt;   Signaturepassword</font><br> <font
- face="monospace">-s &lt;arg&gt;   Signaturefile (P12)</font><br> <font
- face="monospace">-t &lt;arg&gt;   Inputfile (PDF)</font><br><b>pfp$</b></pre>
+ face="monospace">usage: PortableSigner<br> -b &lt;arg&gt;              Append signature block [german|english|polish] as<br>                       parameter<br> -c &lt;arg&gt;              Comment under signature block (text)<br> -f                    If this is set, the document is NOT finalized<br> -h                    Help (this page)<br> -i &lt;arg&gt;              Image file for signature block<br> -l &lt;arg&gt;              Contents of "Location" - field (text)<br> -n                    Without GUI<br> -o &lt;arg&gt;              Outputfile (PDF)<br> -ownerpwd &lt;arg&gt;       Owner password<br> -ownerpwdfile &lt;arg&gt;   Owner password file<br> -p &lt;arg&gt;              Signaturepassword<br> -pwdfile &lt;arg&gt;        Password file<br> -r &lt;arg&gt;              Contents of "Reason" - field (text)<br> -s &lt;arg&gt;              Signaturefile (P12 or PFX)<br> -t &lt;arg&gt;              Inputfile (PDF)<br></font><font
+ face="monospace"></font><b>pfp$</b></pre>
 <p>
 For the example above the following commandline is required:</p>
 <pre><font face="monospace"><b>pfp$</b> java -jar PortableSigner.jar -n \</font><br>        <font
@@ -187,24 +195,28 @@ For the example above the following commandline is required:</p>
 The switch "-n" turns the GUI off. In all other cases the
 GUI is invoked to support macro mode calling!<br>
 </p>
-<h2><a class="mozTocH2" name="mozTocId782406"></a>New in version 1.4</h2>
+<h2><a class="mozTocH2" name="mozTocId782406"></a>New in version 1.6</h2>
 &nbsp;
 Changes in version 1.4:<br>
 <ul>
-  <li>There's a warning on startup, if the JCE "Java unrestricted
-Policy" is not enabled.<br>
-  </li>
-  <li>You can add a comment to the signature block with descriptions.</li>
-  <li>There's an option to generat a not "finalized" document. With
-this option it is possible to sign a document multiple times. The last
-signer should finalize the document to generate the original "Look
-&amp; Feel" while reading the document with Acrobat Reader.</li>
-  <li>The GUI components have ToolTips. You can disable the ToolTips
-via the Help menu.<br>
-  </li>
+  <li>Preview buttons</li>
+  <li>polish localization</li>
+  <li>In commandline mode it is possible to sign encrypted documents</li>
+  <li>In commandline mode it is possible to work with a password file</li>
+  <li>The document has not to be finalized. With this option it is
+possible to sign multiple times. Only the last signer has to finalize
+the document.</li>
+  <li>The localization method for the signature block has been altered.
+So it's easier to add new languages (see <a href="Translation.txt">Translation.txt</a>).</li>
+  <li>There's the possibility to make an "intranet" build for easier
+deployment in intranets (see <a href="HowTo-InternalUse.txt">HowTo-InternalUse.txt</a>).</li>
+  <li>The signature block is now in conformance with the Austrina
+e-government rules.</li>
 </ul>
-<hr>
-<p>Peter Pfläging &lt;<a href="mailto:peter.pflaeging@wien.gv.at">peter.pflaeging@wien.gv.at</a>&gt;<br>
+<hr style="width: 100%; height: 2px;">Peter Pfläging &lt;<a
+ href="mailto:peter.pflaeging@wien.gv.at">peter.pflaeging@wien.gv.at</a>&gt;<br>
+<p>Thanks to all the people helping me with ideas, translations and
+patches,...<br>
 <br>
 This&nbsp;
 program is made by the EDP department of the Municipality of Vienna

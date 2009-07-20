@@ -128,7 +128,8 @@ public class SignCommandLine {
                                 if (r < 0) {
                                     break;
                                 }
-                                password += new String(Arrays.copyOfRange(pwd, 0, r));
+                                //password += new String(Arrays.copyOfRange(pwd, 0, r));
+                                password += new String(Arrays.toString(pwd));
                                 password = password.trim();
                             } while (pwdfis.available() > 0);
                             pwdfis.close();
@@ -148,7 +149,8 @@ public class SignCommandLine {
                             if (r < 0) {
                                 break;
                             }
-                            password += new String(Arrays.copyOfRange(pwd, 0, r));
+                            //password += new String(Arrays.copyOfRange(pwd, 0, r));
+                            password += new String(Arrays.toString(pwd));
                             password = password.trim();
                         } while (System.in.available() > 0);
                     } catch (java.io.IOException ex) {
@@ -171,7 +173,8 @@ public class SignCommandLine {
                             if (r < 0) {
                                 break;
                             }
-                            tmp = Arrays.copyOfRange(tmp, 0, r);
+                            //tmp = Arrays.copyOfRange(tmp, 0, r);
+                            System.arraycopy(tmp, 0, tmp, 0, r);
                             full = new byte[ownerPwd.length + tmp.length];
                             System.arraycopy(ownerPwd, 0, full, 0, ownerPwd.length);
                             System.arraycopy(tmp, 0, full, ownerPwd.length, tmp.length);
