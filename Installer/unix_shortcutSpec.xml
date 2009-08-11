@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <shortcuts>
   	<skipIfNotSupported/>
-  	<programGroup defaultName="MagWien-Applikationen"
-                location="applications"/>
   	<shortcut
             name="PortableSigner"
             type="Application"
@@ -19,7 +17,8 @@
             encoding="UTF-8"
             KdeSubstUID="false"
             initialState="normal"
-            startup="no">
+            startup="no"
+            Categories="﻿Application;Office">﻿Application;Office
             <createForPack name="Base"/>
   </shortcut>
 </shortcuts>

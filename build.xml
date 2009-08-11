@@ -74,10 +74,14 @@
         <dirname property="dist.jar.dir" file="${dist.jar}"/>
         <dirname property="mac.src.dir" file="mac/PortableSigner.app"/>
         <dirname property="mac.lib.dir" file="${dist.jar.dir}/PortableSigner.app/Contents/Resources/Java/javadir.empty"/>
+        <dirname property="linux.src.dir" file="linux"/>
         <copy file="Readme.txt" todir="${dist.jar.dir}" overwrite="true"/>
         <copy todir="${dist.jar.dir}">
             <fileset dir="${mac.src.dir}">
                 <include name="PortableSigner.app/"/>
+            </fileset>
+            <fileset dir="${linux.src.dir}">
+                <include name="linux/" />
             </fileset>
         </copy>
         <copy todir="${mac.lib.dir}"  verbose="true">
@@ -88,6 +92,7 @@
                 <include name="PortableSigner.jar"/>
             </fileset>    
         </copy>
+        <move file="dist/linux/linux-install.sh" todir="dist" />
         <chmod file="${dist.jar.dir}/PortableSigner.app/Contents/MacOS/JavaApplicationStub" perm="755" verbose="true"/>
         <taskdef classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" name="launch4j"/>
         <launch4j configFile="${launch4j.config}"/>
@@ -115,6 +120,8 @@
         <zip destfile="${dist.jar.dir}/ship/PortableSigner-Generic.zip" casesensitive="true">
             <fileset dir="${dist.jar.dir}">
                 <include name="PortableSigner.jar"/>
+                <include name="linux/**" />
+                <include name="linux-install.sh" />
                 <include name="lib/**"/>
                 <include name="Readme.txt"/>
             </fileset>
@@ -124,9 +131,6 @@
             <arg value="./Installer/install.sh" />
         </exec>        
         <taskdef classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" name="launch4j"/>
-        <launch4j configFile="./Installer/Installer-launch4j.xml"/>
-
-
-        
+        <launch4j configFile="./Installer/Installer-launch4j.xml"/>        
     </target>
 </project>

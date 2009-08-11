@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Terminal=false
+Exec=PortableSigner
+Icon=/usr/local/PortableSigner/PortableSignerLogo.png
+Type=Application
+Categories=Application;Office
+StartupNotify=false
+Name=PortableSigner
+Name[de]=PortableSigner PDF signieren
+Name[en_GB]=PortableSigner sign PDF files
+Name[en]=PortableSigner sign PDF files
+Comment=Digital sign PDF files with X.509 certificates
+Comment[de]=Digitales signieren von PDF Dateien mit X.509 Zertifikaten
+Comment[en_GB]=Digital sign PDF files with X.509 certificates
+Comment[en]=Digital sign PDF files with X.509 certificates
+

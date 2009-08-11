@@ -5,6 +5,12 @@ Start program with
 
 java -jar PortableSigner
 
+There's a minimal installer in the package PortableSigner-Generic-x.x.xxx.zip
+in the directory linux/.
+
+There's a full blown installer also for the required JCE Policies for Windows as
+PortableSigner-Installer-x.x.xxx.exe.
+
 The following additional libraries are provided and used:
 
     - itext (siehe auch http://itext.sourceforge.net)
@@ -45,6 +51,12 @@ Deutsch
 Das vorliegende Programm laesst sich in einer Java 1.5.0 Umgebung mit
 
 java -jar PortableSigner.jar starten.
+
+Es gibt minimalen Installationssupport für Linux im Paket
+PortableSigner-Generic-x.x.xxx.zip im Verziechnis linux/.
+
+Es gibt einen kompletten Installer auch mit den benötigten JCE Policies für
+Windows als Paket: PortableSigner-Installer-x.x.xxx.exe.
 
 Es verwendet folgende zusaetzliche Klassenbibliotheken:
 
