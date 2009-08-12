@@ -24,32 +24,31 @@
  border="0" height="115" width="139">PortableSigner</h1>
 <div style="text-align: center;"><font
  style="color: rgb(153, 0, 0); font-weight: bold;" size="+1">Neue
-Version 1.6!</font><br>
+Version 1.7!</font><br>
 </div>
 <font style="color: rgb(153, 0, 0); font-weight: bold;" size="+1"><br>
-</font>
-<ol class="readonly" id="mozToc">
-<!--mozToc h1 1 h2 2 h3 3 h4 4 h5 5 h6 6-->
-  <li><a href="#mozTocId525326">PortableSigner</a>
-    <ol>
-      <li><a href="#mozTocId107348">Ein Tool zum
-Signieren von PDF (Portable Document Format) Dateien</a></li>
-      <li><a href="#mozTocId383062">Funktionen</a></li>
-      <li><a href="#mozTocId425351">Pressemeldungen im Web</a></li>
-      <li><a href="#mozTocId268698">Homepage und Download
-des Projektes bei Sourceforge.net</a></li>
-      <li><a href="#mozTocId780790">Was benötigt man?</a></li>
-      <li><a href="#mozTocId680699">Betriebsmodi</a>
-        <ol>
-          <li><a href="#mozTocId816625">GUI Desktop Modus</a></li>
-          <li><a href="#mozTocId935183">Commandline Modus</a></li>
-        </ol>
+</font><br>
+<h1>Neu</h1>
+<ul>
+  <li>PortableSigner hat die ersten Ansätze für eine saubere
+Installation unter Linux:</li>
+  <ul>
+    <li>Es gibt einen Install Script (leider noch kein Paket)</li>
+    <li>Unter Linux muss Java installiert sein. Für Ubuntu ist das: <br>
+    </li>
+    <ul>
+      <li>sun-java6-bin <br>
       </li>
-      <li><a href="#mozTocId887001">Neu in der
-Version 1.6</a></li>
-    </ol>
-  </li>
-</ol>
+      <li>sun-java6-jre <br>
+      </li>
+      <li>tzdata-java</li>
+    </ul>
+    <li>Es gibt einen Shell commandline wrapper.</li>
+    <li>Es wird (zumindest unter Gnome) ein Menueintrag generiert</li>
+  </ul>
+  <li>PortableSigner.jar ist als Library unter Java verwendbar (Vielen
+Dank an Denis Torresan)</li>
+</ul>
 <br>
 <h2><a class="mozTocH2" name="mozTocId107348"></a>Ein Tool zum
 Signieren von PDF (Portable Document Format) Dateien</h2>
@@ -178,16 +177,10 @@ Um auch den Aufruf aus Macros zu unterstützen schaltet nur der
 Schalter "<tt>-n</tt>" die GUI Komponente des Programms komplett
 aus!<br>
 </p>
-<h2><a class="mozTocH2" name="mozTocId887001"></a>Neu in der
-Version 1.6</h2>
-In der Version 1.6 hat sich folgendes geändert:<br>
+<h2>Zu beachten, ...<br>
+</h2>
+<br>
 <ul>
-  <li>Es gibt nun Vorschau Buttons, welche für die Dateien den
-verbundenen PDF Reader aufrufen</li>
-  <li>Es wurde eine polnische Lokalisierung hinzugefügt</li>
-  <li>Es gibt die Möglichkeit (im Commandline Modus) verschlüsselte
-Dateien zu signieren</li>
-  <li>Im Commandline Modus kann man eine Datei mit dem Passwort angeben</li>
   <li>Das Dokument muss nicht finalisiert werden. Auf diese Weise
 können mehrere Zertifikate aufgebracht werden. Nur der Letzte
 finalisiert.</li>

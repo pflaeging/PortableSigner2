@@ -61,6 +61,7 @@ public class PDFSigner {
 
             PdfReader reader = null;
             try {
+//                System.out.println("Password:" + ownerPassword.toString());
 				if (ownerPassword == null)
 					reader = new PdfReader(pdfInputFileName);
 				else

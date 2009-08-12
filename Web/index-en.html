@@ -24,29 +24,31 @@
  alt="Logo" align="bottom" border="0" height="115" width="139">PortableSigner</h1>
 <div style="text-align: center;"><font
  style="color: rgb(153, 0, 0); font-weight: bold;" size="+1">New
-version 1.6!<br>
+version 1.7!<br>
 </font>
 <div style="text-align: left;"><br>
 </div>
 </div>
 <br>
-<ol class="readonly" id="mozToc">
-<!--mozToc h2 1 h3 2 h4 3 h5 4-->
-  <li><a href="#mozTocId151173">Tool to sign Portable
-Document Files (PDF)</a></li>
-  <li><a href="#mozTocId759510">Features</a></li>
-  <li><a href="#mozTocId399924">Press releases</a></li>
-  <li><a href="#mozTocId158777">Sourceforge.net page
-and download</a></li>
-  <li><a href="#mozTocId315610">What is needed?</a></li>
-  <li><a href="#mozTocId962483">Operating modes</a>
-    <ol>
-      <li><a href="#mozTocId305467">GUI Desktop Modus</a></li>
-      <li><a href="#mozTocId484218">Commandline Modus</a></li>
-    </ol>
-  </li>
-  <li><a href="#mozTocId782406">New in version 1.6</a></li>
-</ol>
+<h1>New</h1>
+<ul>
+  <li>First steps towards a clean Linux installation:</li>
+  <ul>
+    <li>There's an install script (sorry, not a real packet for now)</li>
+    <li>Under Linux, the following Java Packages should be installed
+(Reference for me is Ubuntu 9.04):</li>
+    <ul>
+      <li>sun-java6-bin</li>
+      <li>sun-java6-jre</li>
+      <li>tzdata-java</li>
+    </ul>
+    <li>There's a shell commandline wrapper</li>
+    <li>At least under Gnome there's a menu shortcut.</li>
+  </ul>
+  <li>PortableSigner.jar is usable as library in Java (thanks to Denis
+Torresan)</li>
+</ul>
+<br>
 <h2><a class="mozTocH2" name="mozTocId151173"></a>Tool to sign Portable
 Document Files (PDF)</h2>
 <p><br>
@@ -195,23 +197,22 @@ For the example above the following commandline is required:</p>
 The switch "-n" turns the GUI off. In all other cases the
 GUI is invoked to support macro mode calling!<br>
 </p>
-<h2><a class="mozTocH2" name="mozTocId782406"></a>New in version 1.6</h2>
-&nbsp;
-Changes in version 1.4:<br>
+<h2>Notable</h2>
 <ul>
-  <li>Preview buttons</li>
-  <li>polish localization</li>
-  <li>In commandline mode it is possible to sign encrypted documents</li>
-  <li>In commandline mode it is possible to work with a password file</li>
-  <li>The document has not to be finalized. With this option it is
+  <li>&nbsp;The document has not to be finalized. With this option it
+is
 possible to sign multiple times. Only the last signer has to finalize
-the document.</li>
+the document. </li>
   <li>The localization method for the signature block has been altered.
-So it's easier to add new languages (see <a href="Translation.txt">Translation.txt</a>).</li>
+So it's easier to add new languages (see <a href="Translation.txt">Translation.txt</a>).
+  </li>
   <li>There's the possibility to make an "intranet" build for easier
-deployment in intranets (see <a href="HowTo-InternalUse.txt">HowTo-InternalUse.txt</a>).</li>
-  <li>The signature block is now in conformance with the Austrina
+deployment in intranets (see <a href="HowTo-InternalUse.txt">HowTo-InternalUse.txt</a>).
+  </li>
+  <li>The signature block is now in conformance with the Austrian
 e-government rules.</li>
+</ul>
+<ul>
 </ul>
 <hr style="width: 100%; height: 2px;">Peter Pfläging &lt;<a
  href="mailto:peter.pflaeging@wien.gv.at">peter.pflaeging@wien.gv.at</a>&gt;<br>

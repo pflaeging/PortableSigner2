@@ -74,28 +74,21 @@ public class SignCommandLine {
         HelpFormatter usage = new HelpFormatter();
         try {
             cmd = parser.parse(options, args);
-            input = cmd.getOptionValue("t");
-            output = cmd.getOptionValue("o");
-            signature = cmd.getOptionValue("s");
-            password = cmd.getOptionValue("p");
+            input = cmd.getOptionValue("t", "");
+            output = cmd.getOptionValue("o", "");
+            signature = cmd.getOptionValue("s", "");
+            password = cmd.getOptionValue("p", "");
             nogui = cmd.hasOption("n");
             help = cmd.hasOption("h");
             finalize = !cmd.hasOption("f");
-            sigblock = cmd.getOptionValue("b");
-            sigimage = cmd.getOptionValue("i");
-            comment = cmd.getOptionValue("c");
-            reason = cmd.getOptionValue("r");
-            location = cmd.getOptionValue("l");
-            pwdFile = cmd.getOptionValue("pwdfile");
-            ownerPwdString = cmd.getOptionValue("ownerpwd");
-            ownerPwdFile = cmd.getOptionValue("ownerpwdfile");
-            if (sigblock == null) {
-                sigblock = "";
-                comment = "";
-            }
-            if (sigimage == null) {
-                sigimage = "";
-            }
+            sigblock = cmd.getOptionValue("b", "");
+            sigimage = cmd.getOptionValue("i", "");
+            comment = cmd.getOptionValue("c", "");
+            reason = cmd.getOptionValue("r", "");
+            location = cmd.getOptionValue("l", "");
+            pwdFile = cmd.getOptionValue("pwdfile", "");
+            ownerPwdString = cmd.getOptionValue("ownerpwd", "");
+            ownerPwdFile = cmd.getOptionValue("ownerpwdfile", "");
 
             if (cmd.getArgs().length != 0) {
                 throw new ParseException(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
@@ -108,15 +101,15 @@ public class SignCommandLine {
             System.exit(3);
         }
         if (nogui) {
-            if (input == null || output == null || signature == null) {
+            if (input.equals("") || output.equals("") || signature.equals("")) {
                 System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
                         .getString("CLI-MissingArguments"));
                 usage.printHelp("PortableSigner", options);
                 System.exit(2);
             }
-            if (password == null) {
+            if (password.equals("")) {
                 // password missing
-                if (pwdFile != null) {
+                if (!pwdFile.equals("")) {
                     // read the password from the given file
                     try {
                         FileInputStream pwdfis = new FileInputStream(pwdFile);
@@ -128,7 +121,6 @@ public class SignCommandLine {
                                 if (r < 0) {
                                     break;
                                 }
-                                //password += new String(Arrays.copyOfRange(pwd, 0, r));
                                 password += new String(Arrays.toString(pwd));
                                 password = password.trim();
                             } while (pwdfis.available() > 0);
@@ -157,11 +149,11 @@ public class SignCommandLine {
                     }
                 }
             }
-            if (ownerPwdString == null && ownerPwdFile == null) {
-                ownerPwd = null;
-            } else if (ownerPwdString != null) {
+            if (!ownerPwdString.equals("") && !ownerPwdFile.equals("")) {
+                ownerPwd = new byte[0];
+            } else if (!ownerPwdString.equals("")) {
                 ownerPwd = ownerPwdString.getBytes();
-            } else if (ownerPwdFile != null) {
+            } else if (!ownerPwdFile.equals("")) {
                 try {
                     FileInputStream pwdfis = new FileInputStream(ownerPwdFile);
                     ownerPwd = new byte[0];
@@ -198,5 +190,18 @@ public class SignCommandLine {
             usage.printHelp("PortableSigner", options);
             System.exit(1);
         }
+//        System.err.println("CMDline: input: " + input);
+//        System.err.println("CMDline: output: " + output);
+//        System.err.println("CMDline: signature: " + signature);
+//        System.err.println("CMDline: password: " + password);
+//        System.err.println("CMDline: sigblock: " + sigblock);
+//        System.err.println("CMDline: sigimage: " + sigimage);
+//        System.err.println("CMDline: comment: " + comment);
+//        System.err.println("CMDline: reason: " + reason);
+//        System.err.println("CMDline: location: " + location);
+//        System.err.println("CMDline: pwdFile: " + pwdFile);
+//        System.err.println("CMDline: ownerPwdFile: " + ownerPwdFile);
+//        System.err.println("CMDline: ownerPwdString: " + ownerPwdString);
+//        System.err.println("CMDline: ownerPwd: " + ownerPwd.toString());
     }
 }

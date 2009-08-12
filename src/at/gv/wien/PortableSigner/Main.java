@@ -1573,12 +1573,13 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
             }
 
             mycommand = new SignCommandLine(args);
+//            System.out.println("Main: Password:" + mycommand.ownerPwd.toString());
 
             if (mycommand.nogui) {
                 if (!workingJCE) {
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("JCEmissing");
                     System.exit(254);
-                }                    
+                }
                 new DoSignPDF(mycommand.input,
                         mycommand.output, 
                         mycommand.signature, 

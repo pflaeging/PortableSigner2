@@ -1,7 +1,7 @@
 /*
  * Version.java
  *
- * for second 1.6.xx (Release 1.6)
+ * for 1.7.xx (Release 1.7)
  */
 
 package at.gv.wien.PortableSigner;

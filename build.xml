@@ -79,6 +79,7 @@
         <copy todir="${dist.jar.dir}">
             <fileset dir="${mac.src.dir}">
                 <include name="PortableSigner.app/"/>
+                <include name="Install PortableSigner Commandline.scpt"/>
             </fileset>
             <fileset dir="${linux.src.dir}">
                 <include name="linux/" />
@@ -94,6 +95,7 @@
         </copy>
         <move file="dist/linux/linux-install.sh" todir="dist" />
         <chmod file="${dist.jar.dir}/PortableSigner.app/Contents/MacOS/JavaApplicationStub" perm="755" verbose="true"/>
+        <chmod file="${dist.jar.dir}/PortableSigner.app/Contents/Resources/PortableSigner.sh" perm="755" verbose="true"/>
         <taskdef classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" name="launch4j"/>
         <launch4j configFile="${launch4j.config}"/>
 
@@ -113,6 +115,7 @@
             <tarfileset dir="${dist.jar.dir}" prefix="PortableSigner-MacOSX/">
                 <include name="PortableSigner.app/"/>
                 <include name="Readme.txt"/>
+                <include name="Install PortableSigner Commandline.scpt"/>
                 <exclude name="PortableSigner.app/Contents/MacOS/JavaApplicationStub"/>
             </tarfileset>
         </tar>
