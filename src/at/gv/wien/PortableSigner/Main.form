@@ -96,7 +96,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jScrollPaneAboutVersion" alignment="0" pref="413" max="32767" attributes="0"/>
+                              <Component id="jScrollPaneAboutVersion" alignment="0" pref="417" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabelAboutCopyright" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="144" max="32767" attributes="0"/>
@@ -121,7 +121,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelAboutText" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jScrollPaneAboutVersion" pref="145" max="32767" attributes="0"/>
+                  <Component id="jScrollPaneAboutVersion" pref="208" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonAboutOk" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -927,10 +927,10 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jSeparator1" alignment="0" pref="639" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="0" pref="646" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="361" max="32767" attributes="0"/>
+                      <EmptySpace pref="368" max="32767" attributes="0"/>
                       <Component id="jButtonAbout" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
