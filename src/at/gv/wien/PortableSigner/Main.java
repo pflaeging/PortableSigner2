@@ -2,6 +2,9 @@
  * Main.java
  *
  * Created on 21. September 2006, 09:13
+ * This File is part of PortableSigner (http://portablesigner.sf.net/)
+ *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
+ * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
  */
 
 package at.gv.wien.PortableSigner;
@@ -72,6 +75,9 @@ public class Main extends javax.swing.JFrame {
         if (operatingSystem.contains("Mac OS X")) {
             platform = "mac";
             System.setProperty(
+            "Quaqua.design","leopard"
+                    );
+            System.setProperty(
                     "Quaqua.tabLayoutPolicy","wrap"
                     );
             // set the Quaqua Look and Feel in the UIManager
@@ -84,19 +90,20 @@ public class Main extends javax.swing.JFrame {
                 // take an appropriate action here
                 System.err.println("Unable to load Aqua UI");
             }
-        } else if (operatingSystem.contains("Windows")) {
+        } else
+            if (operatingSystem.contains("Windows")) {
             platform = "windows";
             try {
                 UIManager.setLookAndFeel(
-                        "net.java.plaf.windows.WindowsLookAndFeel"
+                        "com.sun.java.swing.plaf.windows.WindowsLookAndFeel"
                         );
-                // set UI manager properties here that affect Quaqua
             } catch (Exception e) {
                 // take an appropriate action here
                 System.err.println("Unable to load Windows UI");
             }
 
-        } else {
+        } else
+        {
             platform = "other";
         }
       MultiLineToolTipUI.setMaximumWidth(250);
@@ -104,22 +111,22 @@ public class Main extends javax.swing.JFrame {
       javax.swing.ToolTipManager.sharedInstance().setDismissDelay(20000);
       
         initComponents();
-        if (mycommand.signature == null) {
+        if (mycommand.signature == null || mycommand.signature.equals("")) {
             jTextFieldSignaturefile.setText(prefs.lastP12File);
         } else {
             jTextFieldSignaturefile.setText(mycommand.signature);
         }
-        if (mycommand.input == null) {
+        if (mycommand.input == null || mycommand.input.equals("")) {
             jTextFieldInputfile.setText(prefs.lastInputFile);
         } else {
             jTextFieldInputfile.setText(mycommand.input);
         }
-        if (mycommand.output == null) {
+        if (mycommand.output == null || mycommand.output.equals("")) {
             jTextFieldOutputfile.setText(generateOutputFile(jTextFieldInputfile.getText()));
         } else {
             jTextFieldOutputfile.setText(mycommand.output);
         }
-        if (mycommand.password != null) {
+        if (mycommand.password != null || mycommand.password.equals("")) {
             jPasswordFieldPassword.setText(mycommand.password);
         }
         if (mycommand.sigimage.equals("")) {
@@ -127,17 +134,17 @@ public class Main extends javax.swing.JFrame {
         } else {
             jTextFieldOptionLogo.setText(mycommand.sigimage);
         }
-        if (mycommand.location ==  null) {
+        if (mycommand.location ==  null || mycommand.location.equals("")) {
             jTextFieldLocation.setText(prefs.signLocation);
         } else {
             jTextFieldLocation.setText(mycommand.location);
         }
-        if (mycommand.reason == null) {
+        if (mycommand.reason == null || mycommand.reason.equals("")) {
             jTextFieldReason.setText(prefs.signReason);
         } else {
             jTextFieldReason.setText(mycommand.reason);
         }
-        if (mycommand.comment.equals("")) {
+        if (mycommand.comment.equals("") || mycommand.comment.equals("")) {
             jTextPaneCommentField.setText(prefs.signComment);
         } else {
             jTextPaneCommentField.setText(mycommand.comment);

@@ -2,15 +2,14 @@
  * CommandLine.java
  *
  * Created on 25. Oktober 2006, 10:03
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
+ * This File is part of PortableSigner (http://portablesigner.sf.net/)
+ *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
+ * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
  */
 package at.gv.wien.PortableSigner;
 
 import org.apache.commons.cli.*;
 import java.io.FileInputStream;
-import java.util.Arrays;
 
 /**
  *
@@ -102,7 +101,8 @@ public class SignCommandLine {
         }
         if (nogui) {
             if (input.equals("") || output.equals("") || signature.equals("")) {
-                System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                System.err.println(java.util.ResourceBundle
+                        .getBundle("at/gv/wien/PortableSigner/i18n")
                         .getString("CLI-MissingArguments"));
                 usage.printHelp("PortableSigner", options);
                 System.exit(2);
@@ -121,7 +121,7 @@ public class SignCommandLine {
                                 if (r < 0) {
                                     break;
                                 }
-                                password += new String(Arrays.toString(pwd));
+                                password += new String(pwd);
                                 password = password.trim();
                             } while (pwdfis.available() > 0);
                             pwdfis.close();
@@ -131,7 +131,8 @@ public class SignCommandLine {
                     }
                 } else {
                     // no password file given, read from standard input
-                    System.out.print(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                    System.out.print(java.util.ResourceBundle
+                            .getBundle("at/gv/wien/PortableSigner/i18n")
                             .getString("CLI-MissingPassword"));
                     byte[] pwd = new byte[1024];
                     password = "";
@@ -141,8 +142,7 @@ public class SignCommandLine {
                             if (r < 0) {
                                 break;
                             }
-                            //password += new String(Arrays.copyOfRange(pwd, 0, r));
-                            password += new String(Arrays.toString(pwd));
+                            password += new String(pwd);
                             password = password.trim();
                         } while (System.in.available() > 0);
                     } catch (java.io.IOException ex) {

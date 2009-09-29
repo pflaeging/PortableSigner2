@@ -1,6 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This File is part of PortableSigner (http://portablesigner.sf.net/)
+ *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
+ * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
  */
 
 package at.gv.wien.PortableSigner;

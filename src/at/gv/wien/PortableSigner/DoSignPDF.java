@@ -2,6 +2,10 @@
  * DoSignPDF.java
  *
  * Created on 21. September 2006, 15:25
+ * This File is part of PortableSigner (http://portablesigner.sf.net/)
+ *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
+ * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
+ *
  * Patches and bugfixes from: dzoe@users.sourceforge.net
  *
  */

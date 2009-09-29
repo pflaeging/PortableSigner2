@@ -1,4 +1,8 @@
 /*
+ * This File is part of PortableSigner (http://portablesigner.sf.net/)
+ *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
+ * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
+ *
  * Stolen from http://de.pastebin.ca/942635
  */
 
@@ -6,7 +10,6 @@ package at.gv.wien.PortableSigner;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.text.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
