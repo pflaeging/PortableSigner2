@@ -1,7 +1,7 @@
 /*
  * Version.java
  *
- * for 1.7.xx (Release 1.7)
+ * for 1.8.xx (Release 1.8)
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
  * (c) Stadt Wien, Peter Pfläging <peter.pflaeging@wien.gv.at>
@@ -17,7 +17,7 @@ public class Version {
 	private static String author = "$Author$";
 	private static String revision = "$Revision$";
         private static String internaltag = "";
-        public static String release = "1.7" + internaltag;
+        public static String release = "1.8" + internaltag;
         
         public static String print;
         public static String version;

@@ -1,6 +1,6 @@
 #! /bin/sh
-VERSION=1.7
-SVNVERSION=`svnversion . |  cut -d: -f2 | sed s/.$//g`
+VERSION=1.8
+SVNVERSION=`svnversion . |  cut -d: -f2 | cut -c 1 -c 2 -c 3`
 SRCPATH=dist/ship/
 echo "Making Releases for:" $VERSION.$SVNVERSION
 cd $SRCPATH

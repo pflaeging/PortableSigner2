@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>JavaApplicationStub</string>
 	<key>CFBundleGetInfoString</key>
-	<string>PortableSigner 1.5</string>
+	<string>PortableSigner 1.8</string>
 	<key>CFBundleIconFile</key>
 	<string>PortableSigner.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>

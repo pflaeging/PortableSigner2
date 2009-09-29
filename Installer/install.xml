@@ -27,7 +27,7 @@ Installer for PortableSigner
     </locale>
     <resources>
         <res id="Installer.image" src="Icons/PortableSignerLogo.png" />
-        <res id="LicencePanel.licence" src="doc/License-LGPL.txt"/>
+        <res id="LicencePanel.licence" src="doc/eupl-v1.1.txt"/>
         <res id="InfoPanel.info" src="Readme.txt"/>
         <res id="packsLang.xml_deu" src="Installer/packsLang.xml_deu" />
         <res id="shortcutSpec.xml" src="Installer/win_shortcutSpec.xml"/>

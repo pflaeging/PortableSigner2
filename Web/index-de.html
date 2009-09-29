@@ -1,217 +1,251 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html lang="de-at">
-<head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>PortableSigner Hauptseite</title>
-  <meta name="AUTHOR" content="Peter Pflaeging">
-  <meta name="CREATED" content="20070416;12204100">
-  <meta name="CHANGEDBY" content="Peter Pfläging">
-  <meta name="CHANGED" content="20070416;12412100">
-</head>
-<body dir="ltr" lang="de-AT">
-<p align="right"><a href=""><font color="#800000"><img src="austria.png"
- name="graphics1" alt="Austria" align="bottom" border="1" height="18"
- width="26"></font></a><a href=""><font color="#800000"><img
- src="germany.png" name="graphics2" alt="Deutschland" align="bottom"
- border="1" height="18" width="30"></font></a>
-&nbsp; <a href="index-en.html"><font color="#000080"><img
- src="united_kingdom.png" name="graphics3" alt="England" align="bottom"
- border="1" height="15" width="30"></font></a><a href="index-en.html"><font
- color="#000080"><img src="united_states.png" name="graphics4" alt="USA"
- align="bottom" border="1" height="16" width="30"></font></a></p>
-<h1 align="center"><a class="mozTocH1" name="mozTocId525326"></a><img
- src="PortableSignerLogo.png" name="graphics5" alt="Logo" align="bottom"
- border="0" height="115" width="139">PortableSigner</h1>
-<div style="text-align: center;"><font
- style="color: rgb(153, 0, 0); font-weight: bold;" size="+1">Neue
-Version 1.7!</font><br>
-</div>
-<font style="color: rgb(153, 0, 0); font-weight: bold;" size="+1"><br>
-</font>
-<h3>Download Links</h3>
-<ul>
-  <li><a href="https://forge.osor.eu/projects/portablesigner/">OSOR.eu
-Project Page</a></li>
-  <li><a href="http://sourceforge.net/projects/portablesigner/">Sourceforge
-Project Page</a></li>
-  <li><a
- href="http://portablesigner.svn.sourceforge.net/viewvc/portablesigner/">Source
-Code Repository</a></li>
-</ul>
-Sowohl auf OSOR.eu als auch auf Sourceforge.net ist der Download und
-der Sourcecode verfügbar.<br>
-<h1>Neu</h1>
-<ul>
-  <li>PortableSigner hat die ersten Ansätze für eine saubere
-Installation unter Linux:</li>
-  <ul>
-    <li>Es gibt einen Install Script (leider noch kein Paket)</li>
-    <li>Unter Linux muss Java installiert sein. Für Ubuntu ist das: <br>
-    </li>
-    <ul>
-      <li>sun-java6-bin <br>
-      </li>
-      <li>sun-java6-jre <br>
-      </li>
-      <li>tzdata-java</li>
-    </ul>
-    <li>Es gibt einen Shell commandline wrapper.</li>
-    <li>Es wird (zumindest unter Gnome) ein Menueintrag generiert</li>
-  </ul>
-  <li>PortableSigner.jar ist als Library unter Java verwendbar (Vielen
-Dank an Denis Torresan)</li>
-</ul>
-<br>
-<h2><a class="mozTocH2" name="mozTocId107348"></a>Ein Tool zum
-Signieren von PDF (Portable Document Format) Dateien</h2>
-<p>PortableSigner ist ein Java Programm zum digitalen Signieren (mit
-X.509 Zertifikaten) von PDF Dateien. Es ist plattformunabhängig
-und läuft derzeit (zumindest) unter Windows (2000, XP, ...),
-Linux und Mac OS X.</p>
-<h2><a class="mozTocH2" name="mozTocId383062"></a>Funktionen</h2>
-<p>Man kann PDF Dokumente mit X.509 Zertifikaten digital signieren,
-und dafür sorgen, das diese Dokumente nicht weiter verändert
-werden können, ohne dass das Dokument seine Signatur verliert.
-Damit erreicht man eine elektronische "Unterschrift" auf
-nahezu beliebigen Dokumenten. Dies entspricht wohl am ehesten dem
-Ansatz "Electronic Paper".</p>
-<h2><a class="mozTocH2" name="mozTocId425351"></a>Pressemeldungen im Web</h2>
-Einige Publikationen haben schon über den PortableSigner berichtet:<br>
-<ul>
-  <li><a
- href="http://openpr.de/news/147183/Unverwechselbare-Dokumente-erstellen-mit-dem-PortableSigner.html"
- target="_blank">Unverwechselbare Dokumente erstellen mit dem
-PortableSigner</a> (<a href="http://openpr.de/" target="_blank">openPR.de</a>
-- Verlag deutsche Wirtschaft)</li>
-  <li><a
- href="http://systemoptimierungen.net/index.php?mact=News,cntnt01,detail,0&amp;cntnt01articleid=6&amp;cntnt01origid=15&amp;cntnt01dateformat=%25Y%2C%20%25b%20%25d&amp;cntnt01returnid=15"
- target="_blank">PDF Dateien kostenlos signieren</a> (<a
- href="http://systemoptimierungen.net/">systemOptimierungen.net</a>)</li>
-  <li>Wie man <a
- href="http://wiki.jtl-software.de/index.php/19._WORKAROUNDS"
- target="_blank">signierte PDF Dateien mit PortableSigne</a>r aus <a
- href="http://www.jtl-software.de/jtlwawi.php" target="_blank">JTL-Wabi</a>
-erzeugt.</li>
-  <li>RubyPDFBlog <a
- href="http://blog.rubypdf.com/index.php?option=com_docman&amp;paged=9&amp;task=view">erwähnt
-auch den PortableSigner</a>, obwohl der nun wirklich nicht in Ruby
-implementiert wurde.</li>
-  <li>"<a
- href="http://www.linux-magazin.de/online_artikel/signieren_von_pdf_dokumenten_mit_portablesigner?category=0">Signieren
-von PDF-Dokumenten mit Portablesigner</a>" von Florian Effenberg im
-Linux Magazin<br>
-  </li>
-</ul>
-<br>
-<h2><a class="mozTocH2" name="mozTocId780790"></a>Was benötigt man?</h2>
-<ul>
-  <li>Dieses Programm </li>
-  <li>Eine Java 1.5 oder 1.6 kompatible Laufzeitumgebung (siehe auch <a
- href="http://www.java.com/">http://www.java.com</a>) </li>
-  <li>Eine PKCS#12 Datei mit einem persönlichen Zertifikat (zum
-Beispiel von <a href="http://www.cacert.org/">CAcert</a> oder bei <a
- href="http://www.thawte.com/">Thawte</a>) </li>
-  <li>PDF Dateien (eh' klar, oder?) </li>
-</ul>
-<h2><a class="mozTocH2" name="mozTocId680699"></a>Betriebsmodi</h2>
-<p>PortableSigner kann in 2 unterschiedlichen Modi betrieben werden:</p>
-<ul>
-  <li><b>GUI Desktop Modus</b> : Grafische Benutzeroberfläche für das
-interaktive Signieren von einzelnen Dokumenten </li>
-  <li><b>Commandline Modus</b> : Betrieb des selben Programms über die
-Kommandozeile (für Batch oder Operatorlosen Betrieb) </li>
-</ul>
-<p> Alternativ gibt es unter Windows einen eigenen Installer, der eine
-Programmgruppe und die entsprechenden Menüeinträge generiert.
-</p>
-<p> Für Mac OS X gibt es ein "tar.gz" File welches das Programm als Mac
-OS X Bundle zur Verfügung stellt
-</p>
-<h3><a class="mozTocH3" name="mozTocId816625"></a>GUI Desktop Modus</h3>
-<p>Sollte wie oben schon erwähnt eine Java 1.5 Runtime
-installiert sein, so muss man nur die ZIP Datei (siehe Download)
-auspacken und doppelklicken oder in dem ausgepackten Verzeichnis via</p>
-<pre>java -jar PortableSigner.jar</pre>
-<p>starten.</p>
-<p>Nun sieht man etwas ähnliches wie hier:</p>
-<p><img style="border: 0px solid ; width: 724px; height: 520px;"
- src="1.6/HauptSeite.png" name="Main Screen" alt="Screenshot"
- align="middle"><br>
-</p>
-<p>Die Bedienung dürfte auf Basis dieser Maske relativ klar
-sein:</p>
-<ol>
-  <li>Man selektiert eine Eingabedatei (die letzte Eingabedatei bleibt
-vorselektiert). </li>
-  <li>Man sucht sich eine Ausgabedatei (Standard ist der
-Eingabedateiname mit "-sig" angehängt). </li>
-  <li>Man selektiert die PKCS#12 Datei (später werden auch andere Typen
-von Dateiformaten unterstützt sein. Siehe <a href="todo.txt">ToDo</a>)
-  </li>
-  <li>Es lässt sich ein Signaturblock auf der letzten Seite des
-Dokumentes aufbringen. </li>
-  <li>Das Passwort der PKCS#12 Datei eingeben</li>
-  <li>Entscheiden, ob das Dokument finalisiert wird und den Button
-"Signieren" drücken </li>
-  <li>fertig!</li>
-</ol>
-Hat man den Haken "Signaturblock anhängen" betätigt, so wird eine neue
-Seite an das Dokument angehängt, welche folgende Signaturinformationen
-enthält:<br>
-<br>
-<img style="width: 895px; height: 196px;" alt="Signaturblock"
- src="1.6/Signaturblock.png"><br>
-<p>Anbei noch der Bildschirm, welcher sich hinter den "Optionen..."
-verbirgt:</p>
-<p><img style="width: 550px; height: 550px;" alt="OptionScreenshot"
- src="1.6/Optionen.png"><br>
-</p>
-<p>Weiterhin gibt es noch einen "Über ..."
-Dialog auf dem Hauptbildschirm. Dort erfährt man die aktuelle
-Version, welche man auch anmerken sollte, wenn man mit mir in Kontakt
-tritt:
-</p>
-<p><img style="border: 0px solid ; width: 500px; height: 250px;"
- src="1.6/About.png" name="About Box" alt="Screenshot">
-</p>
-<h3><a class="mozTocH3" name="mozTocId935183"></a>Commandline Modus</h3>
-<p>Das Programm unterstützt auch den Aufruf über
-Commandline Parameter:</p>
-<pre><b>pfp$</b> java -jar PortableSigner.jar -h<br>usage: PortableSigner<br> -b &lt;arg&gt;              Signaturblock anhaengen. Parameter:<br>                       [german|english|polish]<br> -c &lt;arg&gt;              Kommentar unter dem Signaturblock (text)<br> -f                    Wenn diese Option gesetzt ist, wird das Dokument<br>                       NICHT finalisiert!<br> -h                    Hilfe (diese Seite)<br> -i &lt;arg&gt;              Bild im Signaturblock<br> -l &lt;arg&gt;              Inhalt des PDF "Ort" - Feldes (Text)<br> -n                    Ohne GUI<br> -o &lt;arg&gt;              Ausgabedatei (PDF)<br> -ownerpwd &lt;arg&gt;       Passwort fuer Restriktionen<br> -ownerpwdfile &lt;arg&gt;   Passwort Datei fuer Restriktionen<br> -p &lt;arg&gt;              Signaturpasswort<br> -pwdfile &lt;arg&gt;        Passwort Datei<br> -r &lt;arg&gt;              Inhalt des PDF "Grund" - Feldes (Text)<br> -s &lt;arg&gt;              Signaturdatei (P12 oder PFX)<br> -t &lt;arg&gt;              Eingabedatei (PDF)<br><br><b>pfp$</b></pre>
-<p>
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE>PortableSigner Hauptseite</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Unix)">
+	<META NAME="AUTHOR" CONTENT="Peter Pflaeging">
+	<META NAME="CREATED" CONTENT="20070416;12204100">
+	<META NAME="CHANGEDBY" CONTENT="Peter Pfläging">
+	<META NAME="CHANGED" CONTENT="20090929;13544800">
+</HEAD>
+<BODY LANG="de-AT" DIR="LTR">
+<P ALIGN=RIGHT><FONT COLOR="#800000"><A HREF="../Web"><FONT COLOR="#000080"><IMG SRC="austria.png" NAME="graphics1" ALT="Austria" ALIGN=BOTTOM WIDTH=26 HEIGHT=18 BORDER=2></FONT></A><A HREF="../Web"><FONT COLOR="#000080"><IMG SRC="germany.png" NAME="graphics2" ALT="Deutschland" ALIGN=BOTTOM WIDTH=30 HEIGHT=18 BORDER=2></FONT></A></FONT>
+&nbsp; <FONT COLOR="#000080">
+<A HREF="index-en.html"><FONT COLOR="#000080"><IMG SRC="united_kingdom.png" NAME="graphics3" ALT="England" ALIGN=BOTTOM WIDTH=30 HEIGHT=15 BORDER=2></FONT></A><A HREF="index-en.html"><FONT COLOR="#000080"><IMG SRC="united_states.png" NAME="graphics4" ALT="USA" ALIGN=BOTTOM WIDTH=30 HEIGHT=16 BORDER=2></FONT></A></FONT></P>
+<H1 ALIGN=CENTER><A NAME="mozTocId525326"></A><IMG SRC="PortableSignerLogo.png" NAME="graphics5" ALT="Logo" ALIGN=BOTTOM WIDTH=139 HEIGHT=115 BORDER=0>PortableSigner</H1>
+<P ALIGN=CENTER STYLE="margin-bottom: 0cm"><FONT COLOR="#990000"><FONT SIZE=4><B>Neue
+Version 1.8!</B></FONT></FONT></P>
+<P><BR><BR>
+</P>
+<H3>Download Links</H3>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><A HREF="https://forge.osor.eu/projects/portablesigner/">OSOR.eu
+	Project Page</A> 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><A HREF="http://sourceforge.net/projects/portablesigner/">Sourceforge
+	Project Page</A> 
+	</P>
+	<LI><P><A HREF="http://portablesigner.svn.sourceforge.net/viewvc/portablesigner/">Source
+	Code Repository</A> 
+	</P>
+</UL>
+<P>Sowohl auf OSOR.eu als auch auf Sourceforge.net ist der Download
+und der Sourcecode verfügbar.</P>
+<H1>Neu</H1>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm; font-style: normal"><B>ab sofort
+	wird der PortableSigner unter der <A HREF="http://www.osor.eu/eupl">EUPL</A>
+	weiter entwickelt!</B></P>
+	<LI><P STYLE="margin-bottom: 0cm">PortableSigner hat die ersten
+	Ansätze für eine saubere Installation unter Linux: 
+	</P>
+	<UL>
+		<LI><P STYLE="margin-bottom: 0cm">Es gibt einen Install Script
+		(leider noch kein Paket) 
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm">Unter Linux muss Java installiert
+		sein. Für Ubuntu ist das: 
+		</P>
+		<UL>
+			<LI><P STYLE="margin-bottom: 0cm">sun-java6-bin 
+			</P>
+			<LI><P STYLE="margin-bottom: 0cm">sun-java6-jre 
+			</P>
+			<LI><P STYLE="margin-bottom: 0cm">tzdata-java 
+			</P>
+		</UL>
+		<LI><P STYLE="margin-bottom: 0cm">Es gibt einen Shell commandline
+		wrapper. 
+		</P>
+		<LI><P STYLE="margin-bottom: 0cm">Es wird (zumindest unter Gnome)
+		ein Menueintrag generiert 
+		</P>
+	</UL>
+	<LI><P>PortableSigner.jar ist als Library unter Java verwendbar
+	(Vielen Dank an Denis Torresan) 
+	</P>
+</UL>
+<P><BR><BR>
+</P>
+<H2><A NAME="mozTocId107348"></A>Ein Tool zum Signieren von PDF
+(Portable Document Format) Dateien</H2>
+<P>PortableSigner ist ein Java Programm zum digitalen Signieren (mit
+X.509 Zertifikaten) von PDF Dateien. Es ist plattformunabhängig und
+läuft derzeit (zumindest) unter Windows (2000, XP, ...), Linux und
+Mac OS X.</P>
+<H2><A NAME="mozTocId383062"></A>Funktionen</H2>
+<P>Man kann PDF Dokumente mit X.509 Zertifikaten digital signieren,
+und dafür sorgen, das diese Dokumente nicht weiter verändert werden
+können, ohne dass das Dokument seine Signatur verliert. Damit
+erreicht man eine elektronische &quot;Unterschrift&quot; auf nahezu
+beliebigen Dokumenten. Dies entspricht wohl am ehesten dem Ansatz
+&quot;Electronic Paper&quot;.</P>
+<H2><A NAME="mozTocId425351"></A>Pressemeldungen im Web</H2>
+<P>Einige Publikationen haben schon über den PortableSigner
+berichtet:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><A HREF="http://openpr.de/news/147183/Unverwechselbare-Dokumente-erstellen-mit-dem-PortableSigner.html" TARGET="_blank">Unverwechselbare
+	Dokumente erstellen mit dem PortableSigner</A> (<A HREF="http://openpr.de/" TARGET="_blank">openPR.de</A>
+	- Verlag deutsche Wirtschaft) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><A HREF="http://systemoptimierungen.net/index.php?mact=News,cntnt01,detail,0&amp;cntnt01articleid=6&amp;cntnt01origid=15&amp;cntnt01dateformat=%25Y%2C%20%25b%20%25d&amp;cntnt01returnid=15" TARGET="_blank">PDF
+	Dateien kostenlos signieren</A> (<A HREF="http://systemoptimierungen.net/">systemOptimierungen.net</A>)
+		</P>
+	<LI><P STYLE="margin-bottom: 0cm">Wie man <A HREF="http://wiki.jtl-software.de/index.php/19._WORKAROUNDS" TARGET="_blank">signierte
+	PDF Dateien mit PortableSigne</A>r aus <A HREF="http://www.jtl-software.de/jtlwawi.php" TARGET="_blank">JTL-Wabi</A>
+	erzeugt. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">RubyPDFBlog <A HREF="http://blog.rubypdf.com/index.php?option=com_docman&amp;paged=9&amp;task=view">erwähnt
+	auch den PortableSigner</A>, obwohl der nun wirklich nicht in Ruby
+	implementiert wurde. 
+	</P>
+	<LI><P>&quot;<A HREF="http://www.linux-magazin.de/online_artikel/signieren_von_pdf_dokumenten_mit_portablesigner?category=0">Signieren
+	von PDF-Dokumenten mit Portablesigner</A>&quot; von Florian
+	Effenberg im Linux Magazin</P>
+</UL>
+<P><BR><BR>
+</P>
+<H2><A NAME="mozTocId780790"></A>Was benötigt man?</H2>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm">Dieses Programm 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Eine Java 1.5 oder 1.6 kompatible
+	Laufzeitumgebung (siehe auch <A HREF="http://www.java.com/">http://www.java.com</A>)
+		</P>
+	<LI><P STYLE="margin-bottom: 0cm">Eine PKCS#12 Datei mit einem
+	persönlichen Zertifikat (zum Beispiel von <A HREF="http://www.cacert.org/">CAcert</A>
+	oder bei <A HREF="http://www.thawte.com/">Thawte</A>) 
+	</P>
+	<LI><P>PDF Dateien (eh' klar, oder?) 
+	</P>
+</UL>
+<H2><A NAME="mozTocId680699"></A>Betriebsmodi</H2>
+<P>PortableSigner kann in 2 unterschiedlichen Modi betrieben werden:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><B>GUI Desktop Modus</B> :
+	Grafische Benutzeroberfläche für das interaktive Signieren von
+	einzelnen Dokumenten 
+	</P>
+	<LI><P><B>Commandline Modus</B> : Betrieb des selben Programms über
+	die Kommandozeile (für Batch oder Operatorlosen Betrieb) 
+	</P>
+</UL>
+<P>Alternativ gibt es unter Windows einen eigenen Installer, der eine
+Programmgruppe und die entsprechenden Menüeinträge generiert. 
+</P>
+<P>Für Mac OS X gibt es ein &quot;tar.gz&quot; File welches das
+Programm als Mac OS X Bundle zur Verfügung stellt 
+</P>
+<H3><A NAME="mozTocId816625"></A>GUI Desktop Modus</H3>
+<P>Sollte wie oben schon erwähnt eine Java 1.5 Runtime installiert
+sein, so muss man nur die ZIP Datei (siehe Download) auspacken und
+doppelklicken oder in dem ausgepackten Verzeichnis via</P>
+<PRE STYLE="margin-bottom: 0.5cm">java -jar PortableSigner.jar</PRE><P>
+starten.</P>
+<P>Nun sieht man etwas ähnliches wie hier:</P>
+<P><FONT COLOR="#000000"><IMG SRC="1.6/HauptSeite.png" NAME="Main Screen" ALT="Screenshot" ALIGN=MIDDLE WIDTH=724 HEIGHT=520 BORDER=1></FONT></P>
+<P>Die Bedienung dürfte auf Basis dieser Maske relativ klar sein:</P>
+<OL>
+	<LI><P STYLE="margin-bottom: 0cm">Man selektiert eine Eingabedatei
+	(die letzte Eingabedatei bleibt vorselektiert). 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Man sucht sich eine Ausgabedatei
+	(Standard ist der Eingabedateiname mit &quot;-sig&quot; angehängt).
+		</P>
+	<LI><P STYLE="margin-bottom: 0cm">Man selektiert die PKCS#12 Datei
+	(später werden auch andere Typen von Dateiformaten unterstützt
+	sein. Siehe <A HREF="todo.txt">ToDo</A>) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Es lässt sich ein Signaturblock
+	auf der letzten Seite des Dokumentes aufbringen. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Das Passwort der PKCS#12 Datei
+	eingeben 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Entscheiden, ob das Dokument
+	finalisiert wird und den Button &quot;Signieren&quot; drücken 
+	</P>
+	<LI><P>fertig! 
+	</P>
+</OL>
+<P>Hat man den Haken &quot;Signaturblock anhängen&quot; betätigt,
+so wird eine neue Seite an das Dokument angehängt, welche folgende
+Signaturinformationen enthält:<BR><BR><IMG SRC="1.6/Signaturblock.png" NAME="Grafik1" ALT="Signaturblock" ALIGN=BOTTOM WIDTH=895 HEIGHT=196 BORDER=0></P>
+<P>Anbei noch der Bildschirm, welcher sich hinter den &quot;Optionen...&quot;
+verbirgt:</P>
+<P><IMG SRC="1.6/Optionen.png" NAME="Grafik2" ALT="OptionScreenshot" ALIGN=BOTTOM WIDTH=550 HEIGHT=550 BORDER=0></P>
+<P>Weiterhin gibt es noch einen &quot;Über ...&quot; Dialog auf dem
+Hauptbildschirm. Dort erfährt man die aktuelle Version, welche man
+auch anmerken sollte, wenn man mit mir in Kontakt tritt: 
+</P>
+<P><FONT COLOR="#000000"><IMG SRC="1.6/About.png" NAME="About Box" ALT="Screenshot" ALIGN=BOTTOM WIDTH=500 HEIGHT=250 BORDER=1></FONT>
+</P>
+<H3><A NAME="mozTocId935183"></A>Commandline Modus</H3>
+<P>Das Programm unterstützt auch den Aufruf über Commandline
+Parameter:</P>
+<PRE><B>pfp$</B> java -jar PortableSigner.jar -h
+usage: PortableSigner
+ -b &lt;arg&gt;              Signaturblock anhaengen. Parameter:
+                       [german|english|polish]
+ -c &lt;arg&gt;              Kommentar unter dem Signaturblock (text)
+ -f                    Wenn diese Option gesetzt ist, wird das Dokument
+                       NICHT finalisiert!
+ -h                    Hilfe (diese Seite)
+ -i &lt;arg&gt;              Bild im Signaturblock
+ -l &lt;arg&gt;              Inhalt des PDF &quot;Ort&quot; - Feldes (Text)
+ -n                    Ohne GUI
+ -o &lt;arg&gt;              Ausgabedatei (PDF)
+ -ownerpwd &lt;arg&gt;       Passwort fuer Restriktionen
+ -ownerpwdfile &lt;arg&gt;   Passwort Datei fuer Restriktionen
+ -p &lt;arg&gt;              Signaturpasswort
+ -pwdfile &lt;arg&gt;        Passwort Datei
+ -r &lt;arg&gt;              Inhalt des PDF &quot;Grund&quot; - Feldes (Text)
+ -s &lt;arg&gt;              Signaturdatei (P12 oder PFX)
+ -t &lt;arg&gt;              Eingabedatei (PDF)
+<B>pfp$</B></PRE><P>
 Um das Beispiel von oben noch einmal als Kommandozeile auszuführen,
-wäre also folgende Kommandozeile notwendig:</p>
-<pre><b>pfp$</b> java -jar PortableSigner.jar -n \<br>        -t /Users/pfp/Desktop/unsigned.pdf \<br>        -o /Users/pfp/Desktop/signed.pdf \<br>        -s /Users/pfp/Desktop/pfp.p12 \<br>        -p MeinGeheimesPasswort<br>Das Dokument<br>/Users/pfp/Desktop/signed.pdf<br>wurde erzeugt und signiert!<br><b>pfp$</b></pre>
-<p>
+wäre also folgende Kommandozeile notwendig:</P>
+<PRE><B>pfp$</B> java -jar PortableSigner.jar -n \
+        -t /Users/pfp/Desktop/unsigned.pdf \
+        -o /Users/pfp/Desktop/signed.pdf \
+        -s /Users/pfp/Desktop/pfp.p12 \
+        -p MeinGeheimesPasswort
+Das Dokument
+/Users/pfp/Desktop/signed.pdf
+wurde erzeugt und signiert!
+<B>pfp$</B></PRE><P>
 Um auch den Aufruf aus Macros zu unterstützen schaltet nur der
-Schalter "<tt>-n</tt>" die GUI Komponente des Programms komplett
-aus!<br>
-</p>
-<h2>Zu beachten, ...<br>
-</h2>
-<br>
-<ul>
-  <li>Das Dokument muss nicht finalisiert werden. Auf diese Weise
-können mehrere Zertifikate aufgebracht werden. Nur der Letzte
-finalisiert.</li>
-  <li>Die Methode wie die lokalisierten Signaturblöcke angegeben werden
-wurde geändert. Damit ist eine Lokalisierung leichter möglich (siehe
-auch <a href="Translation.txt">Translation.txt</a>).</li>
-  <li>Es gibt die Möglichkeit einfach einen "Intranet" Build zu machen,
-um das Tool lokal verteilen zu können (siehe auch <a
- href="HowTo-InternalUse.txt">HowTo-InternalUse.txt</a>).</li>
-  <li>Der Signaturblock wurde den österreichischen Vorgaben für die
-Amtssignatur angepasst</li>
-</ul>
-<br>
-<hr>
-<p>Peter Pfläging &lt;<a href="mailto:peter.pflaeging@wien.gv.at">peter.pflaeging@wien.gv.at</a>&gt;<br>
-</p>
-<p>Vielen Dank an die Unterstützer mit Ideen, Lokalisierungen und
-Patches, ...<br>
-</p>
-<p>Dieses Programm wurde vom Rechenzentrum der Stadt Wien
-(<a href="http://www.wien.gv.at/ma14/">http://www.wien.gv.at/ma14/</a>)
-erstellt.</p>
-</body>
-</html>
+Schalter &quot;<TT>-n</TT>&quot; die GUI Komponente des Programms
+komplett aus!</P>
+<H2>Zu beachten, ...</H2>
+<P><BR><BR>
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm">Das Dokument muss nicht
+	finalisiert werden. Auf diese Weise können mehrere Zertifikate
+	aufgebracht werden. Nur der Letzte finalisiert. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">Die Methode wie die lokalisierten
+	Signaturblöcke angegeben werden wurde geändert. Damit ist eine
+	Lokalisierung leichter möglich (siehe auch <A HREF="Translation.txt">Translation.txt</A>).
+		</P>
+	<LI><P STYLE="margin-bottom: 0cm">Es gibt die Möglichkeit einfach
+	einen &quot;Intranet&quot; Build zu machen, um das Tool lokal
+	verteilen zu können (siehe auch <A HREF="HowTo-InternalUse.txt">HowTo-InternalUse.txt</A>).
+		</P>
+	<LI><P>Der Signaturblock wurde den österreichischen Vorgaben für
+	die Amtssignatur angepasst 
+	</P>
+</UL>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<HR>
+<P>Peter Pfläging &lt;<A HREF="mailto:peter.pflaeging@wien.gv.at">peter.pflaeging@wien.gv.at</A>&gt;</P>
+<P>Vielen Dank an die Unterstützer mit Ideen, Lokalisierungen und
+Patches, ...</P>
+<P>Dieses Programm wurde vom Rechenzentrum der Stadt Wien
+(<A HREF="http://www.wien.gv.at/ma14/">http://www.wien.gv.at/ma14/</A>)
+erstellt.</P>
+</BODY>
+</HTML>
