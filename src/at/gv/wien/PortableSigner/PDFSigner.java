@@ -30,6 +30,8 @@ import com.lowagie.text.Rectangle;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.xml.xmp.XmpWriter;
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
 /**
@@ -112,26 +114,28 @@ public class PDFSigner {
                 int pages = reader.getNumberOfPages();
 
                 Rectangle size = reader.getPageSize(pages);
-                // stp = PdfStamper.createSignature(reader, fout, '\0');
                 stp = PdfStamper.createSignature(reader, fout, '\0', null, true);
                 HashMap pdfInfo = reader.getInfo();
-                String pdfInfoProducer = pdfInfo.get("Producer").toString();
-                pdfInfo.put("Producer", pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")");
+                // thanks to Markus Feisst
+                String pdfInfoProducer = "";
+
+                if( pdfInfo.get("Producer") != null )
+                {
+                	pdfInfoProducer = pdfInfo.get("Producer").toString();
+                        pdfInfoProducer = pdfInfoProducer + " (signed with PortableSigner " + Version.release + ")";
+                } else {
+                        pdfInfoProducer = "Unknown Producer (signed with PortableSigner " + Version.release + ")";
+                }
+                pdfInfo.put("Producer", pdfInfoProducer);
+//                System.err.print("++ Producer:" + pdfInfo.get("Producer").toString());
                 stp.setMoreInfo(pdfInfo);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		XmpWriter xmp = new XmpWriter(baos, pdfInfo);
+		xmp.close();
+		stp.setXmpMetadata(baos.toByteArray());
                 if (signText) {
                     String greet, signator, datestr, ca, serial, special, note, urn, urnvalue;
                     int specialcount = 0;
-//                    ResourceBundle block = ResourceBundle.getBundle(
-//                            "at/gv/wien/PortableSigner/Signatureblock");
-//                    greet = block.getString(signLanguage + "-greeting");
-//                    signator = block.getString(signLanguage + "-signator");
-//                    datestr = block.getString(signLanguage + "-date");
-//                    ca = block.getString(signLanguage + "-issuer");
-//                    serial = block.getString(signLanguage + "-serial");
-//                    special = block.getString(signLanguage + "-special");
-//                    note = block.getString(signLanguage + "-note");
-//                    urn = block.getString(signLanguage + "-urn");
-//                    urnvalue = block.getString(signLanguage + "-urnvalue");
                     ResourceBundle block = ResourceBundle.getBundle(
                             "at/gv/wien/PortableSigner/Signatureblock_" + signLanguage);
                     greet = block.getString("greeting");

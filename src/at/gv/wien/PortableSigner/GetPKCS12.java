@@ -75,9 +75,16 @@ public class GetPKCS12 {
         
         String alias = "";
         try {
-            alias = (String) ks.aliases().nextElement();
-            privateKey = (PrivateKey) ks.getKey(alias, pkcs12Password
-                    .toCharArray());
+//      Maybe not only one cert in file! Thanks to Markus Feisst
+            Enumeration aliases = ks.aliases();
+
+            alias = (String) aliases.nextElement();
+
+            while (aliases.hasMoreElements() && !ks.isKeyEntry(alias)) {
+                alias = (String) aliases.nextElement();
+            }
+
+            privateKey = (PrivateKey) ks.getKey(alias, pkcs12Password.toCharArray());
         } catch (NoSuchElementException e) {
             Main.setResult(
                     java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("ErrorReadingCertificateNoKey"),
