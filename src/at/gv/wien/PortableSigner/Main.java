@@ -67,7 +67,7 @@ public class Main extends javax.swing.JFrame {
         prefs = new Preferences();
 //        ReadStore teststore;
         if (prefs.signLanguage.length() != 2) { // we have old prefs!
-            prefs.set("SignLanguage", "en");
+            prefs.set("SignLanguage", "de");
             prefs.get();
         }
 //        System.out.println(prefs.lastInputFile + prefs.lastOutputFile + prefs.lastP12File);

@@ -40,7 +40,7 @@ public class Preferences {
         // lastOutputFile = prefs.get("LastOutputFile", "");
         lastP12File = prefs.get("LastP12File", "");
         signText = prefs.getBoolean("SignText", false);
-        signLanguage = prefs.get("SignLanguage", "2");
+        signLanguage = prefs.get("SignLanguage", "en");
         sigLogo = prefs.get("SignatureLogo", "");
         signComment = prefs.get("SignComment", "");
         useComment = prefs.getBoolean("useComment", true);
