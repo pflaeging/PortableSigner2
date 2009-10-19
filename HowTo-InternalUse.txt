@@ -8,6 +8,8 @@ src/at/gv/wien/PortableSigner/Version.java          internaltag = "-Org"
 you can change anything else like texts and default logo also, ...
 These things are typically in i18n_??.properties or in Signatureblock.properties
 
+Default Values for PS are changed in Preferences.java
+
 After this compile and package the system.
 
 The easiest way for Deployment on Windows is to take the 

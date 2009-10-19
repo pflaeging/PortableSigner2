@@ -34,7 +34,8 @@ public class Main extends javax.swing.JFrame {
             "PL: Bogdan Drozdowski\n" +
             "IT: Alessio Caiazza\n" +
             "CZ: Tom\u00e1\u0161 Hal\u00e1sz\n" +
-            "DE: Peter Pfl\u00e4ging\n";
+            "DE: Peter Pfl\u00e4ging\n" +
+            "ES: Roberto Espinosa\n";
     private Preferences  prefs;
     private static java.awt.Color resultcolor;
     private static String result, exceptionstring;
