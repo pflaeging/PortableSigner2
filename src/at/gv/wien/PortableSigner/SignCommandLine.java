@@ -17,10 +17,15 @@ import java.io.FileInputStream;
  */
 public class SignCommandLine {
 
-    public String input = "",  output = "",  signature = "",  password = "",  sigblock = "",  sigimage = "",  comment = "",  reason = "",  location = "",  pwdFile = "",  ownerPwdFile = "",  ownerPwdString = "";
+    public String input = "",  output = "",  signature = "",  password = "",
+            sigblock = "",  sigimage = "",  comment = "",  reason = "",
+            location = "",  pwdFile = "",  ownerPwdFile = "",
+            ownerPwdString = "";
+    private String embedParams = "";
     public byte[] ownerPwd = null;
-    public Boolean nogui = false,  finalize = true;
+    public Boolean nogui = false,  finalize = true, noSigPage = false;
     private Boolean help = false;
+    public float vPos = 0f, lMargin = 0f, rMargin = 0f;
     String langcodes;
 
     /** Creates a new instance of CommandLine */
@@ -62,6 +67,8 @@ public class SignCommandLine {
                 java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigReason"));
         options.addOption("l", true,
                 java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-SigLocation"));
+        options.addOption("e", true,
+                java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-EmbedSignature"));
         options.addOption("pwdfile", true,
                 java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n").getString("CLI-PasswdFile"));
         options.addOption("ownerpwd", true,
@@ -85,6 +92,7 @@ public class SignCommandLine {
             comment = cmd.getOptionValue("c", "");
             reason = cmd.getOptionValue("r", "");
             location = cmd.getOptionValue("l", "");
+            embedParams = cmd.getOptionValue("e", "");
             pwdFile = cmd.getOptionValue("pwdfile", "");
             ownerPwdString = cmd.getOptionValue("ownerpwd", "");
             ownerPwdFile = cmd.getOptionValue("ownerpwdfile", "");
@@ -179,6 +187,25 @@ public class SignCommandLine {
                 }
             }
 
+        }
+        if (!embedParams.equals("")) {
+            String [] parameter = null;
+            parameter = embedParams.split(",");
+             try {
+                Float vPosF = new Float(parameter[0]),
+                lMarginF = new Float(parameter[1]),
+                rMarginF = new Float(parameter[2]);
+                vPos = vPosF.floatValue();
+                lMargin = lMarginF.floatValue();
+                rMargin = rMarginF.floatValue();
+                noSigPage = true;
+            } catch (NumberFormatException nfe)
+            {
+               System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")
+                        .getString("CLI-embedParameter-Error"));
+                usage.printHelp("PortableSigner", options);
+                System.exit(5);
+             }
         }
         if (!(langcodes.contains(sigblock)|| sigblock.equals(""))) {
             System.err.println(java.util.ResourceBundle.getBundle("at/gv/wien/PortableSigner/i18n")

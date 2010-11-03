@@ -26,15 +26,30 @@ public class DoSignPDF {
     private static GetPKCS12 pkcs12;
 
     /** Creates a new instance of DoSignPDF */
-    public DoSignPDF(String pdfInputFileName, String pdfOutputFileName,
-            String pkcs12FileName, String password, Boolean signText, String signLanguage,
-            String sigLogo, Boolean finalize, String sigComment, String signReason, String signLocation,
+    public DoSignPDF(String pdfInputFileName,
+            String pdfOutputFileName,
+            String pkcs12FileName,
+            String password,
+            Boolean signText,
+            String signLanguage,
+            String sigLogo,
+            Boolean finalize,
+            String sigComment,
+            String signReason,
+            String signLocation,
+            Boolean noExtraPage,
+            float verticalPos,
+            float leftMargin,
+            float rightMargin,
             byte[] ownerPassword) {
 
     	PDFSigner pdfSigner = new PDFSigner();
 
     	try{
-        	pdfSigner.doSignPDF(pdfInputFileName, pdfOutputFileName, pkcs12FileName, password, signText, signLanguage, sigLogo, finalize, sigComment, signReason, signLocation, ownerPassword);
+        	pdfSigner.doSignPDF(pdfInputFileName, pdfOutputFileName, pkcs12FileName,
+                        password, signText, signLanguage, sigLogo, finalize, sigComment,
+                        signReason, signLocation, noExtraPage, verticalPos, leftMargin,
+                        rightMargin, ownerPassword);
 
         	//if ok
             Main.setResult(

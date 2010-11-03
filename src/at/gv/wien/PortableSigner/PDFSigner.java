@@ -10,10 +10,10 @@
  */
 package at.gv.wien.PortableSigner;
 
-import com.lowagie.text.Chunk;
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.PdfContentByte;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.pdf.PdfContentByte;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,14 +23,14 @@ import java.security.cert.Certificate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfSignatureAppearance;
-import com.lowagie.text.pdf.PdfStamper;
-import com.lowagie.text.Rectangle;
-import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.xml.xmp.XmpWriter;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfSignatureAppearance;
+import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.xml.xmp.XmpWriter;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
@@ -43,11 +43,24 @@ public class PDFSigner {
     private static PrivateKey privateKey;
     private static Certificate[] certificateChain;
     private static GetPKCS12 pkcs12;
+    public float ptToCm = (float) 0.0352777778;
 
     /** Creates a new instance of DoSignPDF */
-    public void doSignPDF(String pdfInputFileName, String pdfOutputFileName,
-            String pkcs12FileName, String password, Boolean signText, String signLanguage,
-            String sigLogo, Boolean finalize, String sigComment, String signReason, String signLocation,
+    public void doSignPDF(String pdfInputFileName,
+            String pdfOutputFileName,
+            String pkcs12FileName,
+            String password,
+            Boolean signText,
+            String signLanguage,
+            String sigLogo,
+            Boolean finalize,
+            String sigComment,
+            String signReason,
+            String signLocation,
+            Boolean noExtraPage,
+            float verticalPos,
+            float leftMargin,
+            float rightMargin,
             byte[] ownerPassword) throws PDFSignerException{
         try {
             //System.out.println("-> DoSignPDF <-");
@@ -57,6 +70,7 @@ public class PDFSigner {
             //System.out.println("Signaturblock?: " + signText);
             //System.out.println("Sprache der Blocks: " + signLanguage);
             //System.out.println("Signaturlogo: " + sigLogo);
+            System.err.println("Position V:" + verticalPos + " L:" + leftMargin + " R:" + rightMargin);
             Rectangle signatureBlock;
 
             java.security.Security.insertProviderAt(
@@ -127,7 +141,7 @@ public class PDFSigner {
                         pdfInfoProducer = "Unknown Producer (signed with PortableSigner " + Version.release + ")";
                 }
                 pdfInfo.put("Producer", pdfInfoProducer);
-//                System.err.print("++ Producer:" + pdfInfo.get("Producer").toString());
+                //System.err.print("++ Producer:" + pdfInfo.get("Producer").toString());
                 stp.setMoreInfo(pdfInfo);
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		XmpWriter xmp = new XmpWriter(baos, pdfInfo);
@@ -136,6 +150,9 @@ public class PDFSigner {
                 if (signText) {
                     String greet, signator, datestr, ca, serial, special, note, urn, urnvalue;
                     int specialcount = 0;
+                    int sigpage;
+                    int rightMarginPT, leftMarginPT;
+                    float verticalPositionPT;
                     ResourceBundle block = ResourceBundle.getBundle(
                             "at/gv/wien/PortableSigner/Signatureblock_" + signLanguage);
                     greet = block.getString("greeting");
@@ -148,19 +165,40 @@ public class PDFSigner {
                     urn = block.getString("urn");
                     urnvalue = block.getString("urnvalue");
 
+
                     //sigcomment = block.getString(signLanguage + "-comment");
-                    stp.insertPage(pages + 1, size);
+                   // upper y
+                    float topy = size.getTop();
+                    System.err.println("Top: " + topy * ptToCm);
+                    // right x
+                    float rightx = size.getRight();
+                    System.err.println("Right: " + rightx * ptToCm);
+                    if (!noExtraPage) {
+                        sigpage = pages + 1;
+                        stp.insertPage(sigpage, size);
+                        // 30pt left, 30pt right, 20pt from top
+                        rightMarginPT = 30;
+                        leftMarginPT = 30;
+                        verticalPositionPT = topy - 20;
+                    } else {
+                        sigpage = pages;
+                        rightMarginPT = Math.round(rightMargin / ptToCm);
+                        leftMarginPT = Math.round(leftMargin / ptToCm);
+                        verticalPositionPT = Math.round(verticalPos / ptToCm);
+                    }
                     if (!GetPKCS12.atEgovOID.equals("")) {
                         specialcount = 1;
                     }
-                    PdfContentByte content = stp.getOverContent(pages + 1);
-                    // float topy = size.top();
-                    float topy = size.getTop();
-                    //float rightx = size.right();
-                    float rightx = size.getRight();
+                    PdfContentByte content = stp.getOverContent(sigpage);
+                    
                     float[] cellsize = new float[2];
                     cellsize[0] = 100f;
-                    cellsize[1] = rightx - 60 - cellsize[0] - cellsize[1] - 70;
+                    // rightx = width of page
+                    // 60 = 2x30 margins
+                    // cellsize[0] = description row
+                    // cellsize[1] = 0
+                    // 70 = logo width
+                    cellsize[1] = rightx - rightMarginPT - leftMarginPT - cellsize[0] - cellsize[1] - 70;
 
                     // Pagetable = Greeting, signatureblock, comment
                     // sigpagetable = outer table
@@ -170,7 +208,7 @@ public class PDFSigner {
                     PdfPCell signatureBlockHeadingCell =
                             new PdfPCell(new Paragraph(
                             new Chunk(greet,
-                            new Font(Font.HELVETICA, 12))));
+                            new Font(Font.FontFamily.HELVETICA, 12))));
                     signatureBlockHeadingCell.setPaddingBottom(5);
                     signatureBlockHeadingCell.setColspan(2);
                     signatureBlockHeadingCell.setBorderWidth(0f);
@@ -180,47 +218,48 @@ public class PDFSigner {
                     // Line 1
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(signator, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(signator, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.subject, new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.subject, new Font(Font.FontFamily.COURIER, 10))));
                     // Line 2
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(datestr, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(datestr, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
+                            new Chunk(datum.toString(), new Font(Font.FontFamily.COURIER, 10))));
                     // Line 3
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(ca, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(ca, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.issuer, new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.issuer, new Font(Font.FontFamily.COURIER, 10))));
                     // Line 4
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(serial, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(serial, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.serial.toString(), new Font(Font.COURIER, 10))));
+                            new Chunk(GetPKCS12.serial.toString(), new Font(Font.FontFamily.COURIER, 10))));
                     // Line 5
                     if (specialcount == 1) {
                         signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(special, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                                new Chunk(special, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                         signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(GetPKCS12.atEgovOID, new Font(Font.COURIER, 10))));
+                                new Chunk(GetPKCS12.atEgovOID, new Font(Font.FontFamily.COURIER, 10))));
                     }
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(urn, new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(urn, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(urnvalue, new Font(Font.COURIER, 10))));
+                            new Chunk(urnvalue, new Font(Font.FontFamily.COURIER, 10))));
                     signatureTextTable.setTotalWidth(cellsize);
+                    System.err.println("signatureTextTable Width: " + cellsize[0] * ptToCm + " " + cellsize[1] * ptToCm);
                     // inner table end
 
                     signatureBlockCompleteTable.setHorizontalAlignment(PdfPTable.ALIGN_CENTER);
@@ -244,11 +283,11 @@ public class PDFSigner {
                     PdfPCell commentcell =
                             new PdfPCell(new Paragraph(
                             new Chunk(sigComment,
-                            new Font(Font.HELVETICA, 10))));
+                            new Font(Font.FontFamily.HELVETICA, 10))));
                     PdfPCell notecell =
                             new PdfPCell(new Paragraph(
                             new Chunk(note,
-                            new Font(Font.HELVETICA, 10, Font.BOLD))));
+                            new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
                     //commentcell.setPaddingTop(10);
                     //commentcell.setColspan(2);
                     // commentcell.setBorderWidth(0f);
@@ -258,7 +297,9 @@ public class PDFSigner {
                     }
                     float[] cells = {70, cellsize[0] + cellsize[1]};
                     signatureBlockCompleteTable.setTotalWidth(cells);
-                    signatureBlockCompleteTable.writeSelectedRows(0, 4 + specialcount, 30, topy - 20, content);
+                    System.err.println("signatureBlockCompleteTable Width: " + cells[0] * ptToCm + " " + cells[1] * ptToCm);
+                    signatureBlockCompleteTable.writeSelectedRows(0, 4 + specialcount, leftMarginPT, topy - verticalPositionPT, content);
+                    System.err.println("signatureBlockCompleteTable Position " + 30 * ptToCm + " " + (topy - 20) * ptToCm);
                     signatureBlock = new Rectangle( 30 + signatureBlockCompleteTable.getTotalWidth() - 20,
                             topy - 20 - 20,
                             30 + signatureBlockCompleteTable.getTotalWidth(),

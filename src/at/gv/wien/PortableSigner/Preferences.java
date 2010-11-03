@@ -26,7 +26,8 @@ public class Preferences {
             signComment = "",
             signLocation = "",
             signReason = "";
-    public Boolean signText = false, useComment = true, toolTip = true;
+    public Boolean signText = false, useComment = true, toolTip = true, noExtraPage = false;
+    public float verticalPos = 0f, leftMargin = 0f, rightMargin = 0f;
     private java.util.prefs.Preferences prefs = java.util.prefs.Preferences.userNodeForPackage (Main.class);
                 
     /** Creates a new instance of Preferences */
@@ -47,6 +48,10 @@ public class Preferences {
         toolTip = prefs.getBoolean("ToolTip", true);
         signLocation = prefs.get("SignLocation", "");
         signReason = prefs.get("SignReason", "");
+        noExtraPage = prefs.getBoolean("NoExtraPage", false);
+        verticalPos = prefs.getFloat("VerticalPosition", 0f);
+        leftMargin = prefs.getFloat("LeftMargin", 0f);
+        rightMargin = prefs.getFloat("RightMargin", 0f);
     }
     
     public void set(String property, String value) {
@@ -56,6 +61,10 @@ public class Preferences {
     
     public void set(String property, Boolean value) {
         prefs.putBoolean(property, value);
+        get();
+    }
+    public void set(String property, float value) {
+        prefs.putFloat(property, value);
         get();
     }
 

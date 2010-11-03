@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>JavaApplicationStub</string>
 	<key>CFBundleGetInfoString</key>
-	<string>PortableSigner 1.8</string>
+	<string>PortableSigner 1.9</string>
 	<key>CFBundleIconFile</key>
 	<string>PortableSigner.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -34,8 +34,8 @@
 			<string>$JAVAROOT/AbsoluteLayout.jar</string>
 			<string>$JAVAROOT/bcprov-ext-jdk15-143.jar</string>
 			<string>$JAVAROOT/commons-cli-1.2.jar</string>
-			<string>$JAVAROOT/iText-2.1.7.jar</string>
-			<string>$JAVAROOT/swing-layout-1.0.3.jar</string>
+			<string>$JAVAROOT/iText-5.0.1.jar</string>
+			<string>$JAVAROOT/swing-layout-1.0.4.jar</string>
 			<string>$JAVAROOT/quaqua.jar</string>
 			<string>$JAVAROOT/</string>
 		</array>
