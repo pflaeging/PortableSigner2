@@ -9,9 +9,9 @@ Mac OS X is a Unix/Linux type OS, so it comes close to Linux.
     You will see some errors regarding not satisfied dependencies and libraries
 
 3. Get the required libraries. You need:
-    BouncyCastle Provider (bcprov-jdk15-xxx.jar) http://www.bouncycastle.org
+    BouncyCastle Provider (bcprov-jdk16-ext-xxx.jar) http://www.bouncycastle.org
     Apache Commons CLI (commons-cli-1.x.jar)
-    iText (itext-2.0.x.jar)
+    iText (itext-5.1.x.jar)
     QuAqua (quaqua.jar, libquaqua.jnilib)
     SwingLayout (swing-layout-1.0.x.jar) included with netbeans
 4. Register the Libraries with the System:

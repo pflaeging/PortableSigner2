@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>JavaApplicationStub</string>
 	<key>CFBundleGetInfoString</key>
-	<string>PortableSigner 1.9</string>
+	<string>PortableSigner 2.0</string>
 	<key>CFBundleIconFile</key>
 	<string>PortableSigner.icns</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,20 +21,20 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.9</string>
+	<string>2.0</string>
 	<key>Java</key>
 	<dict>		
 		<key>JVMVersion</key>
-		<string>1.5*</string>
+		<string>1.6*</string>
 		<key>MainClass</key>
-		<string>at.gv.wien.PortableSigner.Main</string>
+		<string>net.pflaeging.PortableSigner.Main</string>
 		<key>ClassPath</key>
 		<array>
 			<string>$JAVAROOT/PortableSigner.jar</string>
 			<string>$JAVAROOT/AbsoluteLayout.jar</string>
-			<string>$JAVAROOT/bcprov-ext-jdk15-143.jar</string>
+			<string>$JAVAROOT/bcprov-ext-jdk16-146.jar</string>
 			<string>$JAVAROOT/commons-cli-1.2.jar</string>
-			<string>$JAVAROOT/iText-5.0.1.jar</string>
+			<string>$JAVAROOT/itextpdf-5.1.3.jar</string>
 			<string>$JAVAROOT/swing-layout-1.0.4.jar</string>
 			<string>$JAVAROOT/quaqua.jar</string>
 			<string>$JAVAROOT/</string>

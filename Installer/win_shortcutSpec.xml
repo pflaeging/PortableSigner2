@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?> 
 <shortcuts>
   	<skipIfNotSupported/>
-  	<programGroup defaultName="MagWien-Applikationen"
+  	<programGroup defaultName="PortableSigner"
                 location="applications"/>
   	<shortcut
             name="PortableSigner"

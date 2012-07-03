@@ -1,5 +1,5 @@
 #! /bin/sh
-VERSION=1.9
+VERSION=2.0
 SVNVERSION=`svnversion . |  cut -d: -f2 | cut -c 1 -c 2 -c 3`
 SRCPATH=dist/ship/
 echo "Making Releases for:" $VERSION.$SVNVERSION

@@ -184,7 +184,7 @@ public class PDFSigner {
                         sigpage = pages;
                         rightMarginPT = Math.round(rightMargin / ptToCm);
                         leftMarginPT = Math.round(leftMargin / ptToCm);
-                        verticalPositionPT = Math.round(verticalPos / ptToCm);
+                        verticalPositionPT = topy - Math.round(verticalPos / ptToCm);
                     }
                     if (!GetPKCS12.atEgovOID.equals("")) {
                         specialcount = 1;
@@ -298,7 +298,7 @@ public class PDFSigner {
                     float[] cells = {70, cellsize[0] + cellsize[1]};
                     signatureBlockCompleteTable.setTotalWidth(cells);
                     System.err.println("signatureBlockCompleteTable Width: " + cells[0] * ptToCm + " " + cells[1] * ptToCm);
-                    signatureBlockCompleteTable.writeSelectedRows(0, 4 + specialcount, leftMarginPT, topy - verticalPositionPT, content);
+                    signatureBlockCompleteTable.writeSelectedRows(0, 4 + specialcount, leftMarginPT, verticalPositionPT, content);
                     System.err.println("signatureBlockCompleteTable Position " + 30 * ptToCm + " " + (topy - 20) * ptToCm);
                     signatureBlock = new Rectangle( 30 + signatureBlockCompleteTable.getTotalWidth() - 20,
                             topy - 20 - 20,

@@ -41,7 +41,7 @@ The Windows installer is installing all required patches automagic.
 If you'r upgrading your Java runtime, please reinstall PortableSigner to apply
 the security policies again.
 
-:peter pflaeging <peter.pflaeging@wien.gv.at>
+:peter pflaeging <peter@pflaeging.net>
 
 
 
@@ -90,5 +90,5 @@ Der Windows Installer installiert die Security Policy automatisch mit.
 Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableSigner 
 noch einmal installieren, damit die Security Policy auch dort wirkt.
 
-:peter pflaeging <peter.pflaeging@wien.gv.at>
+:peter pflaeging <peter@pflaeging.net>
 
