@@ -11,7 +11,7 @@
 package net.pflaeging.PortableSigner;
 
 /**
- * @author peter.pflaeging@wien.gv.at
+ * @author peter@pflaeging.net
  */
 public class Version {
 	private static String date = "$Date$";

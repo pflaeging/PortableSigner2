@@ -17,7 +17,7 @@ import java.security.cert.Certificate;
 
 /**
  *
- * @author peter.pflaeging@wien.gv.at
+ * @author peter@pflaeging.net
  */
 public class DoSignPDF {
 

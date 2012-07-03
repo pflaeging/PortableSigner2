@@ -20,7 +20,7 @@ import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 
 /*
- * @author  peter.pflaeging@wien.gv.at
+ * @author  peter@pflaeging.net
  */
 public class Main extends javax.swing.JFrame {
     

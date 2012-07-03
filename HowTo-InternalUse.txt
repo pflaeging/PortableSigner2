@@ -2,8 +2,8 @@ What to do, if you want an internal deployment:
 
 Change (optional) the following files/values:
 
-src/at/gv/wien/PortableSigner/i18n_de.properties    HomepageURL=...
-src/at/gv/wien/PortableSigner/Version.java          internaltag = "-Org"
+src/net/pflaeging/PortableSigner/i18n_de.properties    HomepageURL=...
+src/net/pflaeging/PortableSigner/Version.java          internaltag = "-Org"
 
 you can change anything else like texts and default logo also, ...
 These things are typically in i18n_??.properties or in Signatureblock.properties

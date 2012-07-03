@@ -36,7 +36,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author peter.pflaeging@wien.gv.at
+ * @author peter@pflaeging.net
  */
 public class PDFSigner {
 
