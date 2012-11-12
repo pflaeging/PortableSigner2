@@ -75,7 +75,7 @@ public class SignCommandLine {
                 java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-OwnerPasswd"));
         options.addOption("ownerpwdfile", true,
                 java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-OwnerPasswdFile"));
-        options.addOption("z", true,
+        options.addOption("z", false,
                 java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-LastPage"));
 
         CommandLineParser parser = new PosixParser();

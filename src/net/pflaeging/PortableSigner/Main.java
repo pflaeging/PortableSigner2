@@ -25,7 +25,7 @@ import javax.swing.UIManager;
 public class Main extends javax.swing.JFrame {
     
     private static SignCommandLine mycommand;
-    public String copyright = "Peter Pfl\u00e4ging <peter@pflaeging.net>)";
+    public String copyright = "Peter Pfl\u00e4ging <peter@pflaeging.net>";
     public String url = "http://portablesigner.sf.net/";
     public String contributors = "Contributors:\n" +
             "Bogdan Drozdowski, " +
@@ -250,6 +250,10 @@ public class Main extends javax.swing.JFrame {
         jTextFieldRMargin = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jComboBoxSignatureblockPage = new javax.swing.JComboBox();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jFrameSelectKeystore = new javax.swing.JFrame();
         jButtonSelectKeystoreFile = new javax.swing.JButton();
@@ -395,7 +399,7 @@ public class Main extends javax.swing.JFrame {
         jTextAreaAboutVersion.setRows(5);
         jScrollPaneAboutVersion.setViewportView(jTextAreaAboutVersion);
 
-        jLabelAboutCopyright.setText("(c) Peter Pflaeging"); // NOI18N
+        jLabelAboutCopyright.setText("\u00a9 Peter Pfl\u00e4ging");
 
         jButtonLicense.setText(bundle.getString("LicenseButton")); // NOI18N
         jButtonLicense.addActionListener(new java.awt.event.ActionListener() {
@@ -414,7 +418,7 @@ public class Main extends javax.swing.JFrame {
                     .add(jScrollPaneAboutVersion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
                     .add(jDialogAboutLayout.createSequentialGroup()
                         .add(jLabelAboutCopyright)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 117, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 145, Short.MAX_VALUE)
                         .add(jButtonLicense)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jButtonAboutOk))
@@ -573,27 +577,27 @@ public class Main extends javax.swing.JFrame {
         jFrameOption.getContentPane().setLayout(jFrameOptionLayout);
         jFrameOptionLayout.setHorizontalGroup(
             jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
+            .add(jFrameOptionLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jFrameOptionLayout.createSequentialGroup()
+                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jSeparator4)
+                    .add(jSeparator3)
+                    .add(jFrameOptionLayout.createSequentialGroup()
                         .add(jLabelOptionLogo)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jButtonResetLogo)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
-                                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(jFrameOptionLayout.createSequentialGroup()
-                                        .add(0, 0, Short.MAX_VALUE)
-                                        .add(jComboBoxSignatureLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 182, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                    .add(jFrameOptionLayout.createSequentialGroup()
-                                        .add(jTextFieldOptionLogo)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(jButtonOptionSearchLogo))
+                            .add(jFrameOptionLayout.createSequentialGroup()
+                                .add(jTextFieldOptionLogo)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jButtonOptionSearchLogo))
+                            .add(jFrameOptionLayout.createSequentialGroup()
+                                .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(jButtonResetLogo)
+                                    .add(jButtonResetCommentField)
                                     .add(jScrollPane3))
-                                .add(107, 107, 107))))
-                    .add(jFrameOptionLayout.createSequentialGroup()
-                        .add(8, 8, 8)
+                                .add(8, 8, 8))))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
+                        .add(99, 99, 99)
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(jLabel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jLabel11)
@@ -602,25 +606,34 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(jFrameOptionLayout.createSequentialGroup()
+                                .add(jComboBoxSignatureblockPage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 266, Short.MAX_VALUE))
+                            .add(jFrameOptionLayout.createSequentialGroup()
                                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(jTextFieldLMargin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(jTextFieldVPosition, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                     .add(jTextFieldRMargin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 45, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                                .add(278, 327, Short.MAX_VALUE)
-                                .add(jButtonOptionOK))
-                            .add(jComboBoxSignatureblockPage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldReason)
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jFrameOptionLayout.createSequentialGroup()
-                        .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelOptionLanguage)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jButtonResetCommentField)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxComment)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelReason)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jLabelLocation)
-                            .add(org.jdesktop.layout.GroupLayout.LEADING, jCheckBoxSeparatepage))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.LEADING, jTextFieldLocation))
-                .addContainerGap())
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(jButtonOptionOK))))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
+                        .add(101, 101, 101)
+                        .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jTextFieldReason)
+                            .add(jTextFieldLocation)))
+                    .add(jSeparator2)
+                    .add(jSeparator5)
+                    .add(jFrameOptionLayout.createSequentialGroup()
+                        .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jCheckBoxComment)
+                            .add(jLabelReason)
+                            .add(jLabelLocation)
+                            .add(jCheckBoxSeparatepage)
+                            .add(jFrameOptionLayout.createSequentialGroup()
+                                .add(jLabelOptionLanguage)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(jComboBoxSignatureLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 182, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE)))
+                .add(0, 0, 0))
         );
         jFrameOptionLayout.setVerticalGroup(
             jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -629,20 +642,26 @@ public class Main extends javax.swing.JFrame {
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOptionLanguage)
                     .add(jComboBoxSignatureLanguage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(10, 10, 10)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jSeparator5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabelOptionLogo)
                     .add(jTextFieldOptionLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jButtonOptionSearchLogo))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonResetLogo)
-                .add(18, 18, 18)
+                .add(2, 2, 2)
+                .add(jSeparator2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jCheckBoxComment)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 134, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButtonResetCommentField)
-                .add(18, 18, 18)
+                .add(1, 1, 1)
+                .add(jSeparator3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabelReason)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jTextFieldReason, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -650,11 +669,13 @@ public class Main extends javax.swing.JFrame {
                 .add(jLabelLocation)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jTextFieldLocation, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(12, 12, 12)
+                .add(jSeparator4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jFrameOptionLayout.createSequentialGroup()
-                        .add(28, 28, 28)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jCheckBoxSeparatepage)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 8, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(jFrameOptionLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                             .add(jLabel13)
                             .add(jComboBoxSignatureblockPage, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -671,7 +692,7 @@ public class Main extends javax.swing.JFrame {
                             .add(jTextFieldRMargin, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jLabel12))
                         .add(27, 27, 27))
-                    .add(jFrameOptionLayout.createSequentialGroup()
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jFrameOptionLayout.createSequentialGroup()
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(jButtonOptionOK)
                         .addContainerGap())))
@@ -1884,6 +1905,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private javax.swing.JScrollPane jScrollPaneAboutVersion;
     private javax.swing.JScrollPane jScrollPaneCerts;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextArea jTextAreaAboutVersion;
     private javax.swing.JTextArea jTextAreaLicenseText;
     private javax.swing.JTextField jTextFieldErrorReport;
