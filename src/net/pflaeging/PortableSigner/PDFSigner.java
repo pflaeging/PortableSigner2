@@ -61,6 +61,7 @@ public class PDFSigner {
             float verticalPos,
             float leftMargin,
             float rightMargin,
+            Boolean signLastPage,
             byte[] ownerPassword) throws PDFSignerException{
         try {
             //System.out.println("-> DoSignPDF <-");
@@ -181,7 +182,12 @@ public class PDFSigner {
                         leftMarginPT = 30;
                         verticalPositionPT = topy - 20;
                     } else {
-                        sigpage = pages;
+                        if (signLastPage) {
+                            sigpage = pages;
+                        } else {
+                            sigpage = 1;
+                        }
+                        System.err.println("Page: " + sigpage);
                         rightMarginPT = Math.round(rightMargin / ptToCm);
                         leftMarginPT = Math.round(leftMargin / ptToCm);
                         verticalPositionPT = topy - Math.round(verticalPos / ptToCm);

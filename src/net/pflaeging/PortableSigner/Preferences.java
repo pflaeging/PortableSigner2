@@ -26,7 +26,8 @@ public class Preferences {
             signComment = "",
             signLocation = "",
             signReason = "";
-    public Boolean signText = false, useComment = true, toolTip = true, noExtraPage = false;
+    public Boolean signText = false, useComment = true, toolTip = true, noExtraPage = false, 
+            signLastPage = true;
     public float verticalPos = 0f, leftMargin = 0f, rightMargin = 0f;
     private java.util.prefs.Preferences prefs = java.util.prefs.Preferences.userNodeForPackage (Main.class);
                 
@@ -52,6 +53,7 @@ public class Preferences {
         verticalPos = prefs.getFloat("VerticalPosition", 0f);
         leftMargin = prefs.getFloat("LeftMargin", 0f);
         rightMargin = prefs.getFloat("RightMargin", 0f);
+        signLastPage = prefs.getBoolean("SignatureOnLastPage", true);
     }
     
     public void set(String property, String value) {

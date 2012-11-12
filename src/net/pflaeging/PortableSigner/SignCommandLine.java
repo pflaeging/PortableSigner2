@@ -23,7 +23,7 @@ public class SignCommandLine {
             ownerPwdString = "";
     private String embedParams = "";
     public byte[] ownerPwd = null;
-    public Boolean nogui = false,  finalize = true, noSigPage = false;
+    public Boolean nogui = false,  finalize = true, noSigPage = false, lastPage = false;
     private Boolean help = false;
     public float vPos = 0f, lMargin = 0f, rMargin = 0f;
     String langcodes;
@@ -75,6 +75,8 @@ public class SignCommandLine {
                 java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-OwnerPasswd"));
         options.addOption("ownerpwdfile", true,
                 java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-OwnerPasswdFile"));
+        options.addOption("z", true,
+                java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("CLI-LastPage"));
 
         CommandLineParser parser = new PosixParser();
         HelpFormatter usage = new HelpFormatter();
@@ -96,6 +98,7 @@ public class SignCommandLine {
             pwdFile = cmd.getOptionValue("pwdfile", "");
             ownerPwdString = cmd.getOptionValue("ownerpwd", "");
             ownerPwdFile = cmd.getOptionValue("ownerpwdfile", "");
+            lastPage = !cmd.hasOption("z");
 
             if (cmd.getArgs().length != 0) {
                 throw new ParseException(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")

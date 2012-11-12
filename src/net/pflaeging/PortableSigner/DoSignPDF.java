@@ -4,7 +4,7 @@
  * Created on 21. September 2006, 15:25
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
- * (c) Peter Pfläging <peter@pflaeging.net>
+ * (c) Peter Pflaeging <peter@pflaeging.net>
  *
  * Patches and bugfixes from: dzoe@users.sourceforge.net
  *
@@ -41,6 +41,7 @@ public class DoSignPDF {
             float verticalPos,
             float leftMargin,
             float rightMargin,
+            Boolean signLastPage,
             byte[] ownerPassword) {
 
     	PDFSigner pdfSigner = new PDFSigner();
@@ -49,7 +50,7 @@ public class DoSignPDF {
         	pdfSigner.doSignPDF(pdfInputFileName, pdfOutputFileName, pkcs12FileName,
                         password, signText, signLanguage, sigLogo, finalize, sigComment,
                         signReason, signLocation, noExtraPage, verticalPos, leftMargin,
-                        rightMargin, ownerPassword);
+                        rightMargin, signLastPage, ownerPassword);
 
         	//if ok
             Main.setResult(
