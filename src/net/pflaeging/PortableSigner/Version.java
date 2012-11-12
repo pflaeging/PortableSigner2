@@ -4,7 +4,7 @@
  * for 1.8.12x (Release 1.8)
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
- * (c) Peter Pfläging <peter@pflaeging.net>
+ * (c) Peter Pfl‰ging <peter@pflaeging.net>
  * Version update for: 1.8.130
  */
 
