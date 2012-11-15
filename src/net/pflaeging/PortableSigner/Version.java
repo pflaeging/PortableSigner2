@@ -1,7 +1,7 @@
 /*
  * Version.java
  *
- * for 2.0 (Release 2.0)
+ * for Release 2.0
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
  * (c) Peter Pfläging <peter@pflaeging.net>
