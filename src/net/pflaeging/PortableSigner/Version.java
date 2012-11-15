@@ -1,11 +1,10 @@
 /*
  * Version.java
  *
- * for 1.8.12x (Release 1.8)
+ * for 2.0 (Release 2.0)
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
  * (c) Peter Pfläging <peter@pflaeging.net>
- * Version update for: 1.8.130
  */
 
 package net.pflaeging.PortableSigner;
