@@ -67,6 +67,12 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-pre-compile">
+         <exec executable="/bin/sh"> 
+            <arg value="-c" />
+            <arg value="./Installer/VersionMaker.sh" />
+        </exec>        
+    </target>
     <target name="-post-jar">
         <property location="/Applications/launch4j" name="launch4j.dir"/>
         <property location="./nbproject/launch4jconfig.xml" name="launch4j.config"/>
