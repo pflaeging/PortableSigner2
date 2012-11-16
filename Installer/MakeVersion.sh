@@ -1,12 +1,12 @@
 #! /bin/sh
 VERSION=2.0
-SVNVERSION=`svnversion . |  cut -d: -f2 | cut -c 1 -c 2 -c 3`
+GITVERSION=`git log --pretty="%h" -1`
 SRCPATH=dist/ship/
-echo "Making Releases for:" $VERSION.$SVNVERSION
+echo "Making Releases for:" $VERSION.$GITVERSION
 cd $SRCPATH
-mv PortableSigner-Generic.zip PortableSigner-Generic-$VERSION.$SVNVERSION.zip
-mv PortableSigner-Install.jar PortableSigner-Install-$VERSION.$SVNVERSION.jar
-mv PortableSigner-Installer.exe PortableSigner-Installer-$VERSION.$SVNVERSION.exe
-mv PortableSigner-MacOSX.tar.gz PortableSigner-MacOSX-$VERSION.$SVNVERSION.tar.gz
-mv PortableSigner-Windows.zip PortableSigner-Windows-$VERSION.$SVNVERSION.zip
+mv PortableSigner-Generic.zip PortableSigner-Generic-$VERSION.$GITVERSION.zip
+mv PortableSigner-Install.jar PortableSigner-Install-$VERSION.$GITVERSION.jar
+mv PortableSigner-Installer.exe PortableSigner-Installer-$VERSION.$GITVERSION.exe
+mv PortableSigner-MacOSX.tar.gz PortableSigner-MacOSX-$VERSION.$GITVERSION.tar.gz
+mv PortableSigner-Windows.zip PortableSigner-Windows-$VERSION.$GITVERSION.zip
 rm PortableSigner-MacOSX.tar
