@@ -13,9 +13,6 @@ package net.pflaeging.PortableSigner;
  * @author peter@pflaeging.net
  */
 public class Version {
-	private static String date = "$Date$";
-	private static String author = "$Author$";
-	private static String revision = "$Revision$";
         private static String internaltag = "Delta";
         public static String release = "2.0" + internaltag;
         
@@ -24,9 +21,15 @@ public class Version {
 	
 	public Version() {
 		String cleanDate, cleanAuthor, cleanRevision;
-		cleanDate = date.replace('$', ' ').trim();
-		cleanAuthor = author.replace('$', ' ').trim();
-		cleanRevision = revision.replace('$', ' ').trim();
+		cleanDate = "Date: " +
+                        java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
+                        .getString("Date");
+		cleanAuthor = "Committer: " +
+                        java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
+                        .getString("Committer");
+		cleanRevision = "GitVersion: " +
+                        java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
+                        .getString("GitVersion");
 		print =  cleanRevision + "\n" + cleanAuthor + "\n" + cleanDate;
                 version = release + " " + cleanRevision;
 	}
