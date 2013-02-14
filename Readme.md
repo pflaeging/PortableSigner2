@@ -58,10 +58,10 @@ Das vorliegende Programm laesst sich in einer Java 1.5.0 Umgebung mit
 
 java -jar PortableSigner.jar starten.
 
-Es gibt minimalen Installationssupport für Linux im Paket
+Es gibt minimalen Installationssupport f√ºr Linux im Paket
 PortableSigner-Generic-x.x.xxx.zip im Verziechnis linux/.
 
-Es gibt einen kompletten Installer auch mit den benötigten JCE Policies für
+Es gibt einen kompletten Installer auch mit den ben√∂tigten JCE Policies f√ºr
 Windows als Paket: PortableSigner-Installer-x.x.xxx.exe.
 
 Es verwendet folgende zusaetzliche Klassenbibliotheken:
@@ -97,3 +97,4 @@ Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableS
 noch einmal installieren, damit die Security Policy auch dort wirkt.
 
 :peter pflaeging <peter@pflaeging.net>
+
