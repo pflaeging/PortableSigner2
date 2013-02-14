@@ -1,3 +1,9 @@
+PortableSigner2
+===============
+
+PortableSigner - A Commandline and GUI Tool to digital sign PDF files with X.509 certificates
+
+------
 English (german scroll down)
 =======
 
@@ -29,7 +35,7 @@ For the use of Bouncycastle the Java Strong export Security must be used.
     installed the policy files you will see something like:
 
 java.lang.SecurityException: Unsupported keysize or algorithm parameters
-		at javax.crypto.Cipher.init(DashoA6275)
+  	at javax.crypto.Cipher.init(DashoA6275)
 "
 
 The new JCE Policy can be found 
@@ -91,4 +97,3 @@ Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableS
 noch einmal installieren, damit die Security Policy auch dort wirkt.
 
 :peter pflaeging <peter@pflaeging.net>
-
