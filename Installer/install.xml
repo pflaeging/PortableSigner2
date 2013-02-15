@@ -57,7 +57,7 @@ Installer for PortableSigner
         </pack>
         <pack name="JCE unrestricted policy" required="no" id="jce">
             <description>
-            Java JCE unrestricted policy files for Java 1.5
+            Java JCE unrestricted policy files for Java 1.7
             </description>
             <file src="Installer/jce/local_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
             <file src="Installer/jce/US_export_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
