@@ -14,7 +14,7 @@ Installer for PortableSigner
             <author name="Peter Pfläging" email="peter@pflaeging.net"/>
         </authors>
         <url>http://portablesigner.sourceforge.net/</url>
-        <javaversion>1.6</javaversion>
+        <javaversion>1.7</javaversion>
     </info>
     <guiprefs width="640" height="480" resizable="yes"/>
     <variables>
@@ -55,13 +55,13 @@ Installer for PortableSigner
             <file src="Icons/PortableSignerLogo.ico" targetdir="$INSTALL_PATH" os="windows"/>
             <file src="Icons/PortableSignerLogo.png" targetdir="$INSTALL_PATH" os="unix"/>
         </pack>
-        <pack name="JCE unrestricted policy" required="no" id="jce">
+ <!--       <pack name="JCE unrestricted policy" required="no" id="jce">
             <description>
             Java JCE unrestricted policy files for Java 1.7
             </description>
             <file src="Installer/jce/local_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
             <file src="Installer/jce/US_export_policy.jar" overrride="true" targetdir="$JAVA_HOME/lib/security"/> 
-        </pack>
+        </pack>  -->
     </packs>
     <native type="izpack" name="ShellLink.dll" os="windows"/>
 </installation>

@@ -14,8 +14,7 @@ java -jar PortableSigner
 There's a minimal installer in the package PortableSigner-Generic-x.x.xxx.zip
 in the directory linux/.
 
-There's a full blown installer also for the required JCE Policies for Windows as
-PortableSigner-Installer-x.x.xxx.exe.
+There's a full blown installer as PortableSigner-Installer-x.x.xxx.exe.
 
 The following additional libraries are provided and used:
 
@@ -43,8 +42,7 @@ http://java.sun.com/javase/downloads/index.jsp
 at the end of the page:
 "Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy "
 
-The Windows installer is installing all required patches automagic.
-If you'r upgrading your Java runtime, please reinstall PortableSigner to apply
+If you're upgrading your Java runtime, please reinstall the policies to apply
 the security policies again.
 
 :peter pflaeging <peter@pflaeging.net>
@@ -58,11 +56,11 @@ Das vorliegende Programm laesst sich in einer Java 1.5.0 Umgebung mit
 
 java -jar PortableSigner.jar starten.
 
-Es gibt minimalen Installationssupport für Linux im Paket
+Es gibt minimalen Installationssupport fuer Linux im Paket
 PortableSigner-Generic-x.x.xxx.zip im Verziechnis linux/.
 
-Es gibt einen kompletten Installer auch mit den benötigten JCE Policies für
-Windows als Paket: PortableSigner-Installer-x.x.xxx.exe.
+Es gibt einen kompletten Installer fuer Windows als 
+Paket: PortableSigner-Installer-x.x.xxx.exe.
 
 Es verwendet folgende zusaetzliche Klassenbibliotheken:
 
@@ -92,8 +90,7 @@ http://java.sun.com/javase/downloads/index.jsp
 gegen Ende der Seite als:
 "Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy "
 
-Der Windows Installer installiert die Security Policy automatisch mit.
-Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte den PortableSigner 
+Sollten Sie Ihre Java Runtime updaten oder neu installieren, bitte die Policy 
 noch einmal installieren, damit die Security Policy auch dort wirkt.
 
 :peter pflaeging <peter@pflaeging.net>
