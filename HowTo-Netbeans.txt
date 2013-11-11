@@ -3,7 +3,7 @@ Here comes a short explanation how to use Netbeans (I'm using 6.0 beta2) for dev
 At first: I'm using Mac OS X 10.6 (Snow Leopard), so some things may work different on other platforms.
 Mac OS X is a Unix/Linux type OS, so it comes close to Linux.
 
-1. Checkout the project with Netbeans (SVN) or any other subversion client
+1. Checkout the project with git
 
 2. Open it with netbeans.
     You will see some errors regarding not satisfied dependencies and libraries
@@ -20,5 +20,7 @@ Mac OS X is a Unix/Linux type OS, so it comes close to Linux.
 5. Get additional Tools:
     a) launch4j to generate a Windows .exe binary for the application and the installer
     b) IzPack to make a Windows installer package
+    c) You should have installed GIT. Otherwise the version info in src/Version.properties will
+        not be updated!
 
 

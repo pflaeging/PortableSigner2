@@ -44,12 +44,14 @@ public class GetPKCS12 {
     public GetPKCS12(String pkcs12FileName,
             String pkcs12Password) throws KeyStoreException {
         KeyStore ks = null;
+	FileInputStream fis = null;
         if (pkcs12Password == null) {
             pkcs12Password="";
         }
         try {
             ks = KeyStore.getInstance("pkcs12");
-            ks.load(new FileInputStream(pkcs12FileName), pkcs12Password
+	    fis = new FileInputStream(pkcs12FileName);
+            ks.load(fis, pkcs12Password
                     .toCharArray());
         } catch (NoSuchAlgorithmException e) {
             Main.setResult(
@@ -71,8 +73,17 @@ public class GetPKCS12 {
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateIO"),
                     true,
                     e.getLocalizedMessage());
+            } finally {
+ 		try {
+ 			if (fis != null) {
+ 				fis.close();
+ 			}
+ 		} catch (IOException e) {
+ 			// ignore or print a message
+ 	        }
         }
-        
+
+        if (ks != null) {
         String alias = "";
         try {
 //      Maybe not only one cert in file! Thanks to Markus Feisst
@@ -122,7 +133,7 @@ public class GetPKCS12 {
                 }
             }
         }
-        
+        } 
         
     }
     

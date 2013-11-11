@@ -7,7 +7,7 @@ PortableSigner - A Commandline and GUI Tool to digital sign PDF files with X.509
 English (german scroll down)
 =======
 
-Start program with 
+Start program with Java 1.5 or greater
 
 java -jar PortableSigner
 

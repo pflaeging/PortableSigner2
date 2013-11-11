@@ -11,19 +11,12 @@
  */
 package net.pflaeging.PortableSigner;
 
-import java.security.PrivateKey;
-import java.security.cert.Certificate;
-
 
 /**
  *
  * @author peter@pflaeging.net
  */
 public class DoSignPDF {
-
-    private static PrivateKey privateKey;
-    private static Certificate[] certificateChain;
-    private static GetPKCS12 pkcs12;
 
     /** Creates a new instance of DoSignPDF */
     public DoSignPDF(String pdfInputFileName,

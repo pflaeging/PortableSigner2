@@ -54,14 +54,15 @@ public class ReadStore {
             System.err.println("Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)");
         }
         
-        String alias = "";
-        try {
-            int count = 0;
-            Enumeration aliasEnum = ks.aliases();
-            for (; aliasEnum.hasMoreElements();) {
-                String key = (String)aliasEnum.nextElement();
-                //if (!ks.isCertificateEntry(key)) {
-                if (true) {
+ 	if (ks != null) {
+          String alias = "";
+          try {
+              int count = 0;
+		Enumeration<String> aliasEnum = ks.aliases();
+              for (; aliasEnum.hasMoreElements();) {
+			String key = aliasEnum.nextElement();
+                  //if (!ks.isCertificateEntry(key)) {
+			if (count < certs.length) {
                     certs[count] = new PSCertificate(key, ks);
                     count++;
                 }
@@ -71,5 +72,6 @@ public class ReadStore {
         } catch (KeyStoreException e) {
             System.err.println("Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)");
         }
+    }
     }
 }

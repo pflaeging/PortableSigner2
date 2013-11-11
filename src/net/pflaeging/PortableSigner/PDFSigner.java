@@ -18,8 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyStoreException;
-import java.security.PrivateKey;
-import java.security.cert.Certificate;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -40,8 +38,6 @@ import java.util.HashMap;
  */
 public class PDFSigner {
 
-    private static PrivateKey privateKey;
-    private static Certificate[] certificateChain;
     private static GetPKCS12 pkcs12;
     public float ptToCm = (float) 0.0352777778;
 
@@ -130,7 +126,7 @@ public class PDFSigner {
 
                 Rectangle size = reader.getPageSize(pages);
                 stp = PdfStamper.createSignature(reader, fout, '\0', null, true);
-                HashMap pdfInfo = reader.getInfo();
+                HashMap<String, String> pdfInfo = reader.getInfo();
                 // thanks to Markus Feisst
                 String pdfInfoProducer = "";
 
@@ -271,7 +267,7 @@ public class PDFSigner {
                     signatureBlockCompleteTable.setHorizontalAlignment(PdfPTable.ALIGN_CENTER);
                     Image logo;
 //                     System.out.println("Logo:" + sigLogo + ":");
-                    if (sigLogo.equals("") || sigLogo == null) {
+                    if (sigLogo == null || "".equals(sigLogo)) {
                         logo = Image.getInstance(getClass().getResource(
                                 "/net/pflaeging/PortableSigner/SignatureLogo.png"));
                     } else {

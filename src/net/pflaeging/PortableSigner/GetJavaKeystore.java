@@ -4,12 +4,13 @@
  * Created on 15. November 2006, 22:57
  * This File is part of PortableSigner (http://portablesigner.sf.net/)
  *  and is under the European Public License V1.1 (http://www.osor.eu/eupl)
- * (c) Peter Pfläging <peter@pflaeging.net>
+ * (c) Peter Pflaeging <peter@pflaeging.net>
  * 
  */
 
 package net.pflaeging.PortableSigner;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.KeyStore;
@@ -31,10 +32,10 @@ public class GetJavaKeystore {
     /** Creates a new instance of GetJavaKeystore */
     public GetJavaKeystore(String keystore, String password) {
 
+	FileInputStream fis = null;
         try {
             ks = KeyStore.getInstance("jks");
-            java.io.FileInputStream fis =
-                    new java.io.FileInputStream(keystore);
+            fis = new FileInputStream(keystore);
             ks.load(fis, password.toCharArray());
         } catch (NoSuchAlgorithmException e) {
             Main.setResult(
@@ -61,15 +62,24 @@ public class GetJavaKeystore {
                     "Beim Lesen des Zertifikates trat ein Fehler auf (Datei nicht zugreifbar)",
                     true,
                     e.getLocalizedMessage());
-        }
-        
+                     } finally {
+ 		try {
+ 			if (fis != null) {
+ 				fis.close();
+ 			}
+ 		} catch (IOException e) {
+ 			// ignore or print a message
+ 	        }
+          }
+  
+ 	if (ks != null) {     
         String alias = "";
         try {
             int count = 0;
-            for (Enumeration aliasKey = ks.aliases(); aliasKey.hasMoreElements();) {
+            for (Enumeration<?> aliasKey = ks.aliases(); aliasKey.hasMoreElements();) {
                 String key = aliasKey.nextElement().toString();
                 String name = ks.getCertificate(key).toString();
-                if (ks.isKeyEntry(key)) {
+                if (ks.isKeyEntry(key) && count < aliases.length) {
                     aliases[count] = key;
                     System.out.println("Key#" + count + " " + key);
                     count++;
@@ -88,6 +98,6 @@ public class GetJavaKeystore {
                     e.getLocalizedMessage());
         }
     }
-    
+    }
 }
 

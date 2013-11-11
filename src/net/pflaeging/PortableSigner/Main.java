@@ -9,14 +9,17 @@
 
 package net.pflaeging.PortableSigner;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 
 /*
@@ -44,43 +47,46 @@ public class Main extends javax.swing.JFrame {
     public static String platform;
     String inputPDFFile = "", outputPDFFile = "", signatureP12File = "";
     String password = "";
-    private Vector signatureBlockLanguages = new Vector();
-    private Vector signatureBlockPage = new Vector();
-    
-    private static java.awt.Color colorok = new java.awt.Color(0, 240, 0);
-    private static java.awt.Color colorerror = new java.awt.Color(240, 0, 0);
-    private static java.awt.Color gotitcolor = new java.awt.Color(0, 0, 240);
+    private Vector<String> signatureBlockLanguages = new Vector<String>();
+    private Vector<String> signatureBlockPage = new Vector<String>();
+  
+    private static Color colorok = new Color(0, 240, 0);
+    private static Color colorerror = new Color(240, 0, 0);
+    private static Color gotitcolor = new Color(0, 0, 240);
     private static boolean workingJCE = true, finalize = true;
     Cursor questionCursor = new Cursor(Cursor.HAND_CURSOR);
     Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
     Version version = new Version();
+    private static final ResourceBundle rbi18n
+	= ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n");
+    private static final ResourceBundle rbSigBlock
+	= ResourceBundle.getBundle("net/pflaeging/PortableSigner/SignatureblockLanguages");
     
     
     /** Creates new form Main */
     public Main() {
 
         java.util.Enumeration<String> langNumbers =
-                java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/SignatureblockLanguages")
-                .getKeys();
+                rbSigBlock.getKeys();
         while ( langNumbers.hasMoreElements() )  {
             String languageCode = langNumbers.nextElement();
-            String language = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/SignatureblockLanguages").getString(languageCode);
+            String language = rbSigBlock.getString(languageCode);
 //            System.out.println("Sprache: " +  language + " (" + languageCode + ")");
             signatureBlockLanguages.add(language + " (" + languageCode + ")");
         }
-        signatureBlockPage.add(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
-                    .getString("SignatureBlockpositionFirst"));
-        signatureBlockPage.add(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
-                    .getString("SignatureBlockpositionLast"));
-        prefs = new Preferences();
-        prefs.get();
-        if (prefs.signLastPage) {
-            pagePlacement = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
-                    .getString("SignatureBlockpositionLast");
-        } else {
-            pagePlacement = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
-                    .getString("SignatureBlockpositionFirst");
-        }
+        signatureBlockPage.add(rbi18n
+                      .getString("SignatureBlockpositionFirst"));
+        signatureBlockPage.add(rbi18n
+                      .getString("SignatureBlockpositionLast"));
+          prefs = new Preferences();
+          prefs.get();
+          if (prefs.signLastPage) {
+            pagePlacement = rbi18n
+                      .getString("SignatureBlockpositionLast");
+          } else {
+            pagePlacement = rbi18n
+                      .getString("SignatureBlockpositionFirst");
+          }
         if (prefs.signLanguage.length() != 2) { // we have old prefs!
             prefs.set("SignLanguage", "de");
             prefs.get();
@@ -141,7 +147,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             jTextFieldOutputfile.setText(mycommand.output);
         }
-        if (mycommand.password != null || mycommand.password.equals("")) {
+        if (mycommand.password != null && ! "".equals(mycommand.password)) {
             jPasswordFieldPassword.setText(mycommand.password);
         }
         if (mycommand.sigimage.equals("")) {
@@ -159,7 +165,7 @@ public class Main extends javax.swing.JFrame {
         } else {
             jTextFieldReason.setText(mycommand.reason);
         }
-        if (mycommand.comment.equals("") || mycommand.comment.equals("")) {
+        if (mycommand.comment == null || mycommand.comment.equals("")) {
             jTextPaneCommentField.setText(prefs.signComment);
         } else {
             jTextPaneCommentField.setText(mycommand.comment);
@@ -186,7 +192,7 @@ public class Main extends javax.swing.JFrame {
         if (!workingJCE) {
             jDialogJCEAlert.setSize(650, 170);
             jDialogJCEAlert.setVisible(true);
-            System.err.println(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
+            System.err.println(rbi18n
                     .getString("JCEMissing"));
             System.exit(254);
         }
@@ -336,7 +342,7 @@ public class Main extends javax.swing.JFrame {
         jDialogCancel.setModal(true);
         jDialogCancel.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n"); // NOI18N
+        java.util.ResourceBundle bundle = rbi18n; // NOI18N
         jButtonCancelYes.setText(bundle.getString("Yes")); // NOI18N
         jButtonCancelYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1315,13 +1321,13 @@ public class Main extends javax.swing.JFrame {
 
 private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHelpActionPerformed
 //        try {
-//            com.itextpdf.tools.Executable.launchBrowser(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
+//            com.itextpdf.tools.Executable.launchBrowser(rbi18n
 //                .getString("HomepageURL"));
 //        } catch (IOException ex) {
 //            System.err.println("Unable to launch Browser for helppage");
 
       try {
-         String url = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("HomepageURL");
+         String url = rbi18n.getString("HomepageURL");
          java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
          }
       catch (java.io.IOException e) {
@@ -1414,19 +1420,28 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         prefs.set("SignComment", jTextPaneCommentField.getText());
         prefs.set("SignReason", jTextFieldReason.getText());
         prefs.set("SignLocation", jTextFieldLocation.getText());
+	Float vPos, lMargin, rMargin;
         try {
-        Float vPos = new Float(jTextFieldVPosition.getText()),
-                lMargin = new Float(jTextFieldLMargin.getText()),
+        	vPos = new Float(jTextFieldVPosition.getText());
+        } catch (NumberFormatException nfe)
+        {
+            vPos = new Float(0f);
+        }
+        try {
+        	lMargin = new Float(jTextFieldLMargin.getText());
+        } catch (NumberFormatException nfe)
+        {
+            lMargin = new Float(0f);
+        }
+        try {
                 rMargin = new Float(jTextFieldRMargin.getText());
+        } catch (NumberFormatException nfe)
+        {
+            rMargin = new Float(0f);
+        }
         prefs.set("VerticalPosition", vPos.floatValue());
         prefs.set("LeftMargin", lMargin.floatValue());
         prefs.set("RightMargin", rMargin.floatValue());
-        } catch (NumberFormatException nfe)
-        {
-            Float vPos = new Float(0f),
-            lMargin = new Float(0f),
-            rMargin = new Float(0f);
-        }
 
         // System.out.println("SigLogo: " + prefs.sigLogo );
         jFrameOption.setVisible(false);
@@ -1439,8 +1454,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         java.util.ResourceBundle block = java.util.ResourceBundle.getBundle(
                                             "net/pflaeging/PortableSigner/Signatureblock_" + lang);
         jComboBoxSignatureLanguage.setSelectedItem(
-                java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/SignatureblockLanguages")
-                .getString(lang) + " (" + lang + ")");
+                rbSigBlock.getString(lang) + " (" + lang + ")");
         jTextPaneCommentField.setEditable(prefs.useComment);
         if (prefs.signComment.equals("")) {
             jTextPaneCommentField.setText(block.getString("comment"));
@@ -1514,6 +1528,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         exceptionstring = null;
         
         // create Thread for signing
+/*
         Runnable runnable = new Runnable() {
             public void run() {
                 new DoSignPDF(inputPDFFile,
@@ -1544,10 +1559,10 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
                 jLabelFinished.setText(result);
                 jDialogErrorReport.setSize(500, 200);
                 if (resultcolor.equals(colorerror)) {
-                    jButtonErrorReport.setText(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
+                    jButtonErrorReport.setText(rbi18n
                             .getString("ErrorReportButton"));
                 } else {
-                    jButtonErrorReport.setText(java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
+                    jButtonErrorReport.setText(rbi18n
                             .getString("ViewButton"));
                     jButtonErrorReport.setForeground(gotitcolor);
                 }
@@ -1558,7 +1573,58 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         
         
         Thread thread = new Thread(runnable);
-        thread.start();
+        thread.start();*/
+
+ 		new SwingWorker<Void, Void> () {
+ 			@Override
+ 			protected Void doInBackground() {
+ 				new DoSignPDF(inputPDFFile,
+ 					outputPDFFile,
+                                        signatureP12File,
+ 					password,
+ 					prefs.signText,
+ 					prefs.signLanguage,
+ 					prefs.sigLogo,
+ 					finalize,
+ 					sigComment,
+ 					prefs.signReason,
+ 					prefs.signLocation,
+ 					prefs.noExtraPage,
+ 					prefs.verticalPos,
+ 					prefs.leftMargin,
+ 					prefs.rightMargin,
+ 					prefs.signLastPage,
+ 					null);
+ 				// password cleanup (from bogdandr@op.pl)
+ 				password = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+ 				System.gc ();
+ 				return null;
+ 			}
+ 
+ 			@Override
+ 			protected void done() {
+ 				jProgressBar1.setIndeterminate(false);
+ 				jProgressBar1.setValue(100);
+ 				//getParent().setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.DEFAULT_CURSOR));
+ 				jLabelFinished.setForeground(resultcolor);
+ 				jLabelFinished.setToolTipText(exceptionstring);
+ 				jLabelFinished.setText(result);
+ 				jDialogErrorReport.setSize(500, 200);
+ 				if (resultcolor.equals(colorerror)) {
+ 					jButtonErrorReport.setText(
+ 						rbi18n
+ 						.getString("ErrorReportButton"));
+ 				} else {
+ 					jButtonErrorReport.setText(
+ 						rbi18n
+ 						.getString("ViewButton"));
+ 					jButtonErrorReport.setForeground(gotitcolor);
+ 				}
+ 				jButtonErrorReport.setVisible(true);
+ 				jTextFieldErrorReport.setText(exceptionstring);
+ 			}
+ 		}.execute ();
+
         
     }//GEN-LAST:event_jButtonPasswordOKActionPerformed
     
@@ -1723,7 +1789,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
     private void jComboBoxSignatureblockPageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSignatureblockPageActionPerformed
         // TODO add your handling code here:
         String tempPage = jComboBoxSignatureblockPage.getSelectedItem().toString();
-        if (java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n")
+        if (rbi18n
             .getString("SignatureBlockpositionFirst").equals(tempPage))
             {
                 prefs.set("SignatureOnLastPage", false);
@@ -1755,7 +1821,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         try {
                         
             // check for Java JCE unrestricted!!!
-            if (javax.crypto.Cipher.getMaxAllowedKeyLength("RC5") < java.lang.Integer.MAX_VALUE) {
+            if (javax.crypto.Cipher.getMaxAllowedKeyLength("RC5") < Integer.MAX_VALUE) {
                 workingJCE = false;
             }
 
@@ -1764,7 +1830,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
 
             if (mycommand.nogui) {
                 if (!workingJCE) {
-                    java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("JCEmissing");
+                    rbi18n.getString("JCEmissing");
                     System.exit(254);
                 }
 // TODO: Implement commandline
@@ -2016,7 +2082,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         }
         
         public String getDescription() {
-            return java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("PDFDescription");
+            return rbi18n.getString("PDFDescription");
         }
     }
     
@@ -2027,7 +2093,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         }
         
         public String getDescription() {
-            return java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("PKCS12Description");
+            return rbi18n.getString("PKCS12Description");
         }
     }
 
@@ -2038,7 +2104,7 @@ private void jButtonSelectKeystoreFileActionPerformed(java.awt.event.ActionEvent
         }
         
         public String getDescription() {
-            return java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ImageDescription");
+            return rbi18n.getString("ImageDescription");
         }
     }
     

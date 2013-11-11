@@ -8,8 +8,13 @@
 
 package net.pflaeging.PortableSigner;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.CellRendererPane;
+import javax.swing.JComponent;
+import javax.swing.JTextArea;
+import javax.swing.JToolTip;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
@@ -53,12 +58,14 @@ public class MultiLineToolTipUI extends BasicToolTipUI {
         return singleton;
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         rendererPane = new CellRendererPane();
         c.add(rendererPane);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         super.uninstallUI(c);
         c.remove(rendererPane);
@@ -73,6 +80,7 @@ public class MultiLineToolTipUI extends BasicToolTipUI {
         maximumWidth = width;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Dimension size = c.getSize();
         textArea.setBackground(c.getBackground());
@@ -80,6 +88,7 @@ public class MultiLineToolTipUI extends BasicToolTipUI {
                     size.width - 1, size.height - 1, true);
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         String tipText = ((JToolTip)c).getTipText();
         if (tipText == null){
@@ -105,10 +114,12 @@ public class MultiLineToolTipUI extends BasicToolTipUI {
          return dim;
     }
 
+    @Override
     public Dimension getMinimumSize(JComponent c) {
         return getPreferredSize(c);
     }
 
+    @Override
     public Dimension getMaximumSize(JComponent c) {
         return getPreferredSize(c);
     }
