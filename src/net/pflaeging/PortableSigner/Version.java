@@ -13,7 +13,7 @@ package net.pflaeging.PortableSigner;
  * @author peter@pflaeging.net
  */
 public class Version {
-        private static String internaltag = "Delta";
+        private static String internaltag = " Delta";
         public static String release = "2.0" + internaltag;
         
         public static String print;
