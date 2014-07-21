@@ -355,8 +355,9 @@ public class PDFSigner {
                     signatureBlock = new Rectangle(0, 0, 0, 0); // fake definition
                 }
                 PdfSignatureAppearance sap = stp.getSignatureAppearance();
-                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null,
-                        PdfSignatureAppearance.WINCER_SIGNED);
+//                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null,
+//                        PdfSignatureAppearance.WINCER_SIGNED );
+                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null, null);
                 sap.setReason(signReason);
                 sap.setLocation(signLocation);
 //                if (signText) {

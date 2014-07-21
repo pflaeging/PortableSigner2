@@ -13,14 +13,14 @@ package net.pflaeging.PortableSigner;
  * @author peter@pflaeging.net
  */
 public class Version {
-        private static String internaltag = " Delta";
-        public static String release = "2.0" + internaltag;
+        private static String internaltag;
+        public static String release;
         
         public static String print;
         public static String version;
 	
 	public Version() {
-		String cleanDate, cleanAuthor, cleanRevision;
+		String cleanDate, cleanAuthor, cleanRevision, cleanRelease, cleanInternalTag;
 		cleanDate = "Date: " +
                         java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
                         .getString("Date");
@@ -30,7 +30,18 @@ public class Version {
 		cleanRevision = "GitVersion: " +
                         java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
                         .getString("GitVersion");
+                cleanRelease = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
+                        .getString("Release");
+                cleanInternalTag = java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/Version")
+                        .getString("InternalTag");
 		print =  cleanRevision + "\n" + cleanAuthor + "\n" + cleanDate;
+                if (cleanInternalTag.equals(""))
+                {
+                    internaltag = "";
+                } else {
+                    internaltag = " " + cleanInternalTag;
+                }
+                release = cleanRelease + internaltag;
                 version = release + " " + cleanRevision;
 	}
 }

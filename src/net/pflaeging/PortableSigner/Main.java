@@ -50,9 +50,9 @@ public class Main extends javax.swing.JFrame {
     private Vector<String> signatureBlockLanguages = new Vector<String>();
     private Vector<String> signatureBlockPage = new Vector<String>();
   
-    private static Color colorok = new Color(0, 240, 0);
-    private static Color colorerror = new Color(240, 0, 0);
-    private static Color gotitcolor = new Color(0, 0, 240);
+    private static final Color colorok = new Color(0, 240, 0);
+    private static final Color colorerror = new Color(240, 0, 0);
+    private static final Color gotitcolor = new Color(0, 0, 240);
     private static boolean workingJCE = true, finalize = true;
     Cursor questionCursor = new Cursor(Cursor.HAND_CURSOR);
     Cursor defaultCursor = new Cursor(Cursor.DEFAULT_CURSOR);
@@ -1327,8 +1327,8 @@ private void jMenuItemHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 //            System.err.println("Unable to launch Browser for helppage");
 
       try {
-         String url = rbi18n.getString("HomepageURL");
-         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+         String HomeUrl = rbi18n.getString("HomepageURL");
+         java.awt.Desktop.getDesktop().browse(java.net.URI.create(HomeUrl));
          }
       catch (java.io.IOException e) {
          System.err.println("Unable to launch Browser for helppage");
