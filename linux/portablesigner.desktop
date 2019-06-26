@@ -10,8 +10,10 @@ Name=PortableSigner
 Name[de]=PortableSigner PDF signieren
 Name[en_GB]=PortableSigner sign PDF files
 Name[en]=PortableSigner sign PDF files
+Name[sv]=PortableSigner signerar PDF-filer
 Comment=Digital sign PDF files with X.509 certificates
 Comment[de]=Digitales signieren von PDF Dateien mit X.509 Zertifikaten
 Comment[en_GB]=Digital sign PDF files with X.509 certificates
 Comment[en]=Digital sign PDF files with X.509 certificates
+Comment[sv]=Digitalsignering av PDF-filer med X.509-certifikat
 
