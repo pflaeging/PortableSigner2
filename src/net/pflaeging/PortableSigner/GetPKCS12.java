@@ -54,21 +54,25 @@ public class GetPKCS12 {
             ks.load(fis, pkcs12Password
                     .toCharArray());
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
                     true,
                     e.getLocalizedMessage());
         } catch (CertificateException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificate"),
                     true,
                     e.getLocalizedMessage());
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateNotAccessible"),
                     true,
                     e.getLocalizedMessage());
         } catch (IOException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateIO"),
                     true,
@@ -97,15 +101,18 @@ public class GetPKCS12 {
 
             privateKey = (PrivateKey) ks.getKey(alias, pkcs12Password.toCharArray());
         } catch (NoSuchElementException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateNoKey"),
                     true,
                     e.getLocalizedMessage());
         } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
                     true, e.getLocalizedMessage());
         } catch (UnrecoverableKeyException e) {
+            e.printStackTrace();
             Main.setResult(
                     java.util.ResourceBundle.getBundle("net/pflaeging/PortableSigner/i18n").getString("ErrorReadingCertificateAlgorythm"),
                     true,

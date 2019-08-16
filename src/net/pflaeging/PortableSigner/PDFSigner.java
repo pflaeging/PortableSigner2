@@ -10,10 +10,10 @@
  */
 package net.pflaeging.PortableSigner;
 
-import com.itextpdf.text.Chunk;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfContentByte;
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Font;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.PdfContentByte;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,14 +21,15 @@ import java.security.KeyStoreException;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfSignatureAppearance;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.Rectangle;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.xml.xmp.XmpWriter;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfSignatureAppearance;
+import com.lowagie.text.pdf.PdfStamper;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfName;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.xml.xmp.XmpWriter;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 
@@ -70,9 +71,9 @@ public class PDFSigner {
             System.err.println("Position V:" + verticalPos + " L:" + leftMargin + " R:" + rightMargin);
             Rectangle signatureBlock;
 
-            java.security.Security.insertProviderAt(
-                    new org.bouncycastle.jce.provider.BouncyCastleProvider(), 2);
-
+            java.security.Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+            //java.security.Security.insertProviderAt(
+            //        new org.bouncycastle.jce.provider.BouncyCastleProvider(), 2);
             pkcs12 = new GetPKCS12(pkcs12FileName, password);
 
             PdfReader reader = null;
@@ -92,7 +93,6 @@ public class PDFSigner {
                         true,
                         e.getLocalizedMessage());
                 */
-            	
             	throw new PDFSignerException(
             			java.util.ResourceBundle.getBundle(
                         "net/pflaeging/PortableSigner/i18n").getString(
@@ -210,7 +210,7 @@ public class PDFSigner {
                     PdfPCell signatureBlockHeadingCell =
                             new PdfPCell(new Paragraph(
                             new Chunk(greet,
-                            new Font(Font.FontFamily.HELVETICA, 12))));
+                            new Font(Font.HELVETICA, 12))));
                     signatureBlockHeadingCell.setPaddingBottom(5);
                     signatureBlockHeadingCell.setColspan(2);
                     signatureBlockHeadingCell.setBorderWidth(0f);
@@ -220,46 +220,46 @@ public class PDFSigner {
                     // Line 1
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(signator, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(signator, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.subject, new Font(Font.FontFamily.COURIER, 10))));
+                            new Chunk(GetPKCS12.subject, new Font(Font.COURIER, 10))));
                     // Line 2
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(datestr, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(datestr, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(datum.toString(), new Font(Font.FontFamily.COURIER, 10))));
+                            new Chunk(datum.toString(), new Font(Font.COURIER, 10))));
                     // Line 3
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(ca, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(ca, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.issuer, new Font(Font.FontFamily.COURIER, 10))));
+                            new Chunk(GetPKCS12.issuer, new Font(Font.COURIER, 10))));
                     // Line 4
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(serial, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(serial, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(GetPKCS12.serial.toString(), new Font(Font.FontFamily.COURIER, 10))));
+                            new Chunk(GetPKCS12.serial.toString(), new Font(Font.COURIER, 10))));
                     // Line 5
                     if (specialcount == 1) {
                         signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(special, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                                new Chunk(special, new Font(Font.HELVETICA, 10, Font.BOLD))));
                         signatureTextTable.addCell(
                                 new Paragraph(
-                                new Chunk(GetPKCS12.atEgovOID, new Font(Font.FontFamily.COURIER, 10))));
+                                new Chunk(GetPKCS12.atEgovOID, new Font(Font.COURIER, 10))));
                     }
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(urn, new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Chunk(urn, new Font(Font.HELVETICA, 10, Font.BOLD))));
                     signatureTextTable.addCell(
                             new Paragraph(
-                            new Chunk(urnvalue, new Font(Font.FontFamily.COURIER, 10))));
+                            new Chunk(urnvalue, new Font(Font.COURIER, 10))));
                     signatureTextTable.setTotalWidth(cellsize);
                     System.err.println("signatureTextTable Width: " + cellsize[0] * ptToCm + " " + cellsize[1] * ptToCm);
                     // inner table end
@@ -285,11 +285,11 @@ public class PDFSigner {
                     PdfPCell commentcell =
                             new PdfPCell(new Paragraph(
                             new Chunk(sigComment,
-                            new Font(Font.FontFamily.HELVETICA, 10))));
+                            new Font(Font.HELVETICA, 10))));
                     PdfPCell notecell =
                             new PdfPCell(new Paragraph(
                             new Chunk(note,
-                            new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD))));
+                            new Font(Font.HELVETICA, 10, Font.BOLD))));
                     //commentcell.setPaddingTop(10);
                     //commentcell.setColspan(2);
                     // commentcell.setBorderWidth(0f);
@@ -355,9 +355,9 @@ public class PDFSigner {
                     signatureBlock = new Rectangle(0, 0, 0, 0); // fake definition
                 }
                 PdfSignatureAppearance sap = stp.getSignatureAppearance();
-//                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null,
-//                        PdfSignatureAppearance.WINCER_SIGNED );
-                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null, null);
+                sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null,
+                        PdfSignatureAppearance.WINCER_SIGNED );
+                //sap.setCrypto(GetPKCS12.privateKey, GetPKCS12.certificateChain, null, PdfName.CERT);
                 sap.setReason(signReason);
                 sap.setLocation(signLocation);
 //                if (signText) {
